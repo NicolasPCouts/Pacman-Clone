@@ -1,6 +1,9 @@
 #include <SFML/Window.hpp>
+#include <SFML/Main.hpp>
+#include <windows.h>
 
-int main(){
+int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszArgument, int nCmdShow)
+{
     sf::ContextSettings contextSettings;
     contextSettings.depthBits = 24;
 
