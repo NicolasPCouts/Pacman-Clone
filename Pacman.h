@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+extern sf::RenderWindow window;
+extern sf::Sprite mapSprite;
+
 class Pacman
 {
 public:

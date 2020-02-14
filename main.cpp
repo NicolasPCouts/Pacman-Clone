@@ -3,18 +3,18 @@
 
 #include "Pacman.h"
 
+sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
+sf::Sprite mapSprite;
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Pac-Man", sf::Style::Close);
     
     //loading map
     sf::Texture texture;
-    sf::Sprite mapSprite;
     if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
     {
         texture.setSmooth(false);
         mapSprite.setTexture(texture);
-        mapSprite.setScale(2, 2);
+        mapSprite.setScale(window.getSize().x / mapSprite.getLocalBounds().width, window.getSize().y / mapSprite.getLocalBounds().height);
         mapSprite.move(0, 1);
     }
     else {
@@ -39,7 +39,7 @@ int main()
 
         window.clear();
         window.draw(mapSprite);
-        //window.draw(pacman.sprite);
+        window.draw(pacman.sprite);
         window.display();
     }
 
