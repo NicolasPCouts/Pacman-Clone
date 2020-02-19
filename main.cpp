@@ -4,24 +4,40 @@
 #include "Pacman.h"
 
 sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
+
 sf::Sprite mapSprite;
-int main()
+sf::Texture mapTexture;
+
+std::map<std::string, sf::IntRect> colliders;
+
+Pacman pacman = Pacman(25,25);
+
+void LoadMap()
 {
-    
-    //loading map
-    sf::Texture texture;
-    if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
+    if (mapTexture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
     {
-        texture.setSmooth(false);
-        mapSprite.setTexture(texture);
+        mapTexture.setSmooth(false);
+        mapSprite.setTexture(mapTexture);
         mapSprite.setScale(window.getSize().x / mapSprite.getLocalBounds().width, window.getSize().y / mapSprite.getLocalBounds().height);
         mapSprite.move(0, 1);
     }
-    else {
+    else 
+    {
         std::cout << "texture not loaded correctly" << std::endl;
     }
+}
 
-    Pacman pacman = Pacman(50,50);
+void Draw() 
+{
+    window.clear();
+    window.draw(mapSprite);
+    window.draw(pacman.sprite);
+    window.display();
+}
+
+int main()
+{
+    LoadMap();
     while (window.isOpen())
     {
         sf::Event event;
@@ -37,10 +53,7 @@ int main()
             }
         }
 
-        window.clear();
-        window.draw(mapSprite);
-        window.draw(pacman.sprite);
-        window.display();
+        Draw();
     }
 
     return 0;

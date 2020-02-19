@@ -8,8 +8,10 @@ class Pacman
 {
 public:
 	float X, Y;
-	Pacman(float x, float y);
 	sf::Sprite sprite;
+	Pacman(float x, float y);
+	void OnKeyPressed(sf::Keyboard::Key key);
+	void Update();
 private:
 	sf::Texture texture;
 };
