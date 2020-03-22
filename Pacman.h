@@ -15,6 +15,7 @@ public:
 	sf::Sprite sprite;
 	Pacman(float x, float y, GameManager* gameManager);
 	void OnKeyPressed(sf::Keyboard::Key key);
+	void Update();
 private:
 	sf::Texture texture;
 	Directions currentDir = Right;
