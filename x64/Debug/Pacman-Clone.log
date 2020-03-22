@@ -1,2 +1,9 @@
-﻿  Pacman.cpp
-  Pacman-Clone.vcxproj -> C:\Users\nicolas.coutinho\Pacman-Clone\x64\Debug\Pacman-Clone.exe
+﻿  GameManager.cpp
+D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.h(16,52): error C2061: syntax error: identifier 'GameManager'
+D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\GameManager.cpp(3,98): error C2661: 'Pacman::Pacman': no overloaded function takes 3 arguments
+  main.cpp
+D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.h(16,52): error C2061: syntax error: identifier 'GameManager'
+  Pacman.cpp
+D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\GameManager.h(13,15): error C3646: 'pacman': unknown override specifier
+D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\GameManager.h(13,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Generating Code...
