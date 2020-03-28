@@ -1,5 +1,4 @@
 #pragma once
-#include "GameManager.h"
 
 enum Directions {
 	Up = 22,
@@ -13,10 +12,10 @@ class Pacman
 public:
 	float X, Y;
 	sf::Sprite sprite;
-	Pacman(float x, float y, GameManager* gameManager);
+	Pacman(float x, float y);
 	void OnKeyPressed(sf::Keyboard::Key key);
 	void Update();
-private:
 	sf::Texture texture;
+private:
 	Directions currentDir = Right;
 };

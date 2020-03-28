@@ -1,7 +1,11 @@
 #include "GameManager.h"
+#include "Pacman.h"
 
-GameManager::GameManager() : window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close), pacman(50, 50, this)
+extern sf::RenderWindow window;
+
+GameManager::GameManager()
 {
+    pacman = &Pacman(50, 50);
     //loading map
     sf::Texture texture;
     if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
@@ -30,14 +34,14 @@ void GameManager::Update()
                 window.close();
                 break;
             case sf::Event::KeyPressed:
-                pacman.OnKeyPressed(event.key.code);
+                pacman->OnKeyPressed(event.key.code);
                 break;
             }
         }
 
         window.clear();
         window.draw(mapSprite);
-        window.draw(pacman.sprite);
+        window.draw(pacman->sprite);
         window.display();
     }
 }

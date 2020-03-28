@@ -1,16 +1,12 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <stdio.h>
-
-#include "Pacman.h"
+#include "Common.h"
+class Pacman;
 
 class GameManager
 {
 public:
-	sf::RenderWindow window;
 	sf::Sprite mapSprite;
-	Pacman pacman;
+	Pacman* pacman;
 	GameManager();
 	void Update();
 };
