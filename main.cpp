@@ -8,8 +8,6 @@ sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 sf::Sprite mapSprite;
 sf::Texture mapTexture;
 
-std::map<std::string, sf::IntRect> colliders;
-
 Pacman pacman = Pacman(25,25);
 
 void LoadMap()
