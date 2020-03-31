@@ -1,6 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Pacman.h"
+
 sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 
 sf::Sprite mapSprite;
@@ -21,6 +23,14 @@ void LoadMap()
     {
         std::cout << "texture not loaded correctly" << std::endl;
     }
+}
+
+void Draw() 
+{
+    window.clear();
+    window.draw(mapSprite);
+    window.draw(pacman.sprite);
+    window.display();
 }
 
 int main()

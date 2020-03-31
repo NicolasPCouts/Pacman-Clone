@@ -1,11 +1,8 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
-enum Directions {
-	Up = 22,
-	Down = 18,
-	Left = 0,
-	Right = 3
-};
+extern sf::RenderWindow window;
+extern sf::Sprite mapSprite;
 
 class Pacman
 {
@@ -15,7 +12,7 @@ public:
 	Pacman(float x, float y);
 	void OnKeyPressed(sf::Keyboard::Key key);
 	void Update();
-	sf::Texture texture;
 private:
-	Directions currentDir = Right;
+	sf::Texture texture;
 };
+
