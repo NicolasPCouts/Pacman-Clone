@@ -47,6 +47,7 @@ int main()
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
+                    pacman.OnKeyPressed(event.key);
                     break;
             }
         }
