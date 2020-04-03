@@ -38,6 +38,7 @@ int main()
     LoadMap();
     while (window.isOpen())
     {
+        //get input
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -52,6 +53,9 @@ int main()
             }
         }
 
+        //Logic
+        pacman.Update();
+        //render
         Draw();
     }
 

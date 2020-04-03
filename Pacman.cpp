@@ -4,7 +4,7 @@
 
 Pacman::Pacman(float x, float y)
 {
-	speed = 25;
+	speed = 0.1f;
 	X = x;
 	Y = y;
 
@@ -22,32 +22,26 @@ Pacman::Pacman(float x, float y)
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
 {
 	if (key.code == sf::Keyboard::Key::W) 
-	{
-		Move(Up);
-	}
+		currentDir = Up;
 	else if (key.code == sf::Keyboard::Key::S)
-	{
-		Move(Down);
-	}
+		currentDir = Down;
 	else if (key.code == sf::Keyboard::Key::A)
-	{
-		Move(Left);
-	}
+		currentDir = Left;
 	else if (key.code == sf::Keyboard::Key::D)
-	{
-		Move(Right);
-	}
+		currentDir = Right;
 }
 
 void Pacman::Update()
 {
-
+	Move();
 }
 
-void Pacman::Move(Directions dirToMove) 
+void Pacman::Move() 
 {
-	switch (dirToMove)
+	switch (currentDir)
 	{
+	case None:
+		return;
 	case Up:
 		sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - speed);
 		break;

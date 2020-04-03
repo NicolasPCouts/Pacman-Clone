@@ -5,10 +5,11 @@ extern sf::RenderWindow window;
 extern sf::Sprite mapSprite;
 
 enum Directions {
-	Up = 22,
-	Down = 18,
-	Left = 0,
-	Right = 3
+	Up,
+	Down,
+	Left,
+	Right,
+	None
 };
 
 class Pacman
@@ -20,9 +21,9 @@ public:
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update();
 private:
-	int speed;
-	Directions currentDir = Right;
+	float speed;
+	Directions currentDir = None;
 	sf::Texture texture;
-	void Move(Directions dirToMove);
+	void Move();
 };
 
