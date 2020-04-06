@@ -8,7 +8,7 @@ sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 sf::Sprite mapSprite;
 sf::Texture mapTexture;
 
-Pacman pacman = Pacman(25,25);
+Pacman pacman = Pacman(40, 40);
 
 void LoadMap()
 {
@@ -29,7 +29,15 @@ void Draw()
 {
     window.clear();
     window.draw(mapSprite);
-    window.draw(pacman.sprite);
+    window.draw(pacman.body);
+
+    //test
+    sf::Texture texture;
+    sf::RectangleShape body(sf::Vector2f(100, 100));
+    body.move(sf::Vector2f(400, 400));
+    body.setFillColor(sf::Color::White);
+    window.draw(body);
+
     window.display();
 }
 

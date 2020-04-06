@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Collider.h"
 
 extern sf::RenderWindow window;
 extern sf::Sprite mapSprite;
@@ -15,8 +16,8 @@ enum Directions {
 class Pacman
 {
 public:
-	float X, Y;
-	sf::Sprite sprite;
+	sf::RectangleShape body;
+	//Collider coll;
 	Pacman(float x, float y);
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update();

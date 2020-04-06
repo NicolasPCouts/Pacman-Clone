@@ -152,10 +152,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pacman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Pacman.h" />
   </ItemGroup>
