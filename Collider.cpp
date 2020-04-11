@@ -12,15 +12,17 @@ bool Collider::CheckCollision(Collider& other)
 {
 	float minX = body.getPosition().x;
 	float maxX = body.getPosition().x + body.getSize().x;
+	float minY = body.getPosition().y;
+	float maxY = body.getPosition().y + body.getSize().y;
 
 	float otherMinX = other.GetPosition().x;
 	float otherMaxX = other.GetPosition().x + other.body.getSize().x;
+	float otherMinY = other.GetPosition().y;
+	float otherMaxY = other.GetPosition().y + other.body.getSize().y;
 
-	//std::cout << "PacMan min x : " << minX << "   --   Max x : " << maxX << "   --   Position x : " << body.getPosition().x << std::endl;
-	//std::cout << "Square min x : " << otherMinX << "   --   Max x : " << otherMaxX << "   --   Position x : " << other.GetPosition().x << std::endl;
-
-	if (maxX > otherMinX && minX < otherMaxX)
+	if ((maxX > otherMinX && minX < otherMaxX) 
+		&& (maxY > otherMinY && minY < otherMaxY))
 		return true;
-
-	return false;
+	else
+		return false;
 }

@@ -8,12 +8,16 @@ sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 sf::Sprite mapSprite;
 sf::Texture mapTexture;
 
+
+
 Pacman pacman = Pacman(40, 40);
 
+//test
 sf::RectangleShape body = sf::RectangleShape(sf::Vector2f(100, 100));
 Collider coll = Collider(body);
-
 sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(5, 5));
+//end test
+
 
 void LoadMap()
 {
@@ -47,7 +51,7 @@ void Draw()
     window.draw(pixel);
     pixel.setPosition(coll.GetPosition() + body.getSize());
     window.draw(pixel);
-
+    //end test
 
 
     window.display();
@@ -59,7 +63,7 @@ int main()
     body.move(sf::Vector2f(400, 400));
     body.setFillColor(sf::Color::White);
     pixel.setFillColor(sf::Color::Red);
-
+    //end test
 
     LoadMap();
     while (window.isOpen())
