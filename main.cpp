@@ -10,6 +10,11 @@ sf::Texture mapTexture;
 
 Pacman pacman = Pacman(40, 40);
 
+sf::RectangleShape body = sf::RectangleShape(sf::Vector2f(100, 100));
+Collider coll = Collider(body);
+
+sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(5, 5));
+
 void LoadMap()
 {
     if (mapTexture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
@@ -32,17 +37,30 @@ void Draw()
     window.draw(pacman.body);
 
     //test
-    sf::Texture texture;
-    sf::RectangleShape body(sf::Vector2f(100, 100));
-    body.move(sf::Vector2f(400, 400));
-    body.setFillColor(sf::Color::White);
+    pixel.setPosition(pacman.coll.GetPosition() + pacman.body.getSize());
+    window.draw(pixel);
+    pixel.setPosition(pacman.coll.GetPosition());
+    window.draw(pixel);
+
     window.draw(body);
+    pixel.setPosition(coll.GetPosition());
+    window.draw(pixel);
+    pixel.setPosition(coll.GetPosition() + body.getSize());
+    window.draw(pixel);
+
+
 
     window.display();
 }
 
 int main()
 {
+    //test
+    body.move(sf::Vector2f(400, 400));
+    body.setFillColor(sf::Color::White);
+    pixel.setFillColor(sf::Color::Red);
+
+
     LoadMap();
     while (window.isOpen())
     {
@@ -63,6 +81,7 @@ int main()
 
         //Logic
         pacman.Update();
+        std::cout << pacman.coll.CheckCollision(coll) << std::endl;
         //render
         Draw();
     }

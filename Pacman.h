@@ -17,7 +17,7 @@ class Pacman
 {
 public:
 	sf::RectangleShape body;
-	//Collider coll;
+	Collider coll;
 	Pacman(float x, float y);
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update();
