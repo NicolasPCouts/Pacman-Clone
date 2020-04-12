@@ -3,20 +3,74 @@
 
 #include "Pacman.h"
 
+struct ColliderObj
+{
+    sf::RectangleShape body;
+    Collider coll;
+
+    ColliderObj(sf::RectangleShape body, sf::Vector2f bodyPosition) : body(body), coll(this->body)
+    {
+        body.setPosition(bodyPosition);
+    }
+};
+
 sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 
 sf::Sprite mapSprite;
 sf::Texture mapTexture;
 
-
-
 Pacman pacman = Pacman(40, 40);
+
+std::vector<ColliderObj> mapColliders;
 
 //test
 sf::RectangleShape body = sf::RectangleShape(sf::Vector2f(100, 100));
 Collider coll = Collider(body);
 sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(5, 5));
 //end test
+
+
+void Draw();
+void LoadMap();
+void CreateMapColliders();
+
+int main()
+{
+    //test
+    body.move(sf::Vector2f(400, 400));
+    body.setFillColor(sf::Color::White);
+    pixel.setFillColor(sf::Color::Red);
+    //end test
+
+    LoadMap();
+    CreateMapColliders();
+
+    while (window.isOpen())
+    {
+        //get input
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            switch (event.type) 
+            {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    pacman.OnKeyPressed(event.key);
+                    break;
+            }
+        }
+
+        //Logic
+        pacman.Update();
+        std::cout << pacman.coll.CheckCollision(coll) << std::endl;
+        //render
+        Draw();
+    }
+
+    return 0;
+}
 
 
 void LoadMap()
@@ -46,6 +100,14 @@ void Draw()
     pixel.setPosition(pacman.coll.GetPosition());
     window.draw(pixel);
 
+    for (int i = 0; i < mapColliders.size(); i++)
+    {
+        pixel.setPosition(mapColliders[i].coll.GetPosition());
+        window.draw(pixel);
+        pixel.setPosition(mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize());
+        window.draw(pixel);
+    }
+
     window.draw(body);
     pixel.setPosition(coll.GetPosition());
     window.draw(pixel);
@@ -57,38 +119,7 @@ void Draw()
     window.display();
 }
 
-int main()
+void CreateMapColliders() 
 {
-    //test
-    body.move(sf::Vector2f(400, 400));
-    body.setFillColor(sf::Color::White);
-    pixel.setFillColor(sf::Color::Red);
-    //end test
-
-    LoadMap();
-    while (window.isOpen())
-    {
-        //get input
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            switch (event.type) 
-            {
-                case sf::Event::Closed:
-                    window.close();
-                    break;
-                case sf::Event::KeyPressed:
-                    pacman.OnKeyPressed(event.key);
-                    break;
-            }
-        }
-
-        //Logic
-        pacman.Update();
-        std::cout << pacman.coll.CheckCollision(coll) << std::endl;
-        //render
-        Draw();
-    }
-
-    return 0;
+    mapColliders.push_back(ColliderObj(sf::RectangleShape(sf::Vector2f(10, 80)), sf::Vector2f(50, 50)));
 }

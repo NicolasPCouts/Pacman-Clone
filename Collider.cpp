@@ -1,7 +1,11 @@
 #include "Collider.h"
 #include <iostream>
+
+std::vector<Collider*> Collider::activeColliders;
+
 Collider::Collider(sf::RectangleShape& body) : body(body)
 {
+	Collider::activeColliders.push_back(this);
 }
 
 Collider::~Collider()
