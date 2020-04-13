@@ -8,7 +8,7 @@ struct ColliderObj
     sf::RectangleShape body;
     Collider coll;
 
-    ColliderObj(sf::RectangleShape body, sf::Vector2f bodyPosition) : body(body), coll(this->body)
+    ColliderObj(sf::Vector2f rectangleSize, sf::Vector2f bodyPosition) : body(rectangleSize), coll(&body)
     {
         body.setPosition(bodyPosition);
     }
@@ -25,7 +25,7 @@ std::vector<ColliderObj> mapColliders;
 
 //test
 sf::RectangleShape body = sf::RectangleShape(sf::Vector2f(100, 100));
-Collider coll = Collider(body);
+Collider coll = Collider(&body);
 sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(5, 5));
 //end test
 
@@ -121,5 +121,5 @@ void Draw()
 
 void CreateMapColliders() 
 {
-    mapColliders.push_back(ColliderObj(sf::RectangleShape(sf::Vector2f(10, 80)), sf::Vector2f(50, 50)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(10, 80), sf::Vector2f(50, 50)));
 }
