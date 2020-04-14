@@ -24,26 +24,25 @@ Pacman pacman = Pacman(40, 40);
 std::vector<ColliderObj> mapColliders;
 
 //test
-sf::RectangleShape body = sf::RectangleShape(sf::Vector2f(100, 100));
-Collider coll = Collider(&body);
+ColliderObj testCollider(sf::Vector2f(80, 60), sf::Vector2f(70, 60));
+
 sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(5, 5));
 //end test
 
 
 void Draw();
 void LoadMap();
-void CreateMapColliders();
+void ChangeTestColliderValues(sf::Event::KeyEvent key);
 
 int main()
 {
     //test
-    body.move(sf::Vector2f(400, 400));
-    body.setFillColor(sf::Color::White);
     pixel.setFillColor(sf::Color::Red);
     //end test
 
     LoadMap();
-    CreateMapColliders();
+    //CreateMapColliders();
+    //mapColliders.push_back(ColliderObj(sf::Vector2f(80, 60), sf::Vector2f(70, 60)));
 
     while (window.isOpen())
     {
@@ -57,14 +56,15 @@ int main()
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
-                    pacman.OnKeyPressed(event.key);
+                    //pacman.OnKeyPressed(event.key);
+                    ChangeTestColliderValues(event.key);
                     break;
             }
         }
 
         //Logic
         pacman.Update();
-        std::cout << pacman.coll.CheckCollision(coll) << std::endl;
+
         //render
         Draw();
     }
@@ -95,9 +95,9 @@ void Draw()
     window.draw(pacman.body);
 
     //test
-    pixel.setPosition(pacman.coll.GetPosition() + pacman.body.getSize());
+    pixel.setPosition(testCollider.coll.GetPosition());
     window.draw(pixel);
-    pixel.setPosition(pacman.coll.GetPosition());
+    pixel.setPosition(testCollider.coll.GetPosition() + testCollider.body.getSize());
     window.draw(pixel);
 
     for (int i = 0; i < mapColliders.size(); i++)
@@ -107,19 +107,33 @@ void Draw()
         pixel.setPosition(mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize());
         window.draw(pixel);
     }
-
-    window.draw(body);
-    pixel.setPosition(coll.GetPosition());
-    window.draw(pixel);
-    pixel.setPosition(coll.GetPosition() + body.getSize());
-    window.draw(pixel);
     //end test
 
 
     window.display();
 }
 
-void CreateMapColliders() 
+//tests
+void ChangeTestColliderValues(sf::Event::KeyEvent key)
 {
-    mapColliders.push_back(ColliderObj(sf::Vector2f(10, 80), sf::Vector2f(50, 50)));
+    if (key.code == sf::Keyboard::Key::W)
+        testCollider.body.move(sf::Vector2f(0, -1));
+    else if (key.code == sf::Keyboard::Key::S)
+        testCollider.body.move(sf::Vector2f(0, 1));
+    else if (key.code == sf::Keyboard::Key::A)
+        testCollider.body.move(sf::Vector2f(-1, 0));
+    else if (key.code == sf::Keyboard::Key::D)
+        testCollider.body.move(sf::Vector2f(1, 0));
+
+    else if (key.code == sf::Keyboard::Key::Up)
+        testCollider.body.setSize(sf::Vector2f(testCollider.body.getSize().x, testCollider.body.getSize().y - 1));
+    else if (key.code == sf::Keyboard::Key::Down)
+        testCollider.body.setSize(sf::Vector2f(testCollider.body.getSize().x, testCollider.body.getSize().y + 1));
+    else if (key.code == sf::Keyboard::Key::Left)
+        testCollider.body.setSize(sf::Vector2f(testCollider.body.getSize().x - 1, testCollider.body.getSize().y));
+    else if (key.code == sf::Keyboard::Key::Right)
+        testCollider.body.setSize(sf::Vector2f(testCollider.body.getSize().x + 1, testCollider.body.getSize().y));
+
+    std::cout << "Pos X : " << testCollider.body.getPosition().x << " - Pos Y : " << testCollider.body.getPosition().y 
+        << " - Size X : " << testCollider.body.getSize().x << " - Size Y : " << testCollider.body.getSize().y << std::endl;
 }
