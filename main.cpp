@@ -8,7 +8,7 @@ struct ColliderObj
     sf::RectangleShape body;
     Collider coll;
 
-    ColliderObj(sf::Vector2f rectangleSize, sf::Vector2f bodyPosition) : body(rectangleSize), coll(&body)
+    ColliderObj(sf::Vector2f bodyPosition, sf::Vector2f rectangleSize) : body(rectangleSize), coll(&body)
     {
         body.setPosition(bodyPosition);
     }
@@ -41,8 +41,43 @@ int main()
     //end test
 
     LoadMap();
-    //CreateMapColliders();
-    //mapColliders.push_back(ColliderObj(sf::Vector2f(80, 60), sf::Vector2f(70, 60)));
+
+    //Create Map Colliders
+    mapColliders.push_back(ColliderObj(sf::Vector2f(74, 64), sf::Vector2f(81, 49)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(217, 64), sf::Vector2f(108, 49)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(471, 64), sf::Vector2f(108, 49)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 64), sf::Vector2f(81, 49)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(73, 165), sf::Vector2f(85, 28)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(300, 165), sf::Vector2f(197, 28)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(640, 165), sf::Vector2f(85, 28)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(214, 166), sf::Vector2f(28, 182)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(214, 237), sf::Vector2f(113, 34)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(378, 168), sf::Vector2f(35, 102)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(471, 244), sf::Vector2f(109, 33)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(555, 166), sf::Vector2f(27, 181)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(216, 399), sf::Vector2f(25, 103)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(301, 476), sf::Vector2f(197, 28)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(383, 479), sf::Vector2f(29, 101)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(556, 399), sf::Vector2f(25, 103)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(73, 554), sf::Vector2f(83, 33)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(125, 554), sf::Vector2f(31, 100)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(215, 554), sf::Vector2f(112, 26)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(470, 554), sf::Vector2f(112, 26)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(638, 554), sf::Vector2f(31, 100)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(638, 554), sf::Vector2f(85, 28)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(74, 709), sf::Vector2f(252, 25)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(215, 631), sf::Vector2f(29, 100)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(301, 631), sf::Vector2f(195, 25)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(381, 632), sf::Vector2f(29, 100)));
+
+    mapColliders.push_back(ColliderObj(sf::Vector2f(471, 709), sf::Vector2f(252, 25)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(555, 631), sf::Vector2f(29, 100)));
 
     while (window.isOpen())
     {
