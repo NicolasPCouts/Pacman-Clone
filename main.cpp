@@ -137,10 +137,29 @@ void Draw()
 
     for (int i = 0; i < mapColliders.size(); i++)
     {
-        pixel.setPosition(mapColliders[i].coll.GetPosition());
-        window.draw(pixel);
-        pixel.setPosition(mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize());
-        window.draw(pixel);
+        sf::VertexArray lines(sf::LinesStrip, 5);
+
+        lines[0].position = mapColliders[i].coll.GetPosition();
+
+        sf::Vector2f v = mapColliders[i].coll.GetPosition();
+        v.x += mapColliders[i].body.getSize().x;
+        lines[1].position = v;
+
+        lines[2].position = mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize();
+
+        sf::Vector2f v2 = mapColliders[i].coll.GetPosition();
+        v2.y += mapColliders[i].body.getSize().y;
+        lines[3].position = v2;
+
+        lines[4].position = mapColliders[i].coll.GetPosition();
+
+        window.draw(lines);
+
+        //pixel.setPosition(mapColliders[i].coll.GetPosition());
+        //window.draw(pixel);
+        //
+        //pixel.setPosition(mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize());
+        //window.draw(pixel);
     }
     //end test
 
