@@ -23,26 +23,25 @@ Pacman pacman = Pacman(40, 40);
 
 std::vector<ColliderObj> mapColliders;
 
-//test
-ColliderObj testCollider(sf::Vector2f(80, 60), sf::Vector2f(70, 60));
+//debug
+bool drawTestCollider = false;
+bool drawColliderBoxes = true;
 
-sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(5, 5));
-//end test
+ColliderObj testCollider(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
+//end debug
 
 
 void Draw();
 void LoadMap();
 void ChangeTestColliderValues(sf::Event::KeyEvent key);
+void DrawColliderBoxes();
 
 int main()
 {
-    //test
-    pixel.setFillColor(sf::Color::Red);
-    //end test
-
     LoadMap();
 
-    //Create Map Colliders
+#pragma region Creating Map Colliders
+
     mapColliders.push_back(ColliderObj(sf::Vector2f(74, 64), sf::Vector2f(81, 49)));
     mapColliders.push_back(ColliderObj(sf::Vector2f(217, 64), sf::Vector2f(108, 49)));
     mapColliders.push_back(ColliderObj(sf::Vector2f(471, 64), sf::Vector2f(108, 49)));
@@ -79,6 +78,32 @@ int main()
     mapColliders.push_back(ColliderObj(sf::Vector2f(471, 709), sf::Vector2f(252, 25)));
     mapColliders.push_back(ColliderObj(sf::Vector2f(555, 631), sf::Vector2f(29, 100)));
 
+    mapColliders.push_back(ColliderObj(sf::Vector2f(2, 631), sf::Vector2f(72, 30)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(726, 631), sf::Vector2f(72, 30)));
+
+    //border colliders
+    mapColliders.push_back(ColliderObj(sf::Vector2f(0, 0), sf::Vector2f(800, 15)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(0, 786), sf::Vector2f(800, 15)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(0, 490), sf::Vector2f(20, 310)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(780, 490), sf::Vector2f(20, 310)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(0, 0), sf::Vector2f(20, 260)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(780, 0), sf::Vector2f(20, 260)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(385, 0), sf::Vector2f(31, 115)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 490), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 400), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 333), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 244), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(3, 490), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(3, 400), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(3, 333), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(3, 244), sf::Vector2f(156, 16)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(142, 245), sf::Vector2f(18, 103)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(142, 400), sf::Vector2f(18, 103)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 245), sf::Vector2f(18, 103)));
+    mapColliders.push_back(ColliderObj(sf::Vector2f(641, 400), sf::Vector2f(18, 103)));
+
+#pragma endregion
+
     while (window.isOpen())
     {
         //get input
@@ -91,8 +116,8 @@ int main()
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
-                    //pacman.OnKeyPressed(event.key);
-                    ChangeTestColliderValues(event.key);
+                    pacman.OnKeyPressed(event.key);
+                    //ChangeTestColliderValues(event.key);
                     break;
             }
         }
@@ -129,39 +154,7 @@ void Draw()
     window.draw(mapSprite);
     window.draw(pacman.body);
 
-    //test
-    pixel.setPosition(testCollider.coll.GetPosition());
-    window.draw(pixel);
-    pixel.setPosition(testCollider.coll.GetPosition() + testCollider.body.getSize());
-    window.draw(pixel);
-
-    for (int i = 0; i < mapColliders.size(); i++)
-    {
-        sf::VertexArray lines(sf::LinesStrip, 5);
-
-        lines[0].position = mapColliders[i].coll.GetPosition();
-
-        sf::Vector2f v = mapColliders[i].coll.GetPosition();
-        v.x += mapColliders[i].body.getSize().x;
-        lines[1].position = v;
-
-        lines[2].position = mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize();
-
-        sf::Vector2f v2 = mapColliders[i].coll.GetPosition();
-        v2.y += mapColliders[i].body.getSize().y;
-        lines[3].position = v2;
-
-        lines[4].position = mapColliders[i].coll.GetPosition();
-
-        window.draw(lines);
-
-        //pixel.setPosition(mapColliders[i].coll.GetPosition());
-        //window.draw(pixel);
-        //
-        //pixel.setPosition(mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize());
-        //window.draw(pixel);
-    }
-    //end test
+    DrawColliderBoxes();
 
 
     window.display();
@@ -190,4 +183,52 @@ void ChangeTestColliderValues(sf::Event::KeyEvent key)
 
     std::cout << "Pos X : " << testCollider.body.getPosition().x << " - Pos Y : " << testCollider.body.getPosition().y 
         << " - Size X : " << testCollider.body.getSize().x << " - Size Y : " << testCollider.body.getSize().y << std::endl;
+}
+
+void DrawColliderBoxes() 
+{
+    if (drawTestCollider)
+    {
+        sf::VertexArray quad(sf::LinesStrip, 5);
+
+        quad[0].position = testCollider.coll.GetPosition();
+
+        sf::Vector2f v = testCollider.coll.GetPosition();
+        v.x += testCollider.body.getSize().x;
+        quad[1].position = v;
+
+        quad[2].position = testCollider.coll.GetPosition() + testCollider.body.getSize();
+
+        sf::Vector2f v2 = testCollider.coll.GetPosition();
+        v2.y += testCollider.body.getSize().y;
+        quad[3].position = v2;
+
+        quad[4].position = testCollider.coll.GetPosition();
+
+        window.draw(quad);
+    }
+
+    if (drawColliderBoxes)
+    {
+        for (int i = 0; i < mapColliders.size(); i++)
+        {
+            sf::VertexArray lines(sf::LinesStrip, 5);
+
+            lines[0].position = mapColliders[i].coll.GetPosition();
+
+            sf::Vector2f v = mapColliders[i].coll.GetPosition();
+            v.x += mapColliders[i].body.getSize().x;
+            lines[1].position = v;
+
+            lines[2].position = mapColliders[i].coll.GetPosition() + mapColliders[i].body.getSize();
+
+            sf::Vector2f v2 = mapColliders[i].coll.GetPosition();
+            v2.y += mapColliders[i].body.getSize().y;
+            lines[3].position = v2;
+
+            lines[4].position = mapColliders[i].coll.GetPosition();
+
+            window.draw(lines);
+        }
+    }
 }
