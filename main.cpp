@@ -154,7 +154,40 @@ void Draw()
     window.draw(mapSprite);
     window.draw(pacman.body);
 
-    DrawColliderBoxes();
+    //DrawColliderBoxes();
+    sf::Vector2f vec(0, 0);
+
+    int numberOfGridsX = 28;
+    int numberOfGridsY = 31;
+    float dividedNumberX = 800 / (float)numberOfGridsX;
+    float dividedNumberY = 800 / (float)numberOfGridsY;
+
+    for (int i = 0; i < numberOfGridsY; i++)
+    {
+        vec.x = 0;
+        for (int j = 0; j < numberOfGridsX; j++)
+        {
+            sf::VertexArray quad(sf::LinesStrip, 5);
+
+            quad[0].position = vec;
+
+            sf::Vector2f v = vec;
+            v.x += dividedNumberX;
+            quad[1].position = v;
+
+            quad[2].position = sf::Vector2f(vec.x + dividedNumberX, vec.y + dividedNumberY);
+
+            sf::Vector2f v2 = vec;
+            v2.y += dividedNumberY;
+            quad[3].position = v2;
+
+            quad[4].position = vec;
+
+            window.draw(quad);
+            vec.x += dividedNumberX;
+        }
+        vec.y += dividedNumberY;
+    }
 
 
     window.display();
