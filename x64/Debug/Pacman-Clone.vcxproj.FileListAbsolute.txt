@@ -1,2 +1,4 @@
 D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
 D:\OneDrive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.pdb
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.pdb

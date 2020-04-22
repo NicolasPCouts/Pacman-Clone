@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Pacman::Pacman(float x, float y) : body(sf::Vector2f(x,y)), coll(&body)
+Pacman::Pacman(float x, float y) : body(sf::Vector2f(x,y))
 {
 	speed = 0.1f;
 
