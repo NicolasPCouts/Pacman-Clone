@@ -93,13 +93,12 @@ void Draw()
             sf::VertexArray quad(sf::LinesStrip, 5);
             if (!tileArray[x][y].isEmpty)
             {
-                quad[0].color = sf::Color::Red;
-                quad[1].color = sf::Color::Red;
-                quad[2].color = sf::Color::Red;
-                quad[3].color = sf::Color::Red;
-                quad[4].color = sf::Color::Red;
+                quad[0].color = sf::Color::Transparent;
+                quad[1].color = sf::Color::Transparent;
+                quad[2].color = sf::Color::Transparent;
+                quad[3].color = sf::Color::Transparent;
+                quad[4].color = sf::Color::Transparent;
             }
-
                 quad[0].position = vec;
 
                 sf::Vector2f v = vec;
@@ -150,5 +149,65 @@ void CreateMapColliders()
         tileArray[i + 9][2].isEmpty = false;
         tileArray[i + 9][3].isEmpty = false;
         tileArray[i + 9][4].isEmpty = false;
+    }
+    for (int i = 2; i <= 5; i++)
+    {
+        tileArray[i][6].isEmpty = false;
+        tileArray[i][7].isEmpty = false;
+
+        tileArray[i + 20][6].isEmpty = false;
+        tileArray[i + 20][7].isEmpty = false;
+    }
+    for (int i = 10; i <= 17; i++)
+    {
+        tileArray[i][6].isEmpty = false;
+        tileArray[i][7].isEmpty = false;
+
+        tileArray[i][18].isEmpty = false;
+        tileArray[i][19].isEmpty = false;
+
+        tileArray[i][24].isEmpty = false;
+        tileArray[i][25].isEmpty = false;
+    }
+    for (int i = 8; i <= 10; i++)
+    {
+        tileArray[13][i].isEmpty = false;
+        tileArray[14][i].isEmpty = false;
+
+        tileArray[13][i + 12].isEmpty = false;
+        tileArray[14][i + 12].isEmpty = false;
+
+        tileArray[13][i + 18].isEmpty = false;
+        tileArray[14][i + 18].isEmpty = false;
+    }
+    for (int i = 6; i <= 13; i++)
+    {
+        tileArray[7][i].isEmpty = false;
+        tileArray[8][i].isEmpty = false;
+
+        tileArray[7 + 12][i].isEmpty = false;
+        tileArray[8 + 12][i].isEmpty = false;
+    }
+    for (int i = 1; i < 10; i++)
+    {
+        tileArray[0][i].isEmpty = false;
+        tileArray[numberOfTilesX - 1][i].isEmpty = false;
+    }
+    for (int i = 19; i < 30; i++)
+    {
+        tileArray[0][i].isEmpty = false;
+        tileArray[numberOfTilesX - 1][i].isEmpty = false;
+    }
+    for (int i = 0; i <= 5; i++)
+    {
+        tileArray[i][9].isEmpty = false;
+        tileArray[i][9 + 4].isEmpty = false;
+        tileArray[i][9 + 6].isEmpty = false;
+        tileArray[i][9 + 10].isEmpty = false;
+
+        tileArray[i + 22][9].isEmpty = false;
+        tileArray[i + 22][9 + 4].isEmpty = false;
+        tileArray[i + 22][9 + 6].isEmpty = false;
+        tileArray[i + 22][9 + 10].isEmpty = false;
     }
 }
