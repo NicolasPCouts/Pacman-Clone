@@ -17,6 +17,8 @@ struct Tile {
 
 Tile tileArray[28][31];
 
+bool showTiles = false;
+
 int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
 int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
 
@@ -81,24 +83,30 @@ void Draw()
 
     sf::Vector2f vec(0, 0);
 
-
-    float dividedNumberX = 800 / (float)numberOfTilesX;
-    float dividedNumberY = 800 / (float)numberOfTilesY;
-
-    for (int y = 0; y < numberOfTilesY; y++)
+    if (showTiles)
     {
-        vec.x = 0;
-        for (int x = 0; x < numberOfTilesX; x++)
+        float dividedNumberX = 800 / (float)numberOfTilesX;
+        float dividedNumberY = 800 / (float)numberOfTilesY;
+
+        for (int y = 0; y < numberOfTilesY; y++)
         {
-            sf::VertexArray quad(sf::LinesStrip, 5);
-            if (!tileArray[x][y].isEmpty)
+            vec.x = 0;
+            for (int x = 0; x < numberOfTilesX; x++)
             {
+                sf::VertexArray quad(sf::LinesStrip, 5);
                 quad[0].color = sf::Color::Transparent;
                 quad[1].color = sf::Color::Transparent;
                 quad[2].color = sf::Color::Transparent;
                 quad[3].color = sf::Color::Transparent;
                 quad[4].color = sf::Color::Transparent;
-            }
+                if (!tileArray[x][y].isEmpty)
+                {
+                    quad[0].color = sf::Color::Red;
+                    quad[1].color = sf::Color::Red;
+                    quad[2].color = sf::Color::Red;
+                    quad[3].color = sf::Color::Red;
+                    quad[4].color = sf::Color::Red;
+                }
                 quad[0].position = vec;
 
                 sf::Vector2f v = vec;
@@ -115,10 +123,10 @@ void Draw()
 
                 window.draw(quad);
                 vec.x += dividedNumberX;
+            }
+            vec.y += dividedNumberY;
         }
-        vec.y += dividedNumberY;
     }
-
 
     window.display();
 }
@@ -209,5 +217,79 @@ void CreateMapColliders()
         tileArray[i + 22][9 + 4].isEmpty = false;
         tileArray[i + 22][9 + 6].isEmpty = false;
         tileArray[i + 22][9 + 10].isEmpty = false;
+    }
+    for (int i = 10; i <= 12; i++)
+    {
+        tileArray[5][i].isEmpty = false;
+        tileArray[22][i].isEmpty = false;
+        tileArray[5][i + 6].isEmpty = false;
+        tileArray[22][i + 6].isEmpty = false;
+    }
+    for (int i = 10; i <= 17; i++)
+    {
+        tileArray[i][12].isEmpty = false;
+        tileArray[i][16].isEmpty = false;
+    }
+    for (int i = 13; i <= 15; i++)
+    {
+        tileArray[10][i].isEmpty = false;
+        tileArray[17][i].isEmpty = false;
+    }
+
+    for (int i = 9; i < 12; i++)
+    {
+        tileArray[i][9].isEmpty = false;
+        tileArray[i][10].isEmpty = false;
+        tileArray[i + 7][9].isEmpty = false;
+        tileArray[i + 7][10].isEmpty = false;
+    }
+    for (int i = 15; i <= 19; i++)
+    {
+        tileArray[7][i].isEmpty = false;
+        tileArray[8][i].isEmpty = false;
+        tileArray[7 + 12][i].isEmpty = false;
+        tileArray[8 + 12][i].isEmpty = false;
+    }
+    for (int i = 7; i <= 11; i++)
+    {
+        tileArray[i][21].isEmpty = false;
+        tileArray[i][22].isEmpty = false;
+        tileArray[i + 9][21].isEmpty = false;
+        tileArray[i + 9][22].isEmpty = false;
+    }
+    for (int i = 24; i <= 26; i++)
+    {
+        tileArray[7][i].isEmpty = false;
+        tileArray[8][i].isEmpty = false;
+        tileArray[7 + 12][i].isEmpty = false;
+        tileArray[8 + 12][i].isEmpty = false;
+    }
+    for (int i = 2; i <= 11; i++)
+    {
+        tileArray[i][27].isEmpty = false;
+        tileArray[i][28].isEmpty = false;
+        tileArray[i + 14][27].isEmpty = false;
+        tileArray[i + 14][28].isEmpty = false;
+    }
+    for (int i = 1; i <= 2; i++)
+    {
+        tileArray[i][24].isEmpty = false;
+        tileArray[i][25].isEmpty = false;
+        tileArray[i + 24][24].isEmpty = false;
+        tileArray[i + 24][25].isEmpty = false;
+    }
+    for (int i = 21; i <= 25; i++)
+    {
+        tileArray[4][i].isEmpty = false;
+        tileArray[5][i].isEmpty = false;
+        tileArray[22][i].isEmpty = false;
+        tileArray[23][i].isEmpty = false;
+    }
+    for (int i = 2; i <= 3; i++)
+    {
+        tileArray[i][21].isEmpty = false;
+        tileArray[i][22].isEmpty = false;
+        tileArray[i + 22][21].isEmpty = false;
+        tileArray[i + 22][22].isEmpty = false;
     }
 }
