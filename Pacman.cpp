@@ -4,10 +4,11 @@
 
 Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
 {
-	speed = 0.1f;
-	tilePos = sf::Vector2f(tileX, tileY);
+	tilePos = sf::Vector2i(tileX, tileY);
 	tileArray[tileX][tileY].isEmpty = false;
 	tileArray[tileX][tileY].tileType = Tile::Player;
+
+	speed = 0.1f;
 
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13)))
 		body.setTexture(&texture);
@@ -41,16 +42,50 @@ void Pacman::Move()
 	case None:
 		return;
 	case Up:
-		body.setPosition(body.getPosition().x, body.getPosition().y - speed);
+		if (GetFinalPosition().y < body.getPosition().y) 
+			body.setPosition(body.getPosition().x, body.getPosition().y - speed);
+		else if(tileArray[tilePos.x][tilePos.y - 1].isEmpty)
+		{
+			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x, tilePos.y - 1));
+		}
 		break;
 	case Down:
-		body.setPosition(body.getPosition().x, body.getPosition().y + speed);
+		if (GetFinalPosition().y > body.getPosition().y)
+			body.setPosition(body.getPosition().x, body.getPosition().y + speed);
+		else if (tileArray[tilePos.x][tilePos.y + 1].isEmpty)
+		{
+			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x, tilePos.y + 1));
+		}
 		break;
 	case Left:
-		body.setPosition(body.getPosition().x - speed, body.getPosition().y);
+		if (GetFinalPosition().x < body.getPosition().x)
+			body.setPosition(body.getPosition().x - speed, body.getPosition().y);
+		else if (tileArray[tilePos.x - 1][tilePos.y].isEmpty)
+		{
+			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x - 1, tilePos.y));
+		}
 		break;
 	case Right:
-		body.setPosition(body.getPosition().x + speed, body.getPosition().y);
+		if (GetFinalPosition().x > body.getPosition().x)
+			body.setPosition(body.getPosition().x + speed, body.getPosition().y);
+		else if (tileArray[tilePos.x + 1][tilePos.y].isEmpty)
+		{
+			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x + 1, tilePos.y));
+		}
 		break;
 	}
+}
+
+sf::Vector2f Pacman::GetFinalPosition()
+{
+	return sf::Vector2f(tilePos.x * tileWidth, tilePos.y * tileHeight);
+}
+
+void Pacman::UpdatePlayerTilePosition(sf::Vector2i newPos) 
+{
+	tileArray[tilePos.x][tilePos.y].isEmpty = true;
+	tileArray[tilePos.x][tilePos.y].tileType = Tile::None;
+	tilePos = newPos;
+	tileArray[tilePos.x][tilePos.y].isEmpty = false;
+	tileArray[tilePos.x][tilePos.y].tileType = Tile::Player;
 }

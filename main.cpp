@@ -15,6 +15,8 @@ bool showTiles = true;
 
 int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
 int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
+float tileWidth = 800 / (float)numberOfTilesX;
+float tileHeight = 800 / (float)numberOfTilesY;
 
 void Draw();
 void LoadMap();
@@ -79,9 +81,6 @@ void Draw()
 
     if (showTiles)
     {
-        float dividedNumberX = 800 / (float)numberOfTilesX;
-        float dividedNumberY = 800 / (float)numberOfTilesY;
-
         for (int y = 0; y < numberOfTilesY; y++)
         {
             vec.x = 0;
@@ -115,21 +114,21 @@ void Draw()
                 quad[0].position = vec;
 
                 sf::Vector2f v = vec;
-                v.x += dividedNumberX;
+                v.x += tileWidth;
                 quad[1].position = v;
 
-                quad[2].position = sf::Vector2f(vec.x + dividedNumberX, vec.y + dividedNumberY);
+                quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
 
                 sf::Vector2f v2 = vec;
-                v2.y += dividedNumberY;
+                v2.y += tileHeight;
                 quad[3].position = v2;
 
                 quad[4].position = vec;
 
                 window.draw(quad);
-                vec.x += dividedNumberX;
+                vec.x += tileWidth;
             }
-            vec.y += dividedNumberY;
+            vec.y += tileHeight;
         }
     }
 
