@@ -1,8 +1,9 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "Common.h"
 
 extern sf::RenderWindow window;
 extern sf::Sprite mapSprite;
+extern Tile tileArray[28][31];
 
 enum Directions {
 	Up,
@@ -16,7 +17,8 @@ class Pacman
 {
 public:
 	sf::RectangleShape body;
-	Pacman(float x, float y);
+	sf::Vector2f tilePos;
+	Pacman(int x, int y);
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update();
 private:

@@ -1,5 +1,4 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Common.h"
 
 #include "Pacman.h"
 
@@ -8,16 +7,11 @@ sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 sf::Sprite mapSprite;
 sf::Texture mapTexture;
 
-Pacman pacman = Pacman(40, 40);
-
-struct Tile {
-    enum tileType{None, Wall, Enemy, Player};
-    bool isEmpty = true;
-};
+Pacman pacman = Pacman(1,1);
 
 Tile tileArray[28][31];
 
-bool showTiles = false;
+bool showTiles = true;
 
 int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
 int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
@@ -101,11 +95,22 @@ void Draw()
                 quad[4].color = sf::Color::Transparent;
                 if (!tileArray[x][y].isEmpty)
                 {
-                    quad[0].color = sf::Color::Red;
-                    quad[1].color = sf::Color::Red;
-                    quad[2].color = sf::Color::Red;
-                    quad[3].color = sf::Color::Red;
-                    quad[4].color = sf::Color::Red;
+                    if (tileArray[x][y].tileType == Tile::Player) 
+                    {
+                        quad[0].color = sf::Color::Green;
+                        quad[1].color = sf::Color::Green;
+                        quad[2].color = sf::Color::Green;
+                        quad[3].color = sf::Color::Green;
+                        quad[4].color = sf::Color::Green;
+                    }
+                    else
+                    {
+                        quad[0].color = sf::Color::Red;
+                        quad[1].color = sf::Color::Red;
+                        quad[2].color = sf::Color::Red;
+                        quad[3].color = sf::Color::Red;
+                        quad[4].color = sf::Color::Red;
+                    }
                 }
                 quad[0].position = vec;
 

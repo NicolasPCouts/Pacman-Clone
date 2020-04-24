@@ -2,9 +2,12 @@
 #include <iostream>
 
 
-Pacman::Pacman(float x, float y) : body(sf::Vector2f(x,y))
+Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
 {
 	speed = 0.1f;
+	tilePos = sf::Vector2f(tileX, tileY);
+	tileArray[tileX][tileY].isEmpty = false;
+	tileArray[tileX][tileY].tileType = Tile::Player;
 
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13)))
 		body.setTexture(&texture);
