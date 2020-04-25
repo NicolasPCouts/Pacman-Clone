@@ -25,10 +25,14 @@ public:
 	void Update();
 private:
 	Directions currentDir = None;
+	Directions nextDir = None;
 	sf::Texture texture;
 	float speed;
+	bool hasCompletedMovement = false;
 	void Move();
+	void UpdatePlayerTilePosition();
+	void UpdateTileArray(sf::Vector2i newPos);
+	bool IsNeighbourTileAvailable(Directions dir);
 	sf::Vector2f GetFinalPosition();
-	void UpdatePlayerTilePosition(sf::Vector2i newPos);
 };
 

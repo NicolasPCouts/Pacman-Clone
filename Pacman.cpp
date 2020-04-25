@@ -20,14 +20,14 @@ Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
 {
-	if (key.code == sf::Keyboard::Key::W) 
-		currentDir = Up;
+	if (key.code == sf::Keyboard::Key::W)
+		nextDir = Up;
 	else if (key.code == sf::Keyboard::Key::S)
-		currentDir = Down;
+		nextDir = Down;
 	else if (key.code == sf::Keyboard::Key::A)
-		currentDir = Left;
+		nextDir = Left;
 	else if (key.code == sf::Keyboard::Key::D)
-		currentDir = Right;
+		nextDir = Right;
 }
 
 void Pacman::Update()
@@ -40,38 +40,31 @@ void Pacman::Move()
 	switch (currentDir)
 	{
 	case None:
+		UpdatePlayerTilePosition();
 		return;
 	case Up:
-		if (GetFinalPosition().y < body.getPosition().y) 
+		if (GetFinalPosition().y <= body.getPosition().y) 
 			body.setPosition(body.getPosition().x, body.getPosition().y - speed);
-		else if(tileArray[tilePos.x][tilePos.y - 1].isEmpty)
-		{
-			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x, tilePos.y - 1));
-		}
+		else
+			UpdatePlayerTilePosition();
 		break;
 	case Down:
-		if (GetFinalPosition().y > body.getPosition().y)
+		if (GetFinalPosition().y >= body.getPosition().y)
 			body.setPosition(body.getPosition().x, body.getPosition().y + speed);
-		else if (tileArray[tilePos.x][tilePos.y + 1].isEmpty)
-		{
-			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x, tilePos.y + 1));
-		}
+		else
+			UpdatePlayerTilePosition();
 		break;
 	case Left:
-		if (GetFinalPosition().x < body.getPosition().x)
+		if (GetFinalPosition().x <= body.getPosition().x)
 			body.setPosition(body.getPosition().x - speed, body.getPosition().y);
-		else if (tileArray[tilePos.x - 1][tilePos.y].isEmpty)
-		{
-			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x - 1, tilePos.y));
-		}
+		else
+			UpdatePlayerTilePosition();
 		break;
 	case Right:
-		if (GetFinalPosition().x > body.getPosition().x)
+		if (GetFinalPosition().x >= body.getPosition().x)
 			body.setPosition(body.getPosition().x + speed, body.getPosition().y);
-		else if (tileArray[tilePos.x + 1][tilePos.y].isEmpty)
-		{
-			UpdatePlayerTilePosition(sf::Vector2i(tilePos.x + 1, tilePos.y));
-		}
+		else
+			UpdatePlayerTilePosition();
 		break;
 	}
 }
@@ -81,11 +74,64 @@ sf::Vector2f Pacman::GetFinalPosition()
 	return sf::Vector2f(tilePos.x * tileWidth, tilePos.y * tileHeight);
 }
 
-void Pacman::UpdatePlayerTilePosition(sf::Vector2i newPos) 
+void Pacman::UpdatePlayerTilePosition()
+{
+	if (nextDir != None && IsNeighbourTileAvailable(nextDir))
+	{
+		currentDir = nextDir;
+		nextDir = None;
+	}
+
+	if (IsNeighbourTileAvailable(currentDir))
+	{
+		switch (currentDir)
+		{
+		case Up:
+			UpdateTileArray(sf::Vector2i(tilePos.x, tilePos.y - 1));
+			break;
+		case Down:
+			UpdateTileArray(sf::Vector2i(tilePos.x, tilePos.y + 1));
+			break;
+		case Left:
+			UpdateTileArray(sf::Vector2i(tilePos.x - 1, tilePos.y));
+			break;
+		case Right:
+			UpdateTileArray(sf::Vector2i(tilePos.x + 1, tilePos.y));
+			break;
+		}
+	}
+}
+
+void Pacman::UpdateTileArray(sf::Vector2i newPos) 
 {
 	tileArray[tilePos.x][tilePos.y].isEmpty = true;
 	tileArray[tilePos.x][tilePos.y].tileType = Tile::None;
 	tilePos = newPos;
 	tileArray[tilePos.x][tilePos.y].isEmpty = false;
 	tileArray[tilePos.x][tilePos.y].tileType = Tile::Player;
+}
+
+bool Pacman::IsNeighbourTileAvailable(Directions dir) 
+{
+	switch (dir)
+	{
+	case Up:
+		if (tileArray[tilePos.x][tilePos.y - 1].isEmpty)
+			return true;
+		break;
+	case Down:
+		if (tileArray[tilePos.x][tilePos.y + 1].isEmpty)
+			return true;
+		break;
+	case Left:
+		if (tileArray[tilePos.x - 1][tilePos.y].isEmpty)
+			return true;
+		break;
+	case Right:
+		if (tileArray[tilePos.x + 1][tilePos.y].isEmpty)
+			return true;
+		break;
+	}
+
+	return false;
 }
