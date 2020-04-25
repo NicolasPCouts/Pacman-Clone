@@ -76,9 +76,11 @@ sf::Vector2f Pacman::GetFinalPosition()
 
 void Pacman::UpdatePlayerTilePosition()
 {
-	if (nextDir != None && IsNeighbourTileAvailable(nextDir))
+	if (nextDir != None)
 	{
-		currentDir = nextDir;
+		if(IsNeighbourTileAvailable(nextDir))
+			currentDir = nextDir;
+
 		nextDir = None;
 	}
 
