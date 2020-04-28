@@ -8,14 +8,14 @@ Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
 	tileArray[tileX][tileY].isEmpty = false;
 	tileArray[tileX][tileY].tileType = Tile::Player;
 
-	speed = 0.1f;
+	speed = 0.10f;
 
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13)))
 		body.setTexture(&texture);
 	else
 		std::cout << "texture not loaded correctly" << std::endl;
 
-	body.move(sf::Vector2f(25, 25));
+	body.move(sf::Vector2f(30 * tileX, 20 * tileY));
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
