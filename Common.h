@@ -5,7 +5,7 @@
 
 
 struct Tile {
-    enum TileType { None, Wall, Enemy, Player, Snack, BigSnack };
+    enum TileType { None, Wall, Enemy, Player };
 
     bool isEmpty = true;
     TileType tileType = Wall;

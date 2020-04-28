@@ -7,7 +7,7 @@ sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 sf::Sprite mapSprite;
 sf::Texture mapTexture;
 
-Pacman pacman = Pacman(5,1);
+Pacman pacman = Pacman(1,1);
 
 Tile tileArray[28][31];
 
@@ -40,6 +40,7 @@ int main()
                     break;
                 case sf::Event::KeyPressed:
                     pacman.OnKeyPressed(event.key);
+                    //ChangeTestColliderValues(event.key);
                     break;
             }
         }
@@ -75,15 +76,6 @@ void Draw()
     window.clear();
     window.draw(mapSprite);
     window.draw(pacman.body);
-
-    sf::Texture text;
-    text.loadFromFile("Resources/PacManSprites.png", sf::IntRect(226, 240, 6, 6));
-
-    sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(tileWidth, tileHeight));
-    rect.setFillColor(sf::Color::White);
-    rect.setTexture(&text);
-    rect.move(sf::Vector2f(tileWidth * 6, tileHeight * 4));
-    window.draw(rect);
 
     sf::Vector2f vec(0, 0);
 
