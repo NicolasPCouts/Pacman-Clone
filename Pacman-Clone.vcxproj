@@ -158,6 +158,8 @@
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Snack.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

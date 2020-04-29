@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.h"
+#include "Tile.h"
 
 extern sf::RenderWindow window;
 extern sf::Sprite mapSprite;

@@ -1,5 +1,5 @@
 #include "Common.h"
-
+#include "Tile.h"
 #include "Pacman.h"
 
 sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
