@@ -1,6 +1,7 @@
 #include "Common.h"
 #include "Tile.h"
 #include "Pacman.h"
+#include "Snack.h"
 
 sf::RenderWindow window(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
 
@@ -10,8 +11,9 @@ sf::Texture mapTexture;
 Pacman pacman = Pacman(5,1);
 
 Tile tileArray[28][31];
+std::vector<Snack*> snackList;
 
-bool showTiles = true;
+bool showTiles = false;
 
 int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
 int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
@@ -21,11 +23,13 @@ float tileHeight = 800 / (float)numberOfTilesY;
 void Draw();
 void LoadMap();
 void CreateMapColliders();
+void CreateSnacks();
 
 int main()
 {
     LoadMap();
     CreateMapColliders();
+    CreateSnacks();
 
     while (window.isOpen())
     {
@@ -79,11 +83,10 @@ void Draw()
     sf::Texture text;
     text.loadFromFile("Resources/PacManSprites.png", sf::IntRect(226, 240, 6, 6));
 
-    sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(tileWidth, tileHeight));
-    rect.setFillColor(sf::Color::White);
-    rect.setTexture(&text);
-    rect.move(sf::Vector2f(tileWidth * 6, tileHeight * 4));
-    window.draw(rect);
+    for (int i = 0; i < snackList.size(); i++)
+    {
+        window.draw(snackList[i]->rect);
+    }
 
     sf::Vector2f vec(0, 0);
 
@@ -303,5 +306,22 @@ void CreateMapColliders()
         tileArray[i][22].isEmpty = false;
         tileArray[i + 22][21].isEmpty = false;
         tileArray[i + 22][22].isEmpty = false;
+    }
+}
+
+void CreateSnacks()
+{
+    for (int x = 0; x < numberOfTilesX; x++)
+    {
+        for (int y = 0; y < numberOfTilesY; y++)
+        {
+            if (tileArray[x][y].isEmpty)
+            {
+                tileArray[x][y].isEmpty = false;
+                tileArray[x][y].tileType = Tile::Snack;
+                Snack* s = new Snack(Snack::SmallSnack, sf::Vector2i(x, y));
+                snackList.push_back(s);
+            }
+        }
     }
 }
