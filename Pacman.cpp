@@ -1,12 +1,13 @@
 #include "Pacman.h"
-#include <iostream>
+#include "Tile.h"
 
+extern GameManager* gameManager;
 
 Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
 {
 	tilePos = sf::Vector2i(tileX, tileY);
-	tileArray[tileX][tileY].isEmpty = false;
-	tileArray[tileX][tileY].tileType = Tile::Player;
+	gameManager->tileArray[tileX][tileY].isEmpty = false;
+	gameManager->tileArray[tileX][tileY].tileType = Tile::Player;
 
 	speed = 0.10f;
 
@@ -71,7 +72,7 @@ void Pacman::Move()
 
 sf::Vector2f Pacman::GetFinalPosition()
 {
-	return sf::Vector2f(tilePos.x * tileWidth, tilePos.y * tileHeight);
+	return sf::Vector2f(tilePos.x * gameManager->tileWidth, tilePos.y * gameManager->tileHeight);
 }
 
 void Pacman::UpdatePlayerTilePosition()
@@ -106,11 +107,11 @@ void Pacman::UpdatePlayerTilePosition()
 
 void Pacman::UpdateTileArray(sf::Vector2i newPos) 
 {
-	tileArray[tilePos.x][tilePos.y].isEmpty = true;
-	tileArray[tilePos.x][tilePos.y].tileType = Tile::None;
+	gameManager->tileArray[tilePos.x][tilePos.y].isEmpty = true;
+	gameManager->tileArray[tilePos.x][tilePos.y].tileType = Tile::None;
 	tilePos = newPos;
-	tileArray[tilePos.x][tilePos.y].isEmpty = false;
-	tileArray[tilePos.x][tilePos.y].tileType = Tile::Player;
+	gameManager->tileArray[tilePos.x][tilePos.y].isEmpty = false;
+	gameManager->tileArray[tilePos.x][tilePos.y].tileType = Tile::Player;
 }
 
 bool Pacman::IsNeighbourTileAvailable(Directions dir) 
@@ -118,19 +119,19 @@ bool Pacman::IsNeighbourTileAvailable(Directions dir)
 	switch (dir)
 	{
 	case Up:
-		if (tileArray[tilePos.x][tilePos.y - 1].tileType != Tile::Wall)
+		if (gameManager->tileArray[tilePos.x][tilePos.y - 1].tileType != Tile::Wall)
 			return true;
 		break;
 	case Down:
-		if (tileArray[tilePos.x][tilePos.y + 1].tileType != Tile::Wall)
+		if (gameManager->tileArray[tilePos.x][tilePos.y + 1].tileType != Tile::Wall)
 			return true;
 		break;
 	case Left:
-		if (tileArray[tilePos.x - 1][tilePos.y].tileType != Tile::Wall)
+		if (gameManager->tileArray[tilePos.x - 1][tilePos.y].tileType != Tile::Wall)
 			return true;
 		break;
 	case Right:
-		if (tileArray[tilePos.x + 1][tilePos.y].tileType != Tile::Wall)
+		if (gameManager->tileArray[tilePos.x + 1][tilePos.y].tileType != Tile::Wall)
 			return true;
 		break;
 	}

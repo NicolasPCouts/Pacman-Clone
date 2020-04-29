@@ -1,10 +1,11 @@
 #include "GameManager.h"
-
+GameManager* gameManager = new GameManager();
 
 int main()
 {
-    GameManager game;
-    game.Update();
+    gameManager->StartGameManager();
+    gameManager->Update();
 
+    delete gameManager;
     return 0;
 }

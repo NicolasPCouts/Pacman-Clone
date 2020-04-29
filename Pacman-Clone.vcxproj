@@ -155,6 +155,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Snack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />

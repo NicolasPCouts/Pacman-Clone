@@ -1,6 +1,7 @@
 #pragma once
 #include "Common.h"
-#include "Tile.h"
+
+#include "GameManager.h"
 
 enum Directions {
 	Up,

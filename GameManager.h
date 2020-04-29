@@ -1,6 +1,11 @@
 #pragma once
 #include "Common.h"
 
+#include "Tile.h"
+#include "Snack.h"
+
+class Pacman;
+
 class GameManager
 {
 public:
@@ -9,7 +14,7 @@ public:
 	sf::Sprite mapSprite;
 	sf::Texture mapTexture;
 
-	Pacman pacman = Pacman(5, 1);
+	Pacman* pacman;
 
 	Tile tileArray[28][31];
 	std::vector<Snack*> snackList;
@@ -21,12 +26,11 @@ public:
 	float tileWidth = 800 / (float)numberOfTilesX;
 	float tileHeight = 800 / (float)numberOfTilesY;
 
-	GameManager();
 	void Update();
+	void StartGameManager();
 private:
 	void Draw();
 	void LoadMap();
 	void CreateMapColliders();
 	void CreateSnacks();
 };
-

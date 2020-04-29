@@ -1,11 +1,13 @@
 #include "GameManager.h"
+#include "Pacman.h"
 
 
-GameManager::GameManager()
+void GameManager::StartGameManager()
 {
     LoadMap();
     CreateMapColliders();
     CreateSnacks();
+    pacman = &Pacman(5, 1);
 }
 
 void GameManager::Update()
@@ -22,13 +24,13 @@ void GameManager::Update()
                 window.close();
                 break;
             case sf::Event::KeyPressed:
-                pacman.OnKeyPressed(event.key);
+                pacman->OnKeyPressed(event.key);
                 break;
             }
         }
 
         //Logic
-        pacman.Update();
+        pacman->Update();
 
         //render
         Draw();
@@ -39,7 +41,7 @@ void GameManager::Draw()
 {
     window.clear();
     window.draw(mapSprite);
-    window.draw(pacman.body);
+    window.draw(pacman->body);
 
     sf::Texture text;
     text.loadFromFile("Resources/PacManSprites.png", sf::IntRect(226, 240, 6, 6));
