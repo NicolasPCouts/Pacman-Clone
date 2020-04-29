@@ -7,7 +7,7 @@ void GameManager::StartGameManager()
     LoadMap();
     CreateMapColliders();
     CreateSnacks();
-    pacman = &Pacman(5, 1);
+    pacman = new Pacman(5, 1);
 }
 
 void GameManager::Update()
