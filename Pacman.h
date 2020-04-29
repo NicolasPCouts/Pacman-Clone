@@ -2,12 +2,6 @@
 #include "Common.h"
 #include "Tile.h"
 
-extern sf::RenderWindow window;
-extern sf::Sprite mapSprite;
-extern Tile tileArray[28][31];
-extern float tileWidth;
-extern float tileHeight;
-
 enum Directions {
 	Up,
 	Down,
