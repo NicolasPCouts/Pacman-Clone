@@ -118,19 +118,19 @@ bool Pacman::IsNeighbourTileAvailable(Directions dir)
 	switch (dir)
 	{
 	case Up:
-		if (tileArray[tilePos.x][tilePos.y - 1].isEmpty)
+		if (tileArray[tilePos.x][tilePos.y - 1].tileType != Tile::Wall)
 			return true;
 		break;
 	case Down:
-		if (tileArray[tilePos.x][tilePos.y + 1].isEmpty)
+		if (tileArray[tilePos.x][tilePos.y + 1].tileType != Tile::Wall)
 			return true;
 		break;
 	case Left:
-		if (tileArray[tilePos.x - 1][tilePos.y].isEmpty)
+		if (tileArray[tilePos.x - 1][tilePos.y].tileType != Tile::Wall)
 			return true;
 		break;
 	case Right:
-		if (tileArray[tilePos.x + 1][tilePos.y].isEmpty)
+		if (tileArray[tilePos.x + 1][tilePos.y].tileType != Tile::Wall)
 			return true;
 		break;
 	}

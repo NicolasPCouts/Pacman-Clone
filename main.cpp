@@ -163,6 +163,11 @@ void CreateMapColliders()
         tileArray[i + 20][3].isEmpty = false;
         tileArray[i + 20][4].isEmpty = false;
     }
+    for (int i = 1; i <= 4; i++)
+    {
+        tileArray[13][i].isEmpty = false;
+        tileArray[14][i].isEmpty = false;
+    }
     for (int i = 7; i <= 11; i++)
     {
         tileArray[i][2].isEmpty = false;
@@ -233,12 +238,21 @@ void CreateMapColliders()
         tileArray[i + 22][9 + 6].isEmpty = false;
         tileArray[i + 22][9 + 10].isEmpty = false;
     }
-    for (int i = 10; i <= 12; i++)
+    for (int i = 0; i <= 5; i++)
     {
-        tileArray[5][i].isEmpty = false;
-        tileArray[22][i].isEmpty = false;
-        tileArray[5][i + 6].isEmpty = false;
-        tileArray[22][i + 6].isEmpty = false;
+        tileArray[i][10].isEmpty = false;
+        tileArray[i][11].isEmpty = false;
+        tileArray[i][12].isEmpty = false;
+        tileArray[i + 22][10].isEmpty = false;
+        tileArray[i + 22][11].isEmpty = false;
+        tileArray[i + 22][12].isEmpty = false;
+
+        tileArray[i][16].isEmpty = false;
+        tileArray[i][17].isEmpty = false;
+        tileArray[i][18].isEmpty = false;
+        tileArray[i + 22][16].isEmpty = false;
+        tileArray[i + 22][17].isEmpty = false;
+        tileArray[i + 22][18].isEmpty = false;
     }
     for (int i = 10; i <= 17; i++)
     {
