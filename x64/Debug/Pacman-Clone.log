@@ -1,15 +1,16 @@
 ﻿  GameManager.cpp
-  main.cpp
   Pacman.cpp
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(18,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(19,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(18,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(19,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
+  Snack.cpp
+  main.cpp
   Generating Code...
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
