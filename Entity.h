@@ -1,7 +1,6 @@
 #pragma once
 #include "Common.h"
 
-
 enum Directions {
 	Up,
 	Down,
@@ -20,6 +19,5 @@ public:
 	sf::Texture texture;
 	virtual void Draw(sf::RenderWindow& rw);
 	virtual void Move() = 0;
-private:
 };
 

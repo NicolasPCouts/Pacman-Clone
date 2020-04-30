@@ -46,7 +46,9 @@ void GameManager::Draw()
 {
     window.clear();
     window.draw(mapSprite);
-    window.draw(pacman->body);
+
+
+    pacman->Draw(window);
 
     for (int i = 0; i < snackList.size(); i++)
         snackList[i]->Draw(window);

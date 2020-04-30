@@ -1,23 +1,20 @@
 #pragma once
 #include "Common.h"
-
 #include "GameManager.h"
+#include "Entity.h"
 
-class Pacman
+class Pacman : Entity
 {
 public:
-	sf::RectangleShape body;
-	sf::Vector2i tilePos;
 	Pacman(int x, int y);
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update();
+	void Draw(sf::RenderWindow& rw) override;
 private:
-	Directions currentDir = None;
 	Directions nextDir = None;
-	sf::Texture texture;
 	float speed;
 	bool hasCompletedMovement = false;
-	void Move();
+	void Move() override;
 	void UpdatePlayerTilePosition();
 	void UpdateTileArray(sf::Vector2i newPos);
 	bool IsNeighbourTileAvailable(Directions dir);

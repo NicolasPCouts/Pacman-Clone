@@ -3,9 +3,10 @@
 
 extern GameManager* gameManager;
 
-Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
+Pacman::Pacman(int tileX, int tileY)
 {
-	tilePos = sf::Vector2i(tileX, tileY);
+	body.setSize(sf::Vector2f(40, 40));
+	gridPos = sf::Vector2i(tileX, tileY);
 	gameManager->tileArray[tileX][tileY].isEmpty = false;
 	gameManager->tileArray[tileX][tileY].tileType = Tile::Player;
 
@@ -17,6 +18,11 @@ Pacman::Pacman(int tileX, int tileY) : body(sf::Vector2f(40, 40))
 		std::cout << "texture not loaded correctly" << std::endl;
 
 	body.move(sf::Vector2f(30 * tileX, 20 * tileY));
+}
+
+void Pacman::Draw(sf::RenderWindow& rw)
+{
+	rw.draw(body);
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
@@ -72,7 +78,7 @@ void Pacman::Move()
 
 sf::Vector2f Pacman::GetFinalPosition()
 {
-	return sf::Vector2f(tilePos.x * gameManager->tileWidth, tilePos.y * gameManager->tileHeight);
+	return sf::Vector2f(gridPos.x * gameManager->tileWidth, gridPos.y * gameManager->tileHeight);
 }
 
 void Pacman::UpdatePlayerTilePosition()
@@ -90,16 +96,16 @@ void Pacman::UpdatePlayerTilePosition()
 		switch (currentDir)
 		{
 		case Up:
-			UpdateTileArray(sf::Vector2i(tilePos.x, tilePos.y - 1));
+			UpdateTileArray(sf::Vector2i(gridPos.x, gridPos.y - 1));
 			break;
 		case Down:
-			UpdateTileArray(sf::Vector2i(tilePos.x, tilePos.y + 1));
+			UpdateTileArray(sf::Vector2i(gridPos.x, gridPos.y + 1));
 			break;
 		case Left:
-			UpdateTileArray(sf::Vector2i(tilePos.x - 1, tilePos.y));
+			UpdateTileArray(sf::Vector2i(gridPos.x - 1, gridPos.y));
 			break;
 		case Right:
-			UpdateTileArray(sf::Vector2i(tilePos.x + 1, tilePos.y));
+			UpdateTileArray(sf::Vector2i(gridPos.x + 1, gridPos.y));
 			break;
 		}
 	}
@@ -107,11 +113,11 @@ void Pacman::UpdatePlayerTilePosition()
 
 void Pacman::UpdateTileArray(sf::Vector2i newPos) 
 {
-	gameManager->tileArray[tilePos.x][tilePos.y].isEmpty = true;
-	gameManager->tileArray[tilePos.x][tilePos.y].tileType = Tile::None;
-	tilePos = newPos;
-	gameManager->tileArray[tilePos.x][tilePos.y].isEmpty = false;
-	gameManager->tileArray[tilePos.x][tilePos.y].tileType = Tile::Player;
+	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = Tile::None;
+	gridPos = newPos;
+	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = Tile::Player;
 }
 
 bool Pacman::IsNeighbourTileAvailable(Directions dir) 
@@ -119,19 +125,19 @@ bool Pacman::IsNeighbourTileAvailable(Directions dir)
 	switch (dir)
 	{
 	case Up:
-		if (gameManager->tileArray[tilePos.x][tilePos.y - 1].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x][gridPos.y - 1].tileType != Tile::Wall)
 			return true;
 		break;
 	case Down:
-		if (gameManager->tileArray[tilePos.x][tilePos.y + 1].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x][gridPos.y + 1].tileType != Tile::Wall)
 			return true;
 		break;
 	case Left:
-		if (gameManager->tileArray[tilePos.x - 1][tilePos.y].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x - 1][gridPos.y].tileType != Tile::Wall)
 			return true;
 		break;
 	case Right:
-		if (gameManager->tileArray[tilePos.x + 1][tilePos.y].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x + 1][gridPos.y].tileType != Tile::Wall)
 			return true;
 		break;
 	}
