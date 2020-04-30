@@ -3,14 +3,6 @@
 
 #include "GameManager.h"
 
-enum Directions {
-	Up,
-	Down,
-	Left,
-	Right,
-	None
-};
-
 class Pacman
 {
 public:
