@@ -5,6 +5,7 @@ extern GameManager* gameManager;
 
 Snack::Snack(SnackType type, sf::Vector2i gridPos)
 {
+    snackType = type;
     if (type == SmallSnack)
     {
         rect = sf::RectangleShape(sf::Vector2f(gameManager->tileWidth, gameManager->tileHeight));
@@ -13,4 +14,10 @@ Snack::Snack(SnackType type, sf::Vector2i gridPos)
         rect.setTexture(&text);
         rect.move(sf::Vector2f(gameManager->tileWidth * gridPos.x, gameManager->tileHeight * gridPos.y));
     }
+}
+
+void Snack::Draw(sf::RenderWindow& rw)
+{
+    if(snackType == SmallSnack)
+        rw.draw(rect);
 }

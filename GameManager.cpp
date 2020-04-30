@@ -10,6 +10,11 @@ void GameManager::StartGameManager()
     pacman = new Pacman(5, 1);
 }
 
+GameManager::~GameManager()
+{
+    delete pacman;
+}
+
 void GameManager::Update()
 {
     while (window.isOpen())
@@ -43,18 +48,13 @@ void GameManager::Draw()
     window.draw(mapSprite);
     window.draw(pacman->body);
 
-    sf::Texture text;
-    text.loadFromFile("Resources/PacManSprites.png", sf::IntRect(226, 240, 6, 6));
-
     for (int i = 0; i < snackList.size(); i++)
-    {
-        window.draw(snackList[i]->rect);
-    }
+        snackList[i]->Draw(window);
 
-    sf::Vector2f vec(0, 0);
 
     if (showTiles)
     {
+        sf::Vector2f vec(0, 0);
         for (int y = 0; y < numberOfTilesY; y++)
         {
             vec.x = 0;
@@ -299,10 +299,39 @@ void GameManager::CreateMapColliders()
         tileArray[i + 22][21].isEmpty = false;
         tileArray[i + 22][22].isEmpty = false;
     }
+    for (int i = 11; i <= 16; i++)
+    {
+        tileArray[i][13].isEmpty = false;
+        tileArray[i][14].isEmpty = false;
+        tileArray[i][15].isEmpty = false;
+
+        tileArray[i][13].tileType = Tile::EnemyCenter;
+        tileArray[i][14].tileType = Tile::EnemyCenter;
+        tileArray[i][15].tileType = Tile::EnemyCenter;
+    }
 }
 
 void GameManager::CreateSnacks()
 {
+    //BIG SNACKS
+    tileArray[1][3].isEmpty = false;
+    tileArray[1][3].tileType = Tile::Snack;
+    tileArray[26][3].isEmpty = false;
+    tileArray[26][3].tileType = Tile::Snack;
+    tileArray[1][23].isEmpty = false;
+    tileArray[1][23].tileType = Tile::Snack;
+    tileArray[26][23].isEmpty = false;
+    tileArray[26][23].tileType = Tile::Snack;
+    Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(1, 3));
+    Snack* s1 = new Snack(Snack::BigSnack, sf::Vector2i(26, 3));
+    Snack* s2 = new Snack(Snack::BigSnack, sf::Vector2i(1, 23));
+    Snack* s3 = new Snack(Snack::BigSnack, sf::Vector2i(26, 23));
+    snackList.push_back(s);
+    snackList.push_back(s1);
+    snackList.push_back(s2);
+    snackList.push_back(s3);
+
+    //SMALL SNACKS
     for (int x = 0; x < numberOfTilesX; x++)
     {
         for (int y = 0; y < numberOfTilesY; y++)
@@ -316,4 +345,12 @@ void GameManager::CreateSnacks()
             }
         }
     }
+}
+
+void GameManager::DeleteSnacks()
+{
+    for (int x = 0; x < snackList.size(); x++)
+        delete snackList[x];
+
+    snackList.clear();
 }

@@ -28,9 +28,11 @@ public:
 
 	void Update();
 	void StartGameManager();
+	~GameManager();
 private:
 	void Draw();
 	void LoadMap();
 	void CreateMapColliders();
 	void CreateSnacks();
+	void DeleteSnacks();
 };
