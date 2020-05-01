@@ -76,6 +76,11 @@ void Pacman::Move()
 	}
 }
 
+void Pacman::EatSnack(sf::Vector2i snackGridPosition)
+{
+	gameManager->DeleteSnack(snackGridPosition);
+}
+
 sf::Vector2f Pacman::GetFinalPosition()
 {
 	return sf::Vector2f(gridPos.x * gameManager->tileWidth, gridPos.y * gameManager->tileHeight);
@@ -113,9 +118,18 @@ void Pacman::UpdatePlayerTilePosition()
 
 void Pacman::UpdateTileArray(sf::Vector2i newPos) 
 {
+	//emptying current tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
 	gameManager->tileArray[gridPos.x][gridPos.y].tileType = Tile::None;
+
 	gridPos = newPos;
+
+	if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == Tile::Snack)
+	{
+		EatSnack(newPos);
+	}
+
+	//transfering player to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
 	gameManager->tileArray[gridPos.x][gridPos.y].tileType = Tile::Player;
 }

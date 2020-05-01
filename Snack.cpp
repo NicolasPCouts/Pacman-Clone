@@ -16,6 +16,7 @@ Snack::Snack(SnackType type, sf::Vector2i gridPos)
         body = sf::RectangleShape(sf::Vector2f(gameManager->tileWidth, gameManager->tileHeight));
         texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(233, 240, 8, 8));
     }
+    this->gridPos = gridPos;
     body.setTexture(&texture);
     body.move(sf::Vector2f(gameManager->tileWidth * gridPos.x, gameManager->tileHeight * gridPos.y));
 }

@@ -17,7 +17,7 @@ public:
 	Pacman* pacman;
 
 	Tile tileArray[28][31];
-	std::vector<Snack*> snackList;
+	std::vector<Snack*> SnackList;
 
 	bool showTiles = false;
 
@@ -29,10 +29,12 @@ public:
 	void Update();
 	void StartGameManager();
 	~GameManager();
+	void DeleteSnack(sf::Vector2i snackPos);
 private:
 	void Draw();
 	void LoadMap();
 	void CreateMapColliders();
 	void CreateSnacks();
+	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnacks();
 };

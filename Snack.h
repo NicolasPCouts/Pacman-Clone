@@ -3,7 +3,7 @@
 
 #include "Entity.h"
 
-class Snack : Entity {
+class Snack : public Entity {
 public:
     enum SnackType { SmallSnack, BigSnack };
     SnackType snackType;
@@ -11,5 +11,4 @@ public:
     Snack(SnackType type, sf::Vector2i gridPos);
     void Draw(sf::RenderWindow& rw) override;
     void Move() {};
-private:
 };

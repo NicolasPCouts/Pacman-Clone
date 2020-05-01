@@ -50,8 +50,8 @@ void GameManager::Draw()
 
     pacman->Draw(window);
 
-    for (int i = 0; i < snackList.size(); i++)
-        snackList[i]->Draw(window);
+    for (auto const& x : SnackList)
+        x->Draw(window);
 
 
     if (showTiles)
@@ -316,22 +316,14 @@ void GameManager::CreateMapColliders()
 void GameManager::CreateSnacks()
 {
     //BIG SNACKS
-    tileArray[1][3].isEmpty = false;
-    tileArray[1][3].tileType = Tile::Snack;
-    tileArray[26][3].isEmpty = false;
-    tileArray[26][3].tileType = Tile::Snack;
-    tileArray[1][23].isEmpty = false;
-    tileArray[1][23].tileType = Tile::Snack;
-    tileArray[26][23].isEmpty = false;
-    tileArray[26][23].tileType = Tile::Snack;
-    Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(1, 3));
-    Snack* s1 = new Snack(Snack::BigSnack, sf::Vector2i(26, 3));
-    Snack* s2 = new Snack(Snack::BigSnack, sf::Vector2i(1, 23));
-    Snack* s3 = new Snack(Snack::BigSnack, sf::Vector2i(26, 23));
-    snackList.push_back(s);
-    snackList.push_back(s1);
-    snackList.push_back(s2);
-    snackList.push_back(s3);
+    sf::Vector2i bigSnackPosArray[4] { sf::Vector2i(1,3), sf::Vector2i(26,3), sf::Vector2i(1,23), sf::Vector2i(26,23) };
+    for (const auto& snackPos : bigSnackPosArray)
+    {
+        tileArray[snackPos.x][snackPos.y].isEmpty = false;
+        tileArray[snackPos.x][snackPos.y].tileType = Tile::Snack;
+        Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(snackPos.x, snackPos.y));
+        SnackList.push_back(s);
+    }
 
     //SMALL SNACKS
     for (int x = 0; x < numberOfTilesX; x++)
@@ -343,16 +335,39 @@ void GameManager::CreateSnacks()
                 tileArray[x][y].isEmpty = false;
                 tileArray[x][y].tileType = Tile::Snack;
                 Snack* s = new Snack(Snack::SmallSnack, sf::Vector2i(x, y));
-                snackList.push_back(s);
+                SnackList.push_back(s);
             }
         }
     }
 }
 
+
+int GameManager::FindSnackID(sf::Vector2i snackPos)
+{
+    for (int i = 0; i < SnackList.size(); i++)
+    {
+        if(SnackList[i]->gridPos == snackPos)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void GameManager::DeleteSnack(sf::Vector2i snackPos)
+{
+    int id = FindSnackID(snackPos);
+    if(id != -1)
+    {
+        delete SnackList[id];
+        SnackList.erase(SnackList.begin() + id);
+    }
+}
+
 void GameManager::DeleteSnacks()
 {
-    for (int x = 0; x < snackList.size(); x++)
-        delete snackList[x];
+    for (auto const& x : SnackList)
+        delete x;
 
-    snackList.clear();
+    SnackList.clear();
 }
