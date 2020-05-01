@@ -1,2 +1,12 @@
-﻿  GameManager.cpp
+﻿  Pacman.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(20,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(20,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
