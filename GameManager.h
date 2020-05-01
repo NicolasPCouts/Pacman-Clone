@@ -9,7 +9,7 @@ class Pacman;
 class GameManager
 {
 public:
-	sf::RenderWindow window = sf::RenderWindow(sf::VideoMode(800, 800), "Pac-Man", sf::Style::Close);
+	sf::RenderWindow* window;
 
 	sf::Sprite mapSprite;
 	sf::Texture mapTexture;
@@ -31,6 +31,7 @@ public:
 	~GameManager();
 	void DeleteSnack(sf::Vector2i snackPos);
 private:
+	float aspectRatio;
 	void Draw();
 	void LoadMap();
 	void CreateMapColliders();

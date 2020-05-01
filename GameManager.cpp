@@ -4,7 +4,14 @@
 
 void GameManager::StartGameManager()
 {
+    window = new sf::RenderWindow();
+    window->create(sf::VideoMode::getFullscreenModes()[0], "Pacman", sf::Style::Resize);
     LoadMap();
+    aspectRatio = float(window->getSize().x) / float(window->getSize().y);
+    sf::View v(sf::Vector2f(400, 400), sf::Vector2f(800 * aspectRatio, 800));
+    window->setView(v);
+    LoadMap();
+
     CreateMapColliders();
     CreateSnacks();
     pacman = new Pacman(5, 1);
@@ -17,19 +24,24 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
-    while (window.isOpen())
+    while (window->isOpen())
     {
         //get input
         sf::Event event;
-        while (window.pollEvent(event))
+        while (window->pollEvent(event))
         {
             switch (event.type)
             {
             case sf::Event::Closed:
-                window.close();
+                window->close();
                 break;
             case sf::Event::KeyPressed:
                 pacman->OnKeyPressed(event.key);
+                break;
+            case sf::Event::Resized:
+                aspectRatio = float(window->getSize().x) / float(window->getSize().y);
+                sf::View v(sf::Vector2f(400, 400), sf::Vector2f(800 * aspectRatio, 800));
+                window->setView(v);
                 break;
             }
         }
@@ -44,14 +56,14 @@ void GameManager::Update()
 
 void GameManager::Draw()
 {
-    window.clear();
-    window.draw(mapSprite);
+    window->clear();
+    window->draw(mapSprite);
 
 
-    pacman->Draw(window);
+    pacman->Draw(*window);
 
     for (auto const& x : SnackList)
-        x->Draw(window);
+        x->Draw(*window);
 
 
     if (showTiles)
@@ -101,14 +113,14 @@ void GameManager::Draw()
 
                 quad[4].position = vec;
 
-                window.draw(quad);
+                window->draw(quad);
                 vec.x += tileWidth;
             }
             vec.y += tileHeight;
         }
     }
 
-    window.display();
+    window->display();
 }
 
 void GameManager::LoadMap()
@@ -117,7 +129,7 @@ void GameManager::LoadMap()
     {
         mapTexture.setSmooth(false);
         mapSprite.setTexture(mapTexture);
-        mapSprite.setScale(window.getSize().x / mapSprite.getLocalBounds().width, window.getSize().y / mapSprite.getLocalBounds().height);
+        mapSprite.setScale((window->getView().getSize().x) / (mapSprite.getLocalBounds().width * aspectRatio), window->getView().getSize().y / mapSprite.getLocalBounds().height);
         mapSprite.move(0, 1);
     }
     else
