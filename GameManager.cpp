@@ -24,6 +24,7 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
+    deltaTime = clock.restart().asSeconds();
     while (window->isOpen())
     {
         //get input

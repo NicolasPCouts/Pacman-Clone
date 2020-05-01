@@ -10,7 +10,7 @@ Pacman::Pacman(int tileX, int tileY)
 	gameManager->tileArray[tileX][tileY].isEmpty = false;
 	gameManager->tileArray[tileX][tileY].tileType = Tile::Player;
 
-	speed = 0.10f;
+	speed = 0.1f;
 
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13)))
 		body.setTexture(&texture);
@@ -44,6 +44,7 @@ void Pacman::Update()
 
 void Pacman::Move() 
 {
+	float dt = speed * gameManager->deltaTime;
 	switch (currentDir)
 	{
 	case None:
@@ -51,25 +52,25 @@ void Pacman::Move()
 		return;
 	case Up:
 		if (GetFinalPosition().y <= body.getPosition().y) 
-			body.setPosition(body.getPosition().x, body.getPosition().y - speed);
+			body.setPosition(body.getPosition().x, body.getPosition().y - dt);
 		else
 			UpdatePlayerTilePosition();
 		break;
 	case Down:
 		if (GetFinalPosition().y >= body.getPosition().y)
-			body.setPosition(body.getPosition().x, body.getPosition().y + speed);
+			body.setPosition(body.getPosition().x, body.getPosition().y + dt);
 		else
 			UpdatePlayerTilePosition();
 		break;
 	case Left:
 		if (GetFinalPosition().x <= body.getPosition().x)
-			body.setPosition(body.getPosition().x - speed, body.getPosition().y);
+			body.setPosition(body.getPosition().x - dt, body.getPosition().y);
 		else
 			UpdatePlayerTilePosition();
 		break;
 	case Right:
 		if (GetFinalPosition().x >= body.getPosition().x)
-			body.setPosition(body.getPosition().x + speed, body.getPosition().y);
+			body.setPosition(body.getPosition().x + dt, body.getPosition().y);
 		else
 			UpdatePlayerTilePosition();
 		break;
