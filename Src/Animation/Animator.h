@@ -6,7 +6,7 @@
 class Animator
 {
 public:
-	Animator(Animation* anim, sf::RectangleShape* body);
+	Animator(sf::RectangleShape* body);
 	void SetAnimationClip(Animation* anim);
 	void Update();
 private:

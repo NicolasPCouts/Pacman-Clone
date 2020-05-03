@@ -14,7 +14,7 @@ public:
 	void Draw(sf::RenderWindow& rw) override;
 private:
 	Animator* animator;
-	Animation* animations[4];
+	Animation* animations[5];
 	Directions nextDir = None;
 	float speed;
 	bool hasCompletedMovement = false;
@@ -25,5 +25,6 @@ private:
 	bool IsNeighbourTileAvailable(Directions dir);
 	sf::Vector2f GetFinalPosition();
 	void SetupAnimations();
+	void ChangeAnimation(Directions dir);
 };
 

@@ -1,17 +1,24 @@
 #include "Animator.h"
 
-Animator::Animator(Animation* anim, sf::RectangleShape* body)
+Animator::Animator(sf::RectangleShape* body)
 {
-	currentClip = anim;
 	this->body = body;
 }
 
 void Animator::SetAnimationClip(Animation* anim) 
 {
+	if(currentClip != NULL)
+		currentClip->Reset();
+
 	currentClip = anim;
 }
 
 void Animator::Update()
 {
-	body->setTexture(currentClip->GetTexture());
+	if (currentClip != NULL)
+	{
+		sf::Texture* t = currentClip->GetTexture();
+		if(t != NULL)
+			body->setTexture(t);
+	}
 }
