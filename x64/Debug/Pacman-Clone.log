@@ -1,10 +1,10 @@
 ﻿  Pacman.cpp
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(20,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(21,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Pacman.cpp(20,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(21,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
