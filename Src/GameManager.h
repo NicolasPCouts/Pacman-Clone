@@ -2,7 +2,7 @@
 #include "Common.h"
 
 #include "Tile.h"
-#include "Snack.h"
+#include "Entity/Snack/Snack.h"
 
 class Pacman;
 

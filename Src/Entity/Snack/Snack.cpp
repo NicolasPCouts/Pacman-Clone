@@ -1,5 +1,5 @@
 #include "Snack.h"
-#include "GameManager.h"
+#include "../../GameManager.h"
 
 extern GameManager* gameManager;
 

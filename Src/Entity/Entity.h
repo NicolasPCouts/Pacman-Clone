@@ -1,5 +1,5 @@
 #pragma once
-#include "Common.h"
+#include "../Common.h"
 
 enum Directions {
 	Up,
@@ -8,7 +8,6 @@ enum Directions {
 	Right,
 	None
 };
-
 
 class Entity
 {

@@ -152,19 +152,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Pacman.cpp" />
-    <ClCompile Include="Snack.cpp" />
+    <ClCompile Include="Src\Animation\Animation.cpp" />
+    <ClCompile Include="Src\Animation\Animator.cpp" />
+    <ClCompile Include="Src\Entity\Entity.cpp" />
+    <ClCompile Include="Src\GameManager.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Entity\Pacman\Pacman.cpp" />
+    <ClCompile Include="Src\Entity\Snack\Snack.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Pacman.h" />
-    <ClInclude Include="Snack.h" />
-    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Src\Animation\Animation.h" />
+    <ClInclude Include="Src\Animation\Animator.h" />
+    <ClInclude Include="Src\Common.h" />
+    <ClInclude Include="Src\Entity\Entity.h" />
+    <ClInclude Include="Src\GameManager.h" />
+    <ClInclude Include="Src\Entity\Pacman\Pacman.h" />
+    <ClInclude Include="Src\Entity\Snack\Snack.h" />
+    <ClInclude Include="Src\Tile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,7 @@
 #pragma once
-#include "Common.h"
+#include "../../Common.h"
 
-#include "Entity.h"
+#include "../Entity.h"
 
 class Snack : public Entity {
 public:

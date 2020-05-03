@@ -1,5 +1,5 @@
 #include "Pacman.h"
-#include "Tile.h"
+#include "../../Tile.h"
 
 extern GameManager* gameManager;
 
@@ -11,6 +11,7 @@ Pacman::Pacman(int tileX, int tileY)
 	gameManager->tileArray[tileX][tileY].tileType = Tile::Player;
 
 	speed = 0.1f;
+	animator = new Animator(animations[0], &body);//REMINDER - DELETE ANIMATOR LATER
 
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13)))
 		body.setTexture(&texture);
@@ -40,6 +41,7 @@ void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
 void Pacman::Update()
 {
 	Move();
+	animator->Update();
 }
 
 void Pacman::Move() 
@@ -95,6 +97,8 @@ void Pacman::UpdatePlayerTilePosition()
 			currentDir = nextDir;
 
 		nextDir = None;
+
+		//change anim
 	}
 
 	if (IsNeighbourTileAvailable(currentDir))
@@ -158,4 +162,16 @@ bool Pacman::IsNeighbourTileAvailable(Directions dir)
 	}
 
 	return false;
+}
+
+void Pacman::SetupAnimations() 
+{
+	//left animation
+	sf::Texture l1, l2, l3;
+	l1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13));
+	l2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(246, 1, 13, 13));
+	l3.loadFromFile("Resources/PacManSprites.png", sf::IntRect(262, 1, 13, 13));
+	std::vector<sf::Texture> leftAnimTextures{ l1,l2,l3 };
+
+	animations[0] = new Animation(leftAnimTextures); //REMINDER - DELETE ANIMATIONS LATER
 }

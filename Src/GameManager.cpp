@@ -1,5 +1,5 @@
 #include "GameManager.h"
-#include "Pacman.h"
+#include "Entity/Pacman/Pacman.h"
 
 
 void GameManager::StartGameManager()
@@ -13,8 +13,8 @@ void GameManager::StartGameManager()
     LoadMap();
 
     CreateMapColliders();
-    CreateSnacks();
     pacman = new Pacman(5, 1);
+    CreateSnacks();
 }
 
 GameManager::~GameManager()

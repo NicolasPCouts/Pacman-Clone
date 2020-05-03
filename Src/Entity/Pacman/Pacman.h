@@ -1,7 +1,9 @@
 #pragma once
-#include "Common.h"
-#include "GameManager.h"
-#include "Entity.h"
+#include "../../Common.h"
+#include "../../GameManager.h"
+#include "../Entity.h"
+#include "../../Animation/Animation.h"
+#include "../../Animation/Animator.h"
 
 class Pacman : Entity
 {
@@ -11,6 +13,8 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& rw) override;
 private:
+	Animator* animator;
+	Animation* animations[4];
 	Directions nextDir = None;
 	float speed;
 	bool hasCompletedMovement = false;
@@ -20,5 +24,6 @@ private:
 	void UpdateTileArray(sf::Vector2i newPos);
 	bool IsNeighbourTileAvailable(Directions dir);
 	sf::Vector2f GetFinalPosition();
+	void SetupAnimations();
 };
 
