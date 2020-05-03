@@ -11,6 +11,13 @@ Animation::Animation(std::vector<sf::Texture> textures, bool loop)
 	this->loop = loop;
 }
 
+Animation::Animation(std::vector<sf::Texture> textures, bool loop, float switchTime)
+{
+	this->textures = textures;
+	this->loop = loop;
+	this->switchTime = switchTime;
+}
+
 void Animation::Reset()
 {
 	currentTexture = 0;

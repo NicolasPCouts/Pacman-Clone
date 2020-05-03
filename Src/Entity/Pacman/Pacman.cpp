@@ -10,7 +10,7 @@ Pacman::Pacman(int tileX, int tileY)
 	gameManager->tileArray[tileX][tileY].isEmpty = false;
 	gameManager->tileArray[tileX][tileY].tileType = Tile::Player;
 
-	speed = 0.1f;
+	speed = 0.05f;
 
 	SetupAnimations();
 	animator = new Animator(&body);//REMINDER - DELETE ANIMATOR LATER
@@ -43,7 +43,7 @@ void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
 void Pacman::Update()
 {
 	Move();
-	animator->Update();
+	animator->Update(gameManager->deltaTime);
 }
 
 void Pacman::Move() 
@@ -100,7 +100,7 @@ void Pacman::UpdatePlayerTilePosition()
 			ChangeAnimation(currentDir);
 		}
 
-		nextDir = None;
+		//nextDir = None;
 	}
 
 	if (IsNeighbourTileAvailable(currentDir))
