@@ -16,7 +16,7 @@ public:
 
 	Pacman* pacman;
 
-	Tile tileArray[28][31];
+	sTile tileArray[28][31];
 	std::vector<Snack*> SnackList;
 
 	bool showTiles = false;

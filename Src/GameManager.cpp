@@ -83,7 +83,7 @@ void GameManager::Draw()
                 quad[4].color = sf::Color::Transparent;
                 if (!tileArray[x][y].isEmpty)
                 {
-                    if (tileArray[x][y].tileType == Tile::Player)
+                    if (tileArray[x][y].tileType == sTile::Player)
                     {
                         quad[0].color = sf::Color::Green;
                         quad[1].color = sf::Color::Green;
@@ -320,9 +320,9 @@ void GameManager::CreateMapColliders()
         tileArray[i][14].isEmpty = false;
         tileArray[i][15].isEmpty = false;
 
-        tileArray[i][13].tileType = Tile::EnemyCenter;
-        tileArray[i][14].tileType = Tile::EnemyCenter;
-        tileArray[i][15].tileType = Tile::EnemyCenter;
+        tileArray[i][13].tileType = sTile::EnemyCenter;
+        tileArray[i][14].tileType = sTile::EnemyCenter;
+        tileArray[i][15].tileType = sTile::EnemyCenter;
     }
 }
 
@@ -333,7 +333,7 @@ void GameManager::CreateSnacks()
     for (const auto& snackPos : bigSnackPosArray)
     {
         tileArray[snackPos.x][snackPos.y].isEmpty = false;
-        tileArray[snackPos.x][snackPos.y].tileType = Tile::Snack;
+        tileArray[snackPos.x][snackPos.y].tileType = sTile::Snack;
         Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(snackPos.x, snackPos.y));
         SnackList.push_back(s);
     }
@@ -346,7 +346,7 @@ void GameManager::CreateSnacks()
             if (tileArray[x][y].isEmpty)
             {
                 tileArray[x][y].isEmpty = false;
-                tileArray[x][y].tileType = Tile::Snack;
+                tileArray[x][y].tileType = sTile::Snack;
                 Snack* s = new Snack(Snack::SmallSnack, sf::Vector2i(x, y));
                 SnackList.push_back(s);
             }

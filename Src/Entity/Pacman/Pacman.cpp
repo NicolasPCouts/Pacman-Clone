@@ -8,7 +8,7 @@ Pacman::Pacman(int tileX, int tileY)
 	body.setSize(sf::Vector2f(40, 40));
 	gridPos = sf::Vector2i(tileX, tileY);
 	gameManager->tileArray[tileX][tileY].isEmpty = false;
-	gameManager->tileArray[tileX][tileY].tileType = Tile::Player;
+	gameManager->tileArray[tileX][tileY].tileType = sTile::Player;
 
 	speed = 0.05f;
 
@@ -127,18 +127,18 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 {
 	//emptying current tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = Tile::None;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::None;
 
 	gridPos = newPos;
 
-	if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == Tile::Snack)
+	if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == sTile::Snack)
 	{
 		EatSnack(newPos);
 	}
 
 	//transfering player to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = Tile::Player;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Player;
 }
 
 bool Pacman::IsNeighbourTileAvailable(Directions dir) 
@@ -146,19 +146,19 @@ bool Pacman::IsNeighbourTileAvailable(Directions dir)
 	switch (dir)
 	{
 	case Up:
-		if (gameManager->tileArray[gridPos.x][gridPos.y - 1].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x][gridPos.y - 1].tileType != sTile::Wall)
 			return true;
 		break;
 	case Down:
-		if (gameManager->tileArray[gridPos.x][gridPos.y + 1].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x][gridPos.y + 1].tileType != sTile::Wall)
 			return true;
 		break;
 	case Left:
-		if (gameManager->tileArray[gridPos.x - 1][gridPos.y].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x - 1][gridPos.y].tileType != sTile::Wall)
 			return true;
 		break;
 	case Right:
-		if (gameManager->tileArray[gridPos.x + 1][gridPos.y].tileType != Tile::Wall)
+		if (gameManager->tileArray[gridPos.x + 1][gridPos.y].tileType != sTile::Wall)
 			return true;
 		break;
 	}

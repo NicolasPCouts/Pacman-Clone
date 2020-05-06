@@ -1,6 +1,6 @@
 #pragma once
 
-struct Tile {
+struct sTile {
     enum TileType { None, Wall, Enemy, EnemyCenter, Player, Snack };
 
     bool isEmpty = true;
