@@ -1,12 +1,3 @@
-﻿  Pacman.cpp
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(23,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(23,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  Pathfinding.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Pathfinding\Pathfinding.h(10,2): warning C4091: 'static ': ignored on left of 'Pathfinding' when no variable is declared
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
