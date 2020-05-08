@@ -1,3 +1,2 @@
-﻿  Pathfinding.cpp
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Pathfinding\Pathfinding.h(10,2): warning C4091: 'static ': ignored on left of 'Pathfinding' when no variable is declared
+﻿  GameManager.cpp
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
