@@ -19,7 +19,7 @@ public:
 	sTile tileArray[28][31];
 	std::vector<Snack*> SnackList;
 
-	bool showTiles = false;
+	bool showTiles = true;
 
 	int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
 	int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);

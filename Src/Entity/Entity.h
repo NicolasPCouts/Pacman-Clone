@@ -9,6 +9,8 @@ enum Directions {
 	None
 };
 
+Directions GetOppositeDirection(Directions dir);
+
 class Entity
 {
 public:
