@@ -38,7 +38,20 @@ void GameManager::Update()
                 window->close();
                 break;
             case sf::Event::KeyPressed:
-                pacman->OnKeyPressed(event.key);
+                //pacman->OnKeyPressed(event.key);
+
+                //test pathfinding
+                if (event.key.code == sf::Keyboard::A)pathfindingTestX--;
+                if (event.key.code == sf::Keyboard::D)pathfindingTestX++;
+                if (event.key.code == sf::Keyboard::W)pathfindingTestY--;
+                if (event.key.code == sf::Keyboard::S)pathfindingTestY++;
+
+                if (event.key.code == sf::Keyboard::Left)pathfindingTargetTestX--;
+                if (event.key.code == sf::Keyboard::Right)pathfindingTargetTestX++;
+                if (event.key.code == sf::Keyboard::Up)pathfindingTargetTestY--;
+                if (event.key.code == sf::Keyboard::Down)pathfindingTargetTestY++;
+
+
                 break;
             case sf::Event::Resized:
                 aspectRatio = float(window->getSize().x) / float(window->getSize().y);
@@ -128,18 +141,18 @@ void GameManager::Draw()
     bool showPathfinding = true;
     if (showPathfinding)
     {
-        for (sf::Vector2i pos : FindPath(sf::Vector2i(1, 1), sf::Vector2i(15, 17), None)) 
+        for (sf::Vector2i pos : FindPath(sf::Vector2i(pathfindingTestX, pathfindingTestY), sf::Vector2i(pathfindingTargetTestX, pathfindingTargetTestY), None)) 
         {
             sf::Vector2f vec;
             vec.x = pos.x * tileWidth;
             vec.y = pos.y * tileHeight;
             sf::VertexArray quad(sf::LinesStrip, 5);
 
-            quad[0].color = sf::Color::Red;
-            quad[1].color = sf::Color::Red;
-            quad[2].color = sf::Color::Red;
-            quad[3].color = sf::Color::Red;
-            quad[4].color = sf::Color::Red;
+            quad[0].color = sf::Color::Green;
+            quad[1].color = sf::Color::Green;
+            quad[2].color = sf::Color::Green;
+            quad[3].color = sf::Color::Green;
+            quad[4].color = sf::Color::Green;
 
             quad[0].position = vec;
 

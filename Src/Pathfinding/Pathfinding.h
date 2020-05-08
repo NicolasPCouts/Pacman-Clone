@@ -30,19 +30,19 @@ struct sNode
 		std::vector<sNode> neighbours;
 		if (ignoreDirection != Left) {
 			sNode left = CreateNode(sf::Vector2i(pos.x - 1, pos.y));
-			if (&left != NULL)	neighbours.push_back(left);
+			if (left.pos != sf::Vector2i(-100, -100))	neighbours.push_back(left);
 		}
 		if (ignoreDirection != Right) {
 			sNode right = CreateNode(sf::Vector2i(pos.x + 1, pos.y));
-			if (&right != NULL)	neighbours.push_back(right);
+			if (right.pos != sf::Vector2i(-100, -100))	neighbours.push_back(right);
 		}
 		if (ignoreDirection != Up) {
 			sNode up = CreateNode(sf::Vector2i(pos.x, pos.y - 1));
-			if (&up != NULL)	neighbours.push_back(up);
+			if (up.pos != sf::Vector2i(-100, -100))	neighbours.push_back(up);
 		}
 		if (ignoreDirection != Down) {
 			sNode down = CreateNode(sf::Vector2i(pos.x, pos.y + 1));
-			if (&down != NULL)	neighbours.push_back(down);
+			if (down.pos != sf::Vector2i(-100, -100))	neighbours.push_back(down);
 		}
 
 		return neighbours;
@@ -53,6 +53,10 @@ struct sNode
 		sTile* tile = &gameManager->tileArray[pos.x][pos.y];
 		sNode node = sNode(pos);
 		if (tile != NULL) {
+
+			if(pos.x < 0 || pos.y < 0 || pos.x >= gameManager->numberOfTilesX || pos.y >= gameManager->numberOfTilesY)
+				return sNode(sf::Vector2i(-100, -100));
+
 			if (tile->tileType == sTile::Wall)
 				node.walkable = false;
 			else
@@ -60,6 +64,7 @@ struct sNode
 
 			return node;
 		}
+		return sNode(sf::Vector2i(-100, -100));
 	}
 };
 

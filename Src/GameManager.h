@@ -19,13 +19,19 @@ public:
 	sTile tileArray[28][31];
 	std::vector<Snack*> SnackList;
 
-	bool showTiles = true;
+	bool showTiles = false;
 
 	int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
 	int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
 	float tileWidth = 800 / (float)numberOfTilesX;
 	float tileHeight = 800 / (float)numberOfTilesY;
 	float deltaTime;
+
+	//testing pathfinding
+	int pathfindingTestX = 1;
+	int pathfindingTestY = 1;
+	int pathfindingTargetTestX = 5;
+	int pathfindingTargetTestY = 1;
 
 	void Update();
 	void StartGameManager();
