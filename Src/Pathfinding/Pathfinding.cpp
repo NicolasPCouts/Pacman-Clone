@@ -89,8 +89,8 @@ std::vector<sf::Vector2i> FindPath(sf::Vector2i startNodePos, sf::Vector2i endNo
 		}
 	}
 
-	//if (foundPath)
-	//{
+	if (foundPath)
+	{
 		std::vector<sf::Vector2i> pathPositionsList;
 		while (currentNode.pos != startNode.pos)
 		{
@@ -99,7 +99,7 @@ std::vector<sf::Vector2i> FindPath(sf::Vector2i startNodePos, sf::Vector2i endNo
 		}
 		std::reverse(pathPositionsList.begin(), pathPositionsList.end());
 		return pathPositionsList;
-	//}
-	//else
-		//return std::vector<sf::Vector2i>();
+	}
+	else
+		return std::vector<sf::Vector2i>();
 }

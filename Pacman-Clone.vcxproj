@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Entity\Enemy\Enemy.cpp" />
     <ClCompile Include="Src\Pathfinding\Pathfinding.cpp" />
     <ClCompile Include="Src\Animation\Animation.cpp" />
     <ClCompile Include="Src\Animation\Animator.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Src\Entity\Snack\Snack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Entity\Enemy\Enemy.h" />
     <ClInclude Include="Src\Pathfinding\Pathfinding.h" />
     <ClInclude Include="Src\Animation\Animation.h" />
     <ClInclude Include="Src\Animation\Animator.h" />
