@@ -1,5 +1,6 @@
 #include "Pathfinding.h"
 
+
 bool IsNodeInsideList(sNode& n, std::vector<sNode>& list) 
 {
 	for (sNode node : list)

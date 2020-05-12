@@ -74,6 +74,7 @@ void GameManager::Draw()
     window->clear();
     window->draw(mapSprite);
 
+    DrawDebug(false, true);
 
     pacman->Draw(*window);
 
@@ -81,96 +82,6 @@ void GameManager::Draw()
         x->Draw(*window);
 
 
-    if (showTiles)
-    {
-        sf::Vector2f vec(0, 0);
-        for (int y = 0; y < numberOfTilesY; y++)
-        {
-            vec.x = 0;
-            for (int x = 0; x < numberOfTilesX; x++)
-            {
-                sf::VertexArray quad(sf::LinesStrip, 5);
-
-
-                quad[0].color = sf::Color::White;
-                quad[1].color = sf::Color::White;
-                quad[2].color = sf::Color::White;
-                quad[3].color = sf::Color::White;
-                quad[4].color = sf::Color::White;
-                //if (!tileArray[x][y].isEmpty)
-                //{
-                //    if (tileArray[x][y].tileType == sTile::Player)
-                //    {
-                //        quad[0].color = sf::Color::Green;
-                //        quad[1].color = sf::Color::Green;
-                //        quad[2].color = sf::Color::Green;
-                //        quad[3].color = sf::Color::Green;
-                //        quad[4].color = sf::Color::Green;
-                //    }
-                //    else
-                //    {
-                //        quad[0].color = sf::Color::Red;
-                //        quad[1].color = sf::Color::Red;
-                //        quad[2].color = sf::Color::Red;
-                //        quad[3].color = sf::Color::Red;
-                //        quad[4].color = sf::Color::Red;
-                //    }
-                //}
-
-
-                quad[0].position = vec;
-
-                sf::Vector2f v = vec;
-                v.x += tileWidth;
-                quad[1].position = v;
-
-                quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
-
-                sf::Vector2f v2 = vec;
-                v2.y += tileHeight;
-                quad[3].position = v2;
-
-                quad[4].position = vec;
-
-                window->draw(quad);
-                vec.x += tileWidth;
-            }
-            vec.y += tileHeight;
-        }
-    }
-    bool showPathfinding = true;
-    if (showPathfinding)
-    {
-        for (sf::Vector2i pos : FindPath(sf::Vector2i(pathfindingTestX, pathfindingTestY), sf::Vector2i(pathfindingTargetTestX, pathfindingTargetTestY), None)) 
-        {
-            sf::Vector2f vec;
-            vec.x = pos.x * tileWidth;
-            vec.y = pos.y * tileHeight;
-            sf::VertexArray quad(sf::LinesStrip, 5);
-
-            quad[0].color = sf::Color::Green;
-            quad[1].color = sf::Color::Green;
-            quad[2].color = sf::Color::Green;
-            quad[3].color = sf::Color::Green;
-            quad[4].color = sf::Color::Green;
-
-            quad[0].position = vec;
-
-            sf::Vector2f v = vec;
-            v.x += tileWidth;
-            quad[1].position = v;
-
-            quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
-
-            sf::Vector2f v2 = vec;
-            v2.y += tileHeight;
-            quad[3].position = v2;
-
-            quad[4].position = vec;
-
-            window->draw(quad);
-        }
-    }
 
     window->display();
 }
@@ -434,4 +345,144 @@ void GameManager::DeleteSnacks()
         delete x;
 
     SnackList.clear();
+}
+
+
+void GameManager::DrawDebug(bool showGrid, bool drawPathfinding)
+{
+
+    if (showGrid)
+    {
+        sf::Vector2f vec(0, 0);
+        for (int y = 0; y < numberOfTilesY; y++)
+        {
+            vec.x = 0;
+            for (int x = 0; x < numberOfTilesX; x++)
+            {
+                sf::VertexArray quad(sf::LinesStrip, 5);
+
+                quad[0].color = sf::Color::White;
+                quad[1].color = sf::Color::White;
+                quad[2].color = sf::Color::White;
+                quad[3].color = sf::Color::White;
+                quad[4].color = sf::Color::White;
+                //if (!tileArray[x][y].isEmpty)
+                //{
+                //    if (tileArray[x][y].tileType == sTile::Player)
+                //    {
+                //        quad[0].color = sf::Color::Green;
+                //        quad[1].color = sf::Color::Green;
+                //        quad[2].color = sf::Color::Green;
+                //        quad[3].color = sf::Color::Green;
+                //        quad[4].color = sf::Color::Green;
+                //    }
+                //    else
+                //    {
+                //        quad[0].color = sf::Color::Red;
+                //        quad[1].color = sf::Color::Red;
+                //        quad[2].color = sf::Color::Red;
+                //        quad[3].color = sf::Color::Red;
+                //        quad[4].color = sf::Color::Red;
+                //    }
+                //}
+
+
+                quad[0].position = vec;
+
+                sf::Vector2f v = vec;
+                v.x += tileWidth;
+                quad[1].position = v;
+
+                quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
+
+                sf::Vector2f v2 = vec;
+                v2.y += tileHeight;
+                quad[3].position = v2;
+
+                quad[4].position = vec;
+
+                window->draw(quad);
+                vec.x += tileWidth;
+            }
+            vec.y += tileHeight;
+        }
+    }
+
+
+    if (drawPathfinding)
+    {
+        for (sf::Vector2i pos : FindPath(sf::Vector2i(pathfindingTestX, pathfindingTestY), sf::Vector2i(pathfindingTargetTestX, pathfindingTargetTestY), Up))
+        {
+            sf::Vector2f vec;
+            vec.x = pos.x * tileWidth;
+            vec.y = pos.y * tileHeight;
+            sf::VertexArray quad(sf::LinesStrip, 5);
+
+            quad[0].color = sf::Color::Green;
+            quad[1].color = sf::Color::Green;
+            quad[2].color = sf::Color::Green;
+            quad[3].color = sf::Color::Green;
+            quad[4].color = sf::Color::Green;
+
+            quad[0].position = vec;
+
+            sf::Vector2f v = vec;
+            v.x += tileWidth;
+            quad[1].position = v;
+
+            quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
+
+            sf::Vector2f v2 = vec;
+            v2.y += tileHeight;
+            quad[3].position = v2;
+
+            quad[4].position = vec;
+
+            window->draw(quad);
+        }
+
+    }
+    sf::Vector2f vec;
+    vec.x = pathfindingTestX * tileWidth;
+    vec.y = pathfindingTestY * tileHeight;
+    sf::VertexArray quad(sf::LinesStrip, 5);
+
+    quad[0].color = sf::Color::Red;
+    quad[1].color = sf::Color::Red;
+    quad[2].color = sf::Color::Red;
+    quad[3].color = sf::Color::Red;
+    quad[4].color = sf::Color::Red;
+
+    quad[0].position = vec;
+    sf::Vector2f v = vec;
+    v.x += tileWidth;
+    quad[1].position = v;
+
+    quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
+
+    sf::Vector2f v2 = vec;
+    v2.y += tileHeight;
+    quad[3].position = v2;
+
+    quad[4].position = vec;
+
+    window->draw(quad);
+
+    vec.x = pathfindingTargetTestX * tileWidth;
+    vec.y = pathfindingTargetTestY * tileHeight;
+
+    quad[0].position = vec;
+    v = vec;
+    v.x += tileWidth;
+    quad[1].position = v;
+
+    quad[2].position = sf::Vector2f(vec.x + tileWidth, vec.y + tileHeight);
+
+    v2 = vec;
+    v2.y += tileHeight;
+    quad[3].position = v2;
+
+    quad[4].position = vec;
+
+    window->draw(quad);
 }

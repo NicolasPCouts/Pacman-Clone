@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Entity\Enemy\Enemy.h" />
+    <ClInclude Include="Src\Pathfinding\Node.h" />
     <ClInclude Include="Src\Pathfinding\Pathfinding.h" />
     <ClInclude Include="Src\Animation\Animation.h" />
     <ClInclude Include="Src\Animation\Animator.h" />
