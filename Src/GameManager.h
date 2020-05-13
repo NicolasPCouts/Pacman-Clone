@@ -41,12 +41,4 @@ private:
 	void CreateSnacks();
 	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnacks();
-
-
-	//debugging
-	int pathfindingTestX = 1;
-	int pathfindingTestY = 1;
-	int pathfindingTargetTestX = 5;
-	int pathfindingTargetTestY = 1;
-	void DrawDebug(bool drawTiles, bool drawPathfinding);
 };

@@ -5,13 +5,13 @@
 #include "../../Animation/Animation.h"
 #include "../../Animation/Animator.h"
 
-class Pacman : Entity
+class Pacman : public Entity
 {
 public:
 	Pacman(int x, int y);
 	~Pacman();
 	void OnKeyPressed(sf::Event::KeyEvent key);
-	void Update();
+	void Update() override;
 	void Draw(sf::RenderWindow& rw) override;
 private:
 	Animator* animator;

@@ -20,6 +20,7 @@ public:
 	sf::Vector2f GetFinalTilePosition();
 	virtual void Draw(sf::RenderWindow& rw) = 0;
 	virtual void Move() = 0;
+	virtual void Update() = 0;
 };
 
 Directions GetOppositeDirection(Directions dir);

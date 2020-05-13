@@ -1,5 +1,8 @@
 #include "Enemy.h"
 #include "../../GameManager.h"
+#include  "../../Debug.h"
+#include "../../Pathfinding/Pathfinding.h"
+#include "../Pacman/Pacman.h"
 
 extern GameManager* gameManager;
 
@@ -58,7 +61,14 @@ void Enemy::Move()
 	}
 }
 
+void Enemy::Update()
+{
+
+}
+
 void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
+	std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
+	DrawPathfinding(rw, pos, gridPos, gameManager->pacman->gridPos);
 }

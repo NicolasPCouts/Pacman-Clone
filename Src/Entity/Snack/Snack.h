@@ -11,4 +11,5 @@ public:
     Snack(SnackType type, sf::Vector2i gridPos);
     void Draw(sf::RenderWindow& rw) override;
     void Move() {};
+    void Update() {};
 };

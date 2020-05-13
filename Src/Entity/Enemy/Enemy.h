@@ -9,7 +9,6 @@ enum EnemyState {
 	Eaten
 };
 
-
 class Enemy : Entity
 {
 public:
@@ -17,5 +16,6 @@ public:
 	Enemy(int tileX, int tileY);
 	~Enemy();
 	void Move() override;
+	void Update() override;
 	void Draw(sf::RenderWindow& rw) override;
 };
