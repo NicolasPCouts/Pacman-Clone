@@ -23,6 +23,11 @@ struct sNode
 		parent = new sNode(p);
 	}
 
+	~sNode()
+	{
+		//delete parent
+	}
+
 	std::vector<sNode> GetNeighbours()
 	{
 		std::vector<sNode> neighbours;

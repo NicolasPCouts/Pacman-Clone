@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Entity/Pacman/Pacman.h"
+#include "Entity/Enemy/Enemy.h"
 
 #include "Pathfinding/Pathfinding.h"
 
@@ -15,12 +16,16 @@ void GameManager::StartGameManager()
 
     CreateMapColliders();
     pacman = new Pacman(5, 1);
+    enemy = new Enemy();
     CreateSnacks();
 }
 
 GameManager::~GameManager()
 {
     delete pacman;
+    delete enemy;
+    delete window;
+    DeleteSnacks();
 }
 
 void GameManager::Update()

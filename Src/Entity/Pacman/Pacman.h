@@ -9,6 +9,7 @@ class Pacman : Entity
 {
 public:
 	Pacman(int x, int y);
+	~Pacman();
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update();
 	void Draw(sf::RenderWindow& rw) override;

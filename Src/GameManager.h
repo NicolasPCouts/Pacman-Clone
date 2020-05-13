@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include "Entity/Snack/Snack.h"
 
+class Enemy;
 class Pacman;
 
 class GameManager
@@ -15,6 +16,7 @@ public:
 	sf::Texture mapTexture;
 
 	Pacman* pacman;
+	Enemy* enemy;
 
 	sTile tileArray[28][31];
 	std::vector<Snack*> SnackList;

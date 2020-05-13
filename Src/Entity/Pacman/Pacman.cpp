@@ -13,7 +13,7 @@ Pacman::Pacman(int tileX, int tileY)
 	speed = 0.05f;
 
 	SetupAnimations();
-	animator = new Animator(&body);//REMINDER - DELETE ANIMATOR LATER
+	animator = new Animator(&body);
 
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 1, 13, 13)))
 		body.setTexture(&texture);
@@ -21,6 +21,13 @@ Pacman::Pacman(int tileX, int tileY)
 		std::cout << "texture not loaded correctly" << std::endl;
 
 	body.move(sf::Vector2f(30 * tileX, 20 * tileY));
+}
+
+Pacman::~Pacman()
+{
+	delete animator;
+	for (auto const& x : animations)
+		delete x;
 }
 
 void Pacman::Draw(sf::RenderWindow& rw)
@@ -212,7 +219,7 @@ void Pacman::SetupAnimations()
 	de12.loadFromFile("Resources/PacManSprites.png", sf::IntRect(438, 17, 13, 13));
 	std::vector<sf::Texture> deathAnimTextures{ de1, de2, de3, de4, de5, de6, de7, de8, de9, de10, de11, de12 };
 
-	animations[0] = new Animation(leftAnimTextures); //REMINDER - DELETE ANIMATIONS LATER
+	animations[0] = new Animation(leftAnimTextures);
 	animations[1] = new Animation(rightAnimTextures);
 	animations[2] = new Animation(upAnimTextures);
 	animations[3] = new Animation(downAnimTextures);
