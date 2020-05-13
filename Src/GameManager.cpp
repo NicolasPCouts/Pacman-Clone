@@ -16,7 +16,7 @@ void GameManager::StartGameManager()
 
     CreateMapColliders();
     pacman = new Pacman(5, 1);
-    enemy = new Enemy();
+    enemy = new Enemy(7, 1);
     CreateSnacks();
 }
 
@@ -82,6 +82,7 @@ void GameManager::Draw()
     DrawDebug(false, true);
 
     pacman->Draw(*window);
+    enemy->Draw(*window);
 
     for (auto const& x : SnackList)
         x->Draw(*window);

@@ -17,14 +17,12 @@ private:
 	Animator* animator;
 	Animation* animations[5];
 	Directions nextDir = None;
-	float speed;
 	bool hasCompletedMovement = false;
 	void Move() override;
 	void EatSnack(sf::Vector2i snackGridPosition);
 	void UpdatePlayerTilePosition();
 	void UpdateTileArray(sf::Vector2i newPos);
 	bool IsNeighbourTileAvailable(Directions dir);
-	sf::Vector2f GetFinalPosition();
 	void SetupAnimations();
 	void ChangeAnimation(Directions dir);
 };

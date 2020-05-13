@@ -10,8 +10,6 @@ Pacman::Pacman(int tileX, int tileY)
 	gameManager->tileArray[tileX][tileY].isEmpty = false;
 	gameManager->tileArray[tileX][tileY].tileType = sTile::Player;
 
-	speed = 0.05f;
-
 	SetupAnimations();
 	animator = new Animator(&body);
 
@@ -62,25 +60,25 @@ void Pacman::Move()
 		UpdatePlayerTilePosition();
 		return;
 	case Up:
-		if (GetFinalPosition().y <= body.getPosition().y) 
+		if (GetFinalTilePosition().y <= body.getPosition().y) 
 			body.setPosition(body.getPosition().x, body.getPosition().y - dt);
 		else
 			UpdatePlayerTilePosition();
 		break;
 	case Down:
-		if (GetFinalPosition().y >= body.getPosition().y)
+		if (GetFinalTilePosition().y >= body.getPosition().y)
 			body.setPosition(body.getPosition().x, body.getPosition().y + dt);
 		else
 			UpdatePlayerTilePosition();
 		break;
 	case Left:
-		if (GetFinalPosition().x <= body.getPosition().x)
+		if (GetFinalTilePosition().x <= body.getPosition().x)
 			body.setPosition(body.getPosition().x - dt, body.getPosition().y);
 		else
 			UpdatePlayerTilePosition();
 		break;
 	case Right:
-		if (GetFinalPosition().x >= body.getPosition().x)
+		if (GetFinalTilePosition().x >= body.getPosition().x)
 			body.setPosition(body.getPosition().x + dt, body.getPosition().y);
 		else
 			UpdatePlayerTilePosition();
@@ -91,11 +89,6 @@ void Pacman::Move()
 void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 {
 	gameManager->DeleteSnack(snackGridPosition);
-}
-
-sf::Vector2f Pacman::GetFinalPosition()
-{
-	return sf::Vector2f(gridPos.x * gameManager->tileWidth, gridPos.y * gameManager->tileHeight);
 }
 
 void Pacman::UpdatePlayerTilePosition()

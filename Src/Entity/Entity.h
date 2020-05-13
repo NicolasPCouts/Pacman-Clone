@@ -9,16 +9,17 @@ enum Directions {
 	None
 };
 
-Directions GetOppositeDirection(Directions dir);
-
 class Entity
 {
 public:
+	float speed = 0.05f;
 	sf::Vector2i gridPos;
 	Directions currentDir = None;
 	sf::RectangleShape body;
 	sf::Texture texture;
-	virtual void Draw(sf::RenderWindow& rw);
+	sf::Vector2f GetFinalTilePosition();
+	virtual void Draw(sf::RenderWindow& rw) = 0;
 	virtual void Move() = 0;
 };
 
+Directions GetOppositeDirection(Directions dir);

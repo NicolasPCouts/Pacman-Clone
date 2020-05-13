@@ -1,4 +1,7 @@
 #include "Entity.h"
+#include "../GameManager.h"
+
+extern GameManager* gameManager;
 
 Directions GetOppositeDirection(Directions dir) 
 {
@@ -20,7 +23,7 @@ Directions GetOppositeDirection(Directions dir)
     return None;
 }
 
-void Entity::Draw(sf::RenderWindow& rw)
+sf::Vector2f Entity::GetFinalTilePosition()
 {
-	rw.draw(body);
+    return sf::Vector2f(gridPos.x * gameManager->tileWidth, gridPos.y * gameManager->tileHeight);
 }
