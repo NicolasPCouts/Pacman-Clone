@@ -42,7 +42,7 @@
     <ClCompile Include="Src\Entity\Enemy\Enemy.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Debug.cpp">
+    <ClCompile Include="Src\Debugger\Debug.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="Src\Pathfinding\Node.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Debug.h">
+    <ClInclude Include="Src\Debugger\Debug.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

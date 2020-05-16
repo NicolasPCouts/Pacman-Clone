@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "../../GameManager.h"
-#include  "../../Debug.h"
+#include  "../../Debugger/Debug.h"
 #include "../../Pathfinding/Pathfinding.h"
 #include "../Pacman/Pacman.h"
 
@@ -26,49 +26,80 @@ Enemy::~Enemy()
 {
 }
 
+void Enemy::Update()
+{
+	Move();
+}
+
 void Enemy::Move()
 {
 	float dt = speed * gameManager->deltaTime;
 	switch (currentDir)
 	{
 	case None:
-		
+		UpdateEnemyTilePosition();
 		return;
 	case Up:
 		if (GetFinalTilePosition().y <= body.getPosition().y)
 			body.setPosition(body.getPosition().x, body.getPosition().y - dt);
 		else
-			
+			UpdateEnemyTilePosition();
 		break;
 	case Down:
 		if (GetFinalTilePosition().y >= body.getPosition().y)
 			body.setPosition(body.getPosition().x, body.getPosition().y + dt);
 		else
-			
+			UpdateEnemyTilePosition();
 		break;
 	case Left:
 		if (GetFinalTilePosition().x <= body.getPosition().x)
 			body.setPosition(body.getPosition().x - dt, body.getPosition().y);
 		else
-			
+			UpdateEnemyTilePosition();
 		break;
 	case Right:
 		if (GetFinalTilePosition().x >= body.getPosition().x)
 			body.setPosition(body.getPosition().x + dt, body.getPosition().y);
 		else
-			
+			UpdateEnemyTilePosition();
 		break;
 	}
 }
 
-void Enemy::Update()
-{
-
-}
 
 void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
+	//std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
+	if(currentPath.size() > 0)
+		DrawPathfinding(rw, currentPath, gridPos, gameManager->pacman->gridPos);
+}
+
+void Enemy::UpdateEnemyTilePosition()
+{
 	std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
-	DrawPathfinding(rw, pos, gridPos, gameManager->pacman->gridPos);
+	currentPath = pos;
+	if (pos[0].x > gridPos.x)
+		currentDir = Right;
+	else if (pos[0].x < gridPos.x)
+		currentDir = Left;
+	else if (pos[0].y > gridPos.y)
+		currentDir = Down;
+	else if (pos[0].y < gridPos.y)
+		currentDir = Up;
+
+	UpdateTileArray(pos[0]);
+}
+
+void Enemy::UpdateTileArray(sf::Vector2i newPos)
+{
+	//emptying current tile
+	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::None;
+
+	gridPos = newPos;
+
+	//transfering enemy to next tile
+	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Enemy;
 }

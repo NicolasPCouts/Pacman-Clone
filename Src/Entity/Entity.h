@@ -18,9 +18,10 @@ public:
 	sf::RectangleShape body;
 	sf::Texture texture;
 	sf::Vector2f GetFinalTilePosition();
-	virtual void Draw(sf::RenderWindow& rw) = 0;
+	virtual void UpdateTileArray(sf::Vector2i newPos) = 0;
 	virtual void Move() = 0;
 	virtual void Update() = 0;
+	virtual void Draw(sf::RenderWindow& rw) = 0;
 };
 
 Directions GetOppositeDirection(Directions dir);

@@ -55,6 +55,7 @@ void GameManager::Update()
 
         //Logic
         pacman->Update();
+        enemy->Update();
 
         //render
         Draw();

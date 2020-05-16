@@ -9,7 +9,8 @@ public:
     SnackType snackType;
 
     Snack(SnackType type, sf::Vector2i gridPos);
-    void Draw(sf::RenderWindow& rw) override;
+    void UpdateTileArray(sf::Vector2i newPos) {};
     void Move() {};
     void Update() {};
+    void Draw(sf::RenderWindow& rw) override;
 };
