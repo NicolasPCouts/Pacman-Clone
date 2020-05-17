@@ -2,7 +2,7 @@
 
 #include "../Entity.h"
 
-enum EnemyState {
+enum class EnemyState {
 	Scatter,
 	Chase,
 	Frightened,
@@ -12,11 +12,12 @@ enum EnemyState {
 class Enemy : Entity
 {
 public:
-	EnemyState state = Scatter;
+	EnemyState state = EnemyState::Scatter;
 	std::vector<sf::Vector2i> currentPath;
-	void UpdateEnemyTilePosition();
 	Enemy(int tileX, int tileY);
 	~Enemy();
+	void UpdateEnemyTilePosition();
+	sf::Vector2i GetOppositeDirectionNeighbour();
 	void UpdateTileArray(sf::Vector2i newPos) override;
 	void Move() override;
 	void Update() override;

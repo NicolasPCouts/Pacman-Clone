@@ -18,6 +18,7 @@ public:
 	sf::RectangleShape body;
 	sf::Texture texture;
 	sf::Vector2f GetFinalTilePosition();
+	bool IsNeighbourTileAvailable(Directions dir);
 	virtual void UpdateTileArray(sf::Vector2i newPos) = 0;
 	virtual void Move() = 0;
 	virtual void Update() = 0;

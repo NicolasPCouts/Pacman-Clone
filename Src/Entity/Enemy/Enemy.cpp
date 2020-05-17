@@ -70,7 +70,7 @@ void Enemy::Move()
 void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	//std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
+	std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
 	if(currentPath.size() > 0)
 		DrawPathfinding(rw, currentPath, gridPos, gameManager->pacman->gridPos);
 }
@@ -78,6 +78,12 @@ void Enemy::Draw(sf::RenderWindow& rw)
 void Enemy::UpdateEnemyTilePosition()
 {
 	std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
+
+	//in the case that no path is found, the enemy will set a neighbour tile as his path 
+	if (pos.size() <= 0) {
+		pos = FindPath(gridPos, GetOppositeDirectionNeighbour(), currentDir);
+	}
+
 	currentPath = pos;
 	if (pos[0].x > gridPos.x)
 		currentDir = Right;
@@ -89,6 +95,31 @@ void Enemy::UpdateEnemyTilePosition()
 		currentDir = Up;
 
 	UpdateTileArray(pos[0]);
+}
+
+sf::Vector2i Enemy::GetOppositeDirectionNeighbour()
+{
+	Directions dir = GetOppositeDirection(currentDir);
+
+	sf::Vector2i tile = gridPos;
+
+	switch (dir)
+	{
+	case Up:
+		tile.y--;
+		break;
+	case Down:
+		tile.y++;
+		break;
+	case Left:
+		tile.x--;
+		break;
+	case Right:
+		tile.x++;
+		break;
+	}
+
+	return tile;
 }
 
 void Enemy::UpdateTileArray(sf::Vector2i newPos)

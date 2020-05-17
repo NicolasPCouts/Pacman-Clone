@@ -22,7 +22,6 @@ private:
 	void EatSnack(sf::Vector2i snackGridPosition);
 	void UpdatePlayerTilePosition();
 	void UpdateTileArray(sf::Vector2i newPos);
-	bool IsNeighbourTileAvailable(Directions dir);
 	void SetupAnimations();
 	void ChangeAnimation(Directions dir);
 };

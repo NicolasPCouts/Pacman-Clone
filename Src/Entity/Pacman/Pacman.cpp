@@ -141,31 +141,6 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Player;
 }
 
-bool Pacman::IsNeighbourTileAvailable(Directions dir) 
-{
-	switch (dir)
-	{
-	case Up:
-		if (gameManager->tileArray[gridPos.x][gridPos.y - 1].tileType != sTile::Wall)
-			return true;
-		break;
-	case Down:
-		if (gameManager->tileArray[gridPos.x][gridPos.y + 1].tileType != sTile::Wall)
-			return true;
-		break;
-	case Left:
-		if (gameManager->tileArray[gridPos.x - 1][gridPos.y].tileType != sTile::Wall)
-			return true;
-		break;
-	case Right:
-		if (gameManager->tileArray[gridPos.x + 1][gridPos.y].tileType != sTile::Wall)
-			return true;
-		break;
-	}
-
-	return false;
-}
-
 void Pacman::SetupAnimations() 
 {
 	//right animation
