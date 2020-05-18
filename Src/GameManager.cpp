@@ -1,13 +1,15 @@
 #include "GameManager.h"
 #include "Entity/Pacman/Pacman.h"
 #include "Entity/Enemy/Enemy.h"
-
+#include "Entity/Enemy/Blinky.h"
+#include "Entity/Enemy/Pinky.h"
 #include "Pathfinding/Pathfinding.h"
 
 void GameManager::StartGameManager()
 {
     window = new sf::RenderWindow();
-    window->create(sf::VideoMode::getFullscreenModes()[0], "Pacman", sf::Style::Resize);
+    window->create(sf::VideoMode(1200, 1200), "Pacman", sf::Style::Resize);
+    //window->create(sf::VideoMode::getFullscreenModes()[0], "Pacman", sf::Style::Resize);
     LoadMap();
     aspectRatio = float(window->getSize().x) / float(window->getSize().y);
     sf::View v(sf::Vector2f(400, 400), sf::Vector2f(800 * aspectRatio, 800));
@@ -16,14 +18,17 @@ void GameManager::StartGameManager()
 
     CreateMapColliders();
     pacman = new Pacman(5, 1);
-    enemy = new Enemy(9, 1);
+    enemys[0] = new Blinky(sf::Vector2i(9, 1));
+    enemys[1] = new Pinky(sf::Vector2i(3, 1));
     CreateSnacks();
 }
 
 GameManager::~GameManager()
 {
     delete pacman;
-    delete enemy;
+    for (auto const& x : enemys)
+        delete x;
+
     delete window;
     DeleteSnacks();
 }
@@ -55,7 +60,11 @@ void GameManager::Update()
 
         //Logic
         pacman->Update();
-        enemy->Update();
+        for (auto const& x : enemys)
+        {
+            if(x != NULL)
+                x->Update();
+        }
 
         //render
         Draw();
@@ -67,13 +76,16 @@ void GameManager::Draw()
     window->clear();
     window->draw(mapSprite);
 
-
     for (auto const& x : SnackList)
         x->Draw(*window);
 
     pacman->Draw(*window);
-    enemy->Draw(*window);
 
+    for (auto const& x : enemys) 
+    {
+        if (x != NULL)
+            x->Draw(*window);
+    }
 
     window->display();
 }

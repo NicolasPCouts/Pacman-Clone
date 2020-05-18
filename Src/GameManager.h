@@ -16,7 +16,7 @@ public:
 	sf::Texture mapTexture;
 
 	Pacman* pacman;
-	Enemy* enemy;
+	Enemy* enemys[4];
 
 	sTile tileArray[28][31];
 	std::vector<Snack*> SnackList;

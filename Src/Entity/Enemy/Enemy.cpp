@@ -6,19 +6,19 @@
 
 extern GameManager* gameManager;
 
-Enemy::Enemy(int tileX, int tileY)
+Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos)
 {
 	body.setSize(sf::Vector2f(40, 40));
-	gridPos = sf::Vector2i(tileX, tileY);
-	gameManager->tileArray[tileX][tileY].isEmpty = false;
-	gameManager->tileArray[tileX][tileY].tileType = sTile::Player;
+	this->gridPos = gridPos;
+	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Player;
 
-	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 65, 14, 14)))
+	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(texturePos.x, texturePos.y, 14, 14)))
 		body.setTexture(&texture);
 	else
 		std::cout << "texture not loaded correctly" << std::endl;
 
-	body.move(sf::Vector2f(30 * tileX, 20 * tileY));
+	body.move(sf::Vector2f(30 * gridPos.x, 20 * gridPos.y));
 }
 
 

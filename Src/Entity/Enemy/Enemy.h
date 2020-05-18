@@ -13,7 +13,7 @@ class Enemy : Entity
 {
 public:
 	EnemyState state = EnemyState::Scatter;
-	Enemy(int tileX, int tileY);
+	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos);
 	~Enemy();
 	void UpdateTileArray(sf::Vector2i newPos) override;
 	void Update() override;
