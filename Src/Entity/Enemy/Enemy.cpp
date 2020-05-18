@@ -66,25 +66,40 @@ void Enemy::Move()
 	}
 }
 
-
 void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
-	if(currentPath.size() > 0)
-		DrawPathfinding(rw, currentPath, gridPos, gameManager->pacman->gridPos);
+	if (currentPath.size() > 0) {
+		switch (state)
+		{
+		case EnemyState::Scatter:
+			DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
+			break;
+		case EnemyState::Chase:
+			DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
+			break;
+		}
+	}
 }
 
 void Enemy::UpdateEnemyTilePosition()
 {
-	std::vector<sf::Vector2i> pos = FindPath(gridPos, gameManager->pacman->gridPos, currentDir);
+	std::vector<sf::Vector2i> pos;
+	switch (state)
+	{
+	case EnemyState::Scatter:
+		pos = FindPath(gridPos, GetScatterTargetPosition(), currentDir);
+		break;
+	case EnemyState::Chase:
+		pos = FindPath(gridPos, GetChaseTargetPosition(), currentDir);
+		break;
+	}
 
 	//in the case that no path is found, the enemy will set a neighbour tile as his path 
 	if (pos.size() <= 0) {
 		pos = FindPath(gridPos, GetOppositeDirectionNeighbour(), currentDir);
 	}
 
-	currentPath = pos;
 	if (pos[0].x > gridPos.x)
 		currentDir = Right;
 	else if (pos[0].x < gridPos.x)
@@ -94,6 +109,7 @@ void Enemy::UpdateEnemyTilePosition()
 	else if (pos[0].y < gridPos.y)
 		currentDir = Up;
 
+	currentPath = pos;
 	UpdateTileArray(pos[0]);
 }
 
@@ -133,4 +149,14 @@ void Enemy::UpdateTileArray(sf::Vector2i newPos)
 	//transfering enemy to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
 	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Enemy;
+}
+
+sf::Vector2i Enemy::GetScatterTargetPosition()
+{
+	return sf::Vector2i(1, 1);
+}
+
+sf::Vector2i Enemy::GetChaseTargetPosition()
+{
+	return gameManager->pacman->gridPos;
 }

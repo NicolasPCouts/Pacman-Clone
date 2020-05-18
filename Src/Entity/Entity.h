@@ -17,12 +17,13 @@ public:
 	Directions currentDir = None;
 	sf::RectangleShape body;
 	sf::Texture texture;
+	virtual void Update() = 0;
+	virtual void Draw(sf::RenderWindow& rw) = 0;
+protected:
 	sf::Vector2f GetFinalTilePosition();
 	bool IsNeighbourTileAvailable(Directions dir);
 	virtual void UpdateTileArray(sf::Vector2i newPos) = 0;
 	virtual void Move() = 0;
-	virtual void Update() = 0;
-	virtual void Draw(sf::RenderWindow& rw) = 0;
 };
 
 Directions GetOppositeDirection(Directions dir);

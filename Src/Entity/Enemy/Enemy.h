@@ -13,13 +13,17 @@ class Enemy : Entity
 {
 public:
 	EnemyState state = EnemyState::Scatter;
-	std::vector<sf::Vector2i> currentPath;
 	Enemy(int tileX, int tileY);
 	~Enemy();
-	void UpdateEnemyTilePosition();
-	sf::Vector2i GetOppositeDirectionNeighbour();
 	void UpdateTileArray(sf::Vector2i newPos) override;
-	void Move() override;
 	void Update() override;
 	void Draw(sf::RenderWindow& rw) override;
+private:
+	std::vector<sf::Vector2i> currentPath;
+	void UpdateEnemyTilePosition();
+	sf::Vector2i GetOppositeDirectionNeighbour();
+	void Move() override;
+protected:
+	virtual sf::Vector2i GetScatterTargetPosition();
+	virtual sf::Vector2i GetChaseTargetPosition();
 };
