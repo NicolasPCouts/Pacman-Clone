@@ -12,7 +12,7 @@ enum class EnemyState {
 class Enemy : Entity
 {
 public:
-	EnemyState state = EnemyState::Scatter;
+	EnemyState state = EnemyState::Chase;
 	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos);
 	~Enemy();
 	void UpdateTileArray(sf::Vector2i newPos) override;

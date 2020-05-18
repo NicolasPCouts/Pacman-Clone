@@ -10,6 +10,7 @@ void GameManager::StartGameManager()
     window = new sf::RenderWindow();
     window->create(sf::VideoMode(1200, 1200), "Pacman", sf::Style::Resize);
     //window->create(sf::VideoMode::getFullscreenModes()[0], "Pacman", sf::Style::Resize);
+
     LoadMap();
     aspectRatio = float(window->getSize().x) / float(window->getSize().y);
     sf::View v(sf::Vector2f(400, 400), sf::Vector2f(800 * aspectRatio, 800));
