@@ -142,14 +142,15 @@ sf::Vector2i Enemy::GetOppositeDirectionNeighbour()
 void Enemy::UpdateTileArray(sf::Vector2i newPos)
 {
 	//emptying current tile
-	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::None;
+	bool hasSnack = gameManager->FindSnackID(gridPos) == -1;
+	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = hasSnack? true : false;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = hasSnack? sTile::None : sTile::Snack;
 
 	gridPos = newPos;
 
 	//transfering enemy to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Enemy;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Ghost;
 }
 
 sf::Vector2i Enemy::GetScatterTargetPosition()

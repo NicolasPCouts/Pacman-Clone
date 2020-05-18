@@ -31,6 +31,7 @@ public:
 	void Update();
 	void StartGameManager();
 	~GameManager();
+	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnack(sf::Vector2i snackPos);
 private:
 	sf::Clock clock;
@@ -39,6 +40,5 @@ private:
 	void LoadMap();
 	void CreateMapColliders();
 	void CreateSnacks();
-	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnacks();
 };

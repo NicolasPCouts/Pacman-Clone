@@ -3,7 +3,6 @@
 #include "Entity/Enemy/Enemy.h"
 #include "Entity/Enemy/Blinky.h"
 #include "Entity/Enemy/Pinky.h"
-#include "Pathfinding/Pathfinding.h"
 
 void GameManager::StartGameManager()
 {
@@ -287,9 +286,9 @@ void GameManager::CreateMapColliders()
         tileArray[i][14].isEmpty = false;
         tileArray[i][15].isEmpty = false;
 
-        tileArray[i][13].tileType = sTile::EnemyCenter;
-        tileArray[i][14].tileType = sTile::EnemyCenter;
-        tileArray[i][15].tileType = sTile::EnemyCenter;
+        tileArray[i][13].tileType = sTile::GhostHouse;
+        tileArray[i][14].tileType = sTile::GhostHouse;
+        tileArray[i][15].tileType = sTile::GhostHouse;
     }
 }
 
