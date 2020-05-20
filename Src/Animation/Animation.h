@@ -5,7 +5,7 @@
 class Animation
 {
 public:
-	float switchTime = 1;
+	float switchTime = 0.01f;
 	Animation(std::vector<sf::Texture> textures);
 	Animation(std::vector<sf::Texture> textures, bool loop);
 	Animation(std::vector<sf::Texture> textures, bool loop, float switchTime);

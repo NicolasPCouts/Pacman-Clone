@@ -29,6 +29,18 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	totalWaveTime += gameManager->deltaTime;
+
+	if (totalWaveTime >= waves[currentWave].duration)
+	{
+		totalWaveTime -= waves[currentWave].duration;
+
+		if(currentWave < (sizeof(waves) / sizeof(waves[0])) - 1)
+			currentWave++;
+
+		state = waves[currentWave].waveState;
+	}
+
 	Move();
 }
 

@@ -12,7 +12,7 @@ enum Directions {
 class Entity
 {
 public:
-	float speed = 0.05f;
+	float speed = 80;
 	sf::Vector2i gridPos;
 	Directions currentDir = None;
 	sf::RectangleShape body;

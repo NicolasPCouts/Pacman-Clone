@@ -25,7 +25,7 @@ public:
 	int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
 	float tileWidth = 800 / (float)numberOfTilesX;
 	float tileHeight = 800 / (float)numberOfTilesY;
-	float deltaTime;
+	float deltaTime = 0;
 
 
 	void Update();
