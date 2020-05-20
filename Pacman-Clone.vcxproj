@@ -152,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Entity\Enemy\Clyde.cpp" />
+    <ClCompile Include="Src\Entity\Enemy\Inky.cpp" />
     <ClCompile Include="Src\Entity\Enemy\Pinky.cpp" />
     <ClCompile Include="Src\Entity\Enemy\Blinky.cpp" />
     <ClCompile Include="Src\Debugger\Debug.cpp" />
@@ -166,6 +168,8 @@
     <ClCompile Include="Src\Entity\Snack\Snack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Entity\Enemy\Clyde.h" />
+    <ClInclude Include="Src\Entity\Enemy\Inky.h" />
     <ClInclude Include="Src\Entity\Enemy\Pinky.h" />
     <ClInclude Include="Src\Entity\Enemy\Blinky.h" />
     <ClInclude Include="Src\Debugger\Debug.h" />

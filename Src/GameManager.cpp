@@ -3,6 +3,8 @@
 #include "Entity/Enemy/Enemy.h"
 #include "Entity/Enemy/Blinky.h"
 #include "Entity/Enemy/Pinky.h"
+#include "Entity/Enemy/Inky.h"
+#include "Entity/Enemy/Clyde.h"
 
 void GameManager::StartGameManager()
 {
@@ -20,6 +22,8 @@ void GameManager::StartGameManager()
     pacman = new Pacman(5, 1);
     enemys[0] = new Blinky(sf::Vector2i(9, 1));
     enemys[1] = new Pinky(sf::Vector2i(3, 1));
+    enemys[2] = new Inky(sf::Vector2i(15, 1));
+    enemys[3] = new Clyde(sf::Vector2i(18, 1));
     CreateSnacks();
 }
 
