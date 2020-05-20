@@ -19,7 +19,7 @@ void GameManager::StartGameManager()
     CreateMapColliders();
     pacman = new Pacman(5, 1);
     enemys[0] = new Blinky(sf::Vector2i(9, 1));
-    //enemys[1] = new Pinky(sf::Vector2i(3, 1));
+    enemys[1] = new Pinky(sf::Vector2i(3, 1));
     CreateSnacks();
 }
 
