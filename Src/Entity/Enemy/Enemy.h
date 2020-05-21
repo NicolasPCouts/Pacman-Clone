@@ -9,7 +9,7 @@ enum class EnemyState {
 	Eaten
 };
 
-class Enemy : Entity
+class Enemy : public Entity
 {
 public:
 	EnemyState state = EnemyState::Scatter;

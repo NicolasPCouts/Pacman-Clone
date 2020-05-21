@@ -14,16 +14,16 @@ sf::Vector2i Pinky::GetChaseTargetPosition()
 	switch (gameManager->pacman->currentDir)
 	{
 	case Up:
-		pos.y -= 2;
+		pos.y -= 4;
 		break;
 	case Down:
-		pos.y += 2;
+		pos.y += 4;
 		break;
 	case Left:
-		pos.x -= 2;
+		pos.x -= 4;
 		break;
 	case Right:
-		pos.x += 2;
+		pos.x += 4;
 		break;
 	}
 
