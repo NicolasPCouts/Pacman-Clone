@@ -6,6 +6,7 @@ public:
 	Inky(sf::Vector2i gridPos);
 	~Inky();
 private:
-	//sf::Vector2i GetChaseTargetPosition() override;
+	sf::Vector2i GetScatterTargetPosition() override;
+	sf::Vector2i GetChaseTargetPosition() override;
 };
 

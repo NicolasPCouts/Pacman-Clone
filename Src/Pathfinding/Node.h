@@ -57,7 +57,7 @@ struct sNode
 		sNode node = sNode(pos);
 		if (tile != NULL) {
 
-			if (pos.x < 0 || pos.y < 0 || pos.x >= gameManager->numberOfTilesX || pos.y >= gameManager->numberOfTilesY)
+			if (pos.x < 0 || pos.y < 0 || pos.x >= NumberOfTilesX || pos.y >= NumberOfTilesY)
 				return sNode(sf::Vector2i(-100, -100));
 
 			if (tile->tileType == sTile::Wall)

@@ -29,8 +29,8 @@ private:
 	float totalWaveTime = 0;
 	Wave waves[8] = {Wave(EnemyState::Scatter, 7), Wave(EnemyState::Chase, 20)
 					, Wave(EnemyState::Scatter, 7), Wave(EnemyState::Chase, 20)
-					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, 20) 
-					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, -1) 
+					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, 20)
+					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, -1)
 	};
 
 	std::vector<sf::Vector2i> currentPath;

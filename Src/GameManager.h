@@ -7,6 +7,9 @@
 class Enemy;
 class Pacman;
 
+#define NumberOfTilesX 28
+#define NumberOfTilesY 31
+
 class GameManager
 {
 public:
@@ -18,13 +21,11 @@ public:
 	Pacman* pacman;
 	Enemy* enemys[4];
 
-	sTile tileArray[28][31];
+	sTile tileArray[NumberOfTilesX][NumberOfTilesY];
 	std::vector<Snack*> SnackList;
 
-	int numberOfTilesX = sizeof(tileArray) / sizeof(tileArray[0]);
-	int numberOfTilesY = sizeof(tileArray[0]) / sizeof(tileArray[0][0]);
-	float tileWidth = 800 / (float)numberOfTilesX;
-	float tileHeight = 800 / (float)numberOfTilesY;
+	float tileWidth = 800 / (float)NumberOfTilesX;
+	float tileHeight = 800 / (float)NumberOfTilesY;
 	float deltaTime = 0;
 
 

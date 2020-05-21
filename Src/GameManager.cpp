@@ -19,10 +19,10 @@ void GameManager::StartGameManager()
     LoadMap();
 
     CreateMapColliders();
-    pacman = new Pacman(5, 1);
-    enemys[0] = new Blinky(sf::Vector2i(9, 1));
+    pacman = new Pacman(1, 1);
+    enemys[0] = new Blinky(sf::Vector2i(3, 5));
     enemys[1] = new Pinky(sf::Vector2i(3, 1));
-    enemys[2] = new Inky(sf::Vector2i(15, 1));
+    enemys[2] = new Inky(sf::Vector2i(5, 5));
     enemys[3] = new Clyde(sf::Vector2i(18, 1));
     CreateSnacks();
 }
@@ -111,10 +111,10 @@ void GameManager::LoadMap()
 
 void GameManager::CreateMapColliders()
 {
-    for (int i = 0; i < numberOfTilesX; i++)
+    for (int i = 0; i < NumberOfTilesX; i++)
     {
         tileArray[i][0].isEmpty = false;
-        tileArray[i][numberOfTilesY - 1].isEmpty = false;
+        tileArray[i][NumberOfTilesY - 1].isEmpty = false;
     }
     for (int i = 2; i <= 5; i++)
     {
@@ -182,12 +182,12 @@ void GameManager::CreateMapColliders()
     for (int i = 1; i < 10; i++)
     {
         tileArray[0][i].isEmpty = false;
-        tileArray[numberOfTilesX - 1][i].isEmpty = false;
+        tileArray[NumberOfTilesX - 1][i].isEmpty = false;
     }
     for (int i = 19; i < 30; i++)
     {
         tileArray[0][i].isEmpty = false;
-        tileArray[numberOfTilesX - 1][i].isEmpty = false;
+        tileArray[NumberOfTilesX - 1][i].isEmpty = false;
     }
     for (int i = 0; i <= 5; i++)
     {
@@ -309,9 +309,9 @@ void GameManager::CreateSnacks()
     }
 
     //SMALL SNACKS
-    for (int x = 0; x < numberOfTilesX; x++)
+    for (int x = 0; x < NumberOfTilesX; x++)
     {
-        for (int y = 0; y < numberOfTilesY; y++)
+        for (int y = 0; y < NumberOfTilesY; y++)
         {
             if (tileArray[x][y].isEmpty)
             {

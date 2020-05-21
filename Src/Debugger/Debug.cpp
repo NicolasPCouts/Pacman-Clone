@@ -6,10 +6,10 @@ extern GameManager* gameManager;
 void DrawGrid(sf::RenderWindow& window)
 {
     sf::Vector2f vec(0, 0);
-    for (int y = 0; y < gameManager->numberOfTilesY; y++)
+    for (int y = 0; y < NumberOfTilesY; y++)
     {
         vec.x = 0;
-        for (int x = 0; x < gameManager->numberOfTilesX; x++)
+        for (int x = 0; x < NumberOfTilesX; x++)
         {
             sf::VertexArray quad(sf::LinesStrip, 5);
 
