@@ -1,8 +1,6 @@
 #include "GameManager.h"
 GameManager* gameManager = new GameManager();
 
-#include "Pathfinding/Pathfinding.h"
-
 int main()
 {
     gameManager->StartGameManager();

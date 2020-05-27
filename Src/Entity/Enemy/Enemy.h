@@ -15,24 +15,25 @@ public:
 	EnemyState state = EnemyState::Scatter;
 	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos);
 	~Enemy();
+	void Scare();
 	void UpdateTileArray(sf::Vector2i newPos) override;
 	void Update() override;
 	void Draw(sf::RenderWindow& rw) override;
 private:
+	int currentWave = 0;
+	float totalWaveTime = 0;
 	struct Wave {
 		EnemyState waveState;
 		float duration;
 		Wave(EnemyState s, float d) { waveState = s; duration = d; }
 	};
-
-	int currentWave = 0;
-	float totalWaveTime = 0;
 	Wave waves[8] = {Wave(EnemyState::Scatter, 7), Wave(EnemyState::Chase, 20)
 					, Wave(EnemyState::Scatter, 7), Wave(EnemyState::Chase, 20)
 					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, 20)
 					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, -1)
 	};
 
+	float scaredTimer = 0;
 	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
 	sf::Vector2i GetOppositeDirectionNeighbour();
@@ -41,5 +42,5 @@ private:
 protected:
 	virtual sf::Vector2i GetScatterTargetPosition();
 	virtual sf::Vector2i GetChaseTargetPosition();
-
+	virtual sf::Vector2i GetFrightenedTargetPosition();
 };

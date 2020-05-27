@@ -1,5 +1,7 @@
 #include "Enemy.h"
 
+#include <cstdlib>
+
 #include "../../GameManager.h"
 #include  "../../Debugger/Debug.h"
 #include "../../Pathfinding/Pathfinding.h"
@@ -27,18 +29,32 @@ Enemy::~Enemy()
 {
 }
 
+void Enemy::Scare()
+{
+	state = EnemyState::Frightened;
+}
+
 void Enemy::Update()
 {
-	totalWaveTime += gameManager->deltaTime;
+	if (state == EnemyState::Frightened) {
+		scaredTimer += gameManager->deltaTime;
+		if (scaredTimer >= 10) {
+			scaredTimer = 0;
+			state = waves[currentWave].waveState;
+		}
+	}
+	else {
+		totalWaveTime += gameManager->deltaTime;
 
-	if (totalWaveTime >= waves[currentWave].duration)
-	{
-		totalWaveTime -= waves[currentWave].duration;
+		if (totalWaveTime >= waves[currentWave].duration)
+		{
+			totalWaveTime -= waves[currentWave].duration;
 
-		if(currentWave < (sizeof(waves) / sizeof(waves[0])) - 1)
-			currentWave++;
+			if(currentWave < (sizeof(waves) / sizeof(waves[0])) - 1)
+				currentWave++;
 
-		state = waves[currentWave].waveState;
+			state = waves[currentWave].waveState;
+		}
 	}
 
 	Move();
@@ -82,14 +98,15 @@ void Enemy::Move()
 void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
+
 	if (currentPath.size() > 0) {
 		switch (state)
 		{
 		case EnemyState::Scatter:
-			DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
+			//DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
 			break;
 		case EnemyState::Chase:
-			DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
+			//DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
 			break;
 		}
 	}
@@ -105,6 +122,10 @@ void Enemy::UpdateEnemyTilePosition()
 		break;
 	case EnemyState::Chase:
 		pos = FindPath(gridPos, GetChaseTargetPosition(), currentDir);
+		break;
+	case EnemyState::Frightened:
+		std::vector<sf::Vector2i> path{ GetFrightenedTargetPosition() };
+		pos = path;
 		break;
 	}
 
@@ -173,4 +194,42 @@ sf::Vector2i Enemy::GetScatterTargetPosition()
 sf::Vector2i Enemy::GetChaseTargetPosition()
 {
 	return gameManager->pacman->gridPos;
+}
+
+sf::Vector2i Enemy::GetFrightenedTargetPosition()
+{
+	std::vector<Directions> possibleDirections;
+
+	if (GetOppositeDirection(currentDir) != Left && IsNeighbourTileAvailable(Left))
+		possibleDirections.push_back(Left);
+	if (GetOppositeDirection(currentDir) != Right && IsNeighbourTileAvailable(Right))
+		possibleDirections.push_back(Right);
+	if (GetOppositeDirection(currentDir) != Up && IsNeighbourTileAvailable(Up))
+		possibleDirections.push_back(Up);
+	if (GetOppositeDirection(currentDir) != Down && IsNeighbourTileAvailable(Down))
+		possibleDirections.push_back(Down);
+
+
+	int randomDir = std::rand() % possibleDirections.size();
+
+	sf::Vector2i pos = gridPos;
+	switch (possibleDirections[randomDir])
+	{
+	case Up:
+		pos.y--;
+		break;
+	case Down:
+		pos.y++;
+		break;
+	case Left:
+		pos.x--;
+		break;
+	case Right:
+		pos.x++;
+		break;
+	}
+
+	std::cout << "Scared!" << std::endl;
+
+	return pos;
 }

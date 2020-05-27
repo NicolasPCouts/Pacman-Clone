@@ -1,5 +1,6 @@
 #include "Pacman.h"
 #include "../../Tile.h"
+#include "../Enemy/Enemy.h"
 
 extern GameManager* gameManager;
 
@@ -88,6 +89,12 @@ void Pacman::Move()
 
 void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 {
+	if (gameManager->SnackList[gameManager->FindSnackID(snackGridPosition)]->snackType == Snack::BigSnack) {
+		for (Enemy* e : gameManager->enemys) {
+			e->Scare();
+		}
+	}
+
 	gameManager->DeleteSnack(snackGridPosition);
 }
 
