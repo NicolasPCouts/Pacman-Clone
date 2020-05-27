@@ -15,7 +15,7 @@ public:
 	void Draw(sf::RenderWindow& rw) override;
 private:
 	Animator* animator;
-	Animation* animations[5];
+	Animation* animations[5];//left, right, up, down, death
 	Directions nextDir = None;
 	bool hasCompletedMovement = false;
 	void Move() override;

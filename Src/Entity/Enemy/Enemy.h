@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../Entity.h"
+#include "../../Animation/Animator.h"
+#include "../../Animation/Animation.h"
 
 enum class EnemyState {
 	Scatter,
@@ -37,9 +39,11 @@ private:
 	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
 	sf::Vector2i GetOppositeDirectionNeighbour();
+	void SetupAnimations();
 	void Move() override;
-
 protected:
+	Animator* animator;
+	Animation* animations[5]; //left, right, up, down, frightened
 	virtual sf::Vector2i GetScatterTargetPosition();
 	virtual sf::Vector2i GetChaseTargetPosition();
 	virtual sf::Vector2i GetFrightenedTargetPosition();

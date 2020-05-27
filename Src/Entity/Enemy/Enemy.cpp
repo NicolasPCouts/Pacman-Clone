@@ -16,6 +16,9 @@ Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos)
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
 	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Player;
 
+	SetupAnimations();
+	animator = new Animator(&body);
+
 	if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(texturePos.x, texturePos.y, 14, 14)))
 		body.setTexture(&texture);
 	else
@@ -32,6 +35,7 @@ Enemy::~Enemy()
 void Enemy::Scare()
 {
 	state = EnemyState::Frightened;
+	animator->SetAnimationClip(animations[4]);
 }
 
 void Enemy::Update()
@@ -57,6 +61,7 @@ void Enemy::Update()
 		}
 	}
 
+	animator->Update(gameManager->deltaTime);
 	Move();
 }
 
@@ -232,4 +237,14 @@ sf::Vector2i Enemy::GetFrightenedTargetPosition()
 	std::cout << "Scared!" << std::endl;
 
 	return pos;
+}
+
+void Enemy::SetupAnimations() 
+{
+	sf::Texture f1, f2;
+	f1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(358, 65, 13, 13));
+	f2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(374, 65, 13, 13));
+	std::vector<sf::Texture> frightenedAnimTextures{ f1, f2 };
+
+	animations[4] = new Animation(frightenedAnimTextures);
 }
