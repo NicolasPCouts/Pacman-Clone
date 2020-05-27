@@ -1,3 +1,48 @@
-﻿  GameManager.cpp
+﻿  Blinky.cpp
+  Clyde.cpp
 D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  Enemy.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Enemy.cpp(27,44): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Enemy.cpp(27,28): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  Inky.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(33,2): warning C4060: switch statement contains no 'case' or 'default' labels
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(21,4): warning C4102: 'Up': unreferenced label
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(24,6): warning C4102: 'Down': unreferenced label
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(27,6): warning C4102: 'Left': unreferenced label
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(30,7): warning C4102: 'Right': unreferenced label
+  Pinky.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  Pacman.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(22,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(22,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameManager.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
