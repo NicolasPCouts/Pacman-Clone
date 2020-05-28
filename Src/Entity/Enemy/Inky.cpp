@@ -62,5 +62,24 @@ sf::Vector2i Inky::GetChaseTargetPosition()
 
 void Inky::SetupAnimations()
 {
+	sf::Texture r1, r2, l1, l2;
+	r1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(230, 97, 14, 14));
+	r2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(246, 97, 14, 14));
+	l1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(262, 97, 14, 14));
+	l2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(278, 97, 14, 14));
+	std::vector<sf::Texture> leftAnimTextures{ l1,l2 };
+	std::vector<sf::Texture> rightAnimTextures{ r1,r2 };
 
+	sf::Texture u1, u2, d1, d2;
+	u1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(294, 97, 14, 14));
+	u2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(310, 97, 14, 14));
+	d1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(326, 97, 14, 14));
+	d2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(342, 97, 14, 14));
+	std::vector<sf::Texture> upAnimTextures{ u1,u2 };
+	std::vector<sf::Texture> downAnimTextures{ d1,d2 };
+
+	animations[0] = new Animation(leftAnimTextures, true, 0.1f);
+	animations[1] = new Animation(rightAnimTextures, true, 0.1f);
+	animations[2] = new Animation(upAnimTextures, true, 0.1f);
+	animations[3] = new Animation(downAnimTextures, true, 0.1f);
 }
