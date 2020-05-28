@@ -40,16 +40,16 @@ void Enemy::Scare()
 
 void Enemy::Update()
 {
-	static bool hasStartedflickeringAnim = false;
 	if (state == EnemyState::Frightened) {
 		scaredTimer += gameManager->deltaTime;
 
-		if (scaredTimer >= 6){
+		if (scaredTimer >= 6 && !hasStartedflickeringAnim){
 			animator->SetAnimationClip(animations[5]);
+			scaredTimer = 0;
 			hasStartedflickeringAnim = true;
 		}
 
-		if (scaredTimer >= 10) {
+		if (scaredTimer >= 6 && hasStartedflickeringAnim) {
 			scaredTimer = 0;
 			state = waves[currentWave].waveState;
 			hasStartedflickeringAnim = false;
@@ -149,19 +149,27 @@ void Enemy::UpdateEnemyTilePosition()
 
 	if (pos[0].x < gridPos.x) {
 		currentDir = Left;
-		animator->SetAnimationClip(animations[0]);
+
+		if(state != EnemyState::Frightened)
+			animator->SetAnimationClip(animations[0]);
 	}
 	else if (pos[0].x > gridPos.x) {
 		currentDir = Right;
-		animator->SetAnimationClip(animations[1]);
+
+		if (state != EnemyState::Frightened)
+			animator->SetAnimationClip(animations[1]);
 	}
 	else if (pos[0].y < gridPos.y) {
 		currentDir = Up;
-		animator->SetAnimationClip(animations[2]);
+
+		if (state != EnemyState::Frightened)
+			animator->SetAnimationClip(animations[2]);
 	}
 	else if (pos[0].y > gridPos.y) {
 		currentDir = Down;
-		animator->SetAnimationClip(animations[3]);
+
+		if (state != EnemyState::Frightened)	
+			animator->SetAnimationClip(animations[3]);
 	}
 
 	currentPath = pos;
@@ -230,29 +238,32 @@ sf::Vector2i Enemy::GetFrightenedTargetPosition()
 	if (GetOppositeDirection(currentDir) != Down && IsNeighbourTileAvailable(Down))
 		possibleDirections.push_back(Down);
 
+	if (possibleDirections.size() != 0) {
+		int randomDir = std::rand() % possibleDirections.size();
 
-	int randomDir = std::rand() % possibleDirections.size();
+		sf::Vector2i pos = gridPos;
+		switch (possibleDirections[randomDir])
+		{
+		case Up:
+			pos.y--;
+			break;
+		case Down:
+			pos.y++;
+			break;
+		case Left:
+			pos.x--;
+			break;
+		case Right:
+			pos.x++;
+			break;
+		}
 
-	sf::Vector2i pos = gridPos;
-	switch (possibleDirections[randomDir])
-	{
-	case Up:
-		pos.y--;
-		break;
-	case Down:
-		pos.y++;
-		break;
-	case Left:
-		pos.x--;
-		break;
-	case Right:
-		pos.x++;
-		break;
+		std::cout << "Scared!" << std::endl;
+
+		return pos;
 	}
 
-	std::cout << "Scared!" << std::endl;
-
-	return pos;
+	return gridPos;
 }
 
 void Enemy::SetupAnimations() 

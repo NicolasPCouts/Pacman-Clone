@@ -25,7 +25,7 @@ Directions GetOppositeDirection(Directions dir)
 
 sf::Vector2f Entity::GetFinalTilePosition()
 {
-    return sf::Vector2f(gridPos.x * gameManager->tileWidth, gridPos.y * gameManager->tileHeight);
+    return sf::Vector2f((gridPos.x * gameManager->tileWidth) - 5, (gridPos.y * gameManager->tileHeight) - 5);
 }
 
 bool Entity::IsNeighbourTileAvailable(Directions dir)

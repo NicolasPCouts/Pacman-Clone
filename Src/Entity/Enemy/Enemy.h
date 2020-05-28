@@ -36,6 +36,7 @@ private:
 	};
 
 	float scaredTimer = 0;
+	bool hasStartedflickeringAnim = false;
 	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
 	sf::Vector2i GetOppositeDirectionNeighbour();
