@@ -40,11 +40,19 @@ void Enemy::Scare()
 
 void Enemy::Update()
 {
+	static bool hasStartedflickeringAnim = false;
 	if (state == EnemyState::Frightened) {
 		scaredTimer += gameManager->deltaTime;
+
+		if (scaredTimer >= 6){
+			animator->SetAnimationClip(animations[5]);
+			hasStartedflickeringAnim = true;
+		}
+
 		if (scaredTimer >= 10) {
 			scaredTimer = 0;
 			state = waves[currentWave].waveState;
+			hasStartedflickeringAnim = false;
 		}
 	}
 	else {
@@ -139,14 +147,22 @@ void Enemy::UpdateEnemyTilePosition()
 		pos = FindPath(gridPos, GetOppositeDirectionNeighbour(), currentDir);
 	}
 
-	if (pos[0].x > gridPos.x)
-		currentDir = Right;
-	else if (pos[0].x < gridPos.x)
+	if (pos[0].x < gridPos.x) {
 		currentDir = Left;
-	else if (pos[0].y > gridPos.y)
-		currentDir = Down;
-	else if (pos[0].y < gridPos.y)
+		animator->SetAnimationClip(animations[0]);
+	}
+	else if (pos[0].x > gridPos.x) {
+		currentDir = Right;
+		animator->SetAnimationClip(animations[1]);
+	}
+	else if (pos[0].y < gridPos.y) {
 		currentDir = Up;
+		animator->SetAnimationClip(animations[2]);
+	}
+	else if (pos[0].y > gridPos.y) {
+		currentDir = Down;
+		animator->SetAnimationClip(animations[3]);
+	}
 
 	currentPath = pos;
 	UpdateTileArray(pos[0]);
@@ -241,10 +257,15 @@ sf::Vector2i Enemy::GetFrightenedTargetPosition()
 
 void Enemy::SetupAnimations() 
 {
-	sf::Texture f1, f2;
-	f1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(358, 65, 13, 13));
-	f2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(374, 65, 13, 13));
+	sf::Texture f1, f2, ff1, ff2;
+	f1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(358, 65, 14, 14));
+	f2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(374, 65, 14, 14));
+	ff1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(390, 65, 14, 14));
+	ff2.loadFromFile("Resources/PacManSprites.png", sf::IntRect(406, 65, 14, 14));
 	std::vector<sf::Texture> frightenedAnimTextures{ f1, f2 };
+	std::vector<sf::Texture> flickeringFrightenedAnimTextures{ f1, f2, ff1, ff2 };
+
 
 	animations[4] = new Animation(frightenedAnimTextures);
+	animations[5] = new Animation(flickeringFrightenedAnimTextures);
 }

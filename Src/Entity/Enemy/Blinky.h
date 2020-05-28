@@ -8,5 +8,6 @@ public:
 	~Blinky();
 private:
 	sf::Vector2i GetScatterTargetPosition() override;
+	void SetupAnimations() override;
 };
 

@@ -8,5 +8,6 @@ public:
 private:
 	sf::Vector2i GetScatterTargetPosition() override;
 	sf::Vector2i GetChaseTargetPosition() override;
+	void SetupAnimations() override;
 };
 

@@ -39,11 +39,11 @@ private:
 	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
 	sf::Vector2i GetOppositeDirectionNeighbour();
-	void SetupAnimations();
 	void Move() override;
 protected:
 	Animator* animator;
-	Animation* animations[5]; //left, right, up, down, frightened
+	Animation* animations[6]; //left, right, up, down, frightened, flickeringFrightened
+	virtual void SetupAnimations();
 	virtual sf::Vector2i GetScatterTargetPosition();
 	virtual sf::Vector2i GetChaseTargetPosition();
 	virtual sf::Vector2i GetFrightenedTargetPosition();

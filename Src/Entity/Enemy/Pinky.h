@@ -8,6 +8,7 @@ public:
 	~Pinky();
 private:
 	sf::Vector2i GetChaseTargetPosition() override;
+	void SetupAnimations() override;
 };
 
 

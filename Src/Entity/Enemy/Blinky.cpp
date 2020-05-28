@@ -7,3 +7,8 @@ sf::Vector2i Blinky::GetScatterTargetPosition()
 {
 	return sf::Vector2i(26,1);
 }
+
+void Blinky::SetupAnimations()
+{
+
+}

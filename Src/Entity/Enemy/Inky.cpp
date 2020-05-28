@@ -59,3 +59,8 @@ sf::Vector2i Inky::GetChaseTargetPosition()
 
 	return finalPos;
 }
+
+void Inky::SetupAnimations()
+{
+
+}

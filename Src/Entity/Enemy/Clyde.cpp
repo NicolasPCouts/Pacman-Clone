@@ -22,3 +22,8 @@ sf::Vector2i Clyde::GetChaseTargetPosition()
 	
 	return sf::Vector2i(1, 29);
 }
+
+void Clyde::SetupAnimations()
+{
+
+}
