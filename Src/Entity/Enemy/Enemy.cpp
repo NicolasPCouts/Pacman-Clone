@@ -40,6 +40,7 @@ void Enemy::Scare()
 
 void Enemy::Update()
 {
+	//updating frightened timer
 	if (state == EnemyState::Frightened) {
 		scaredTimer += gameManager->deltaTime;
 
@@ -55,6 +56,7 @@ void Enemy::Update()
 			hasStartedflickeringAnim = false;
 		}
 	}
+	//updating wave system
 	else {
 		totalWaveTime += gameManager->deltaTime;
 
@@ -112,17 +114,17 @@ void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
 
-	if (currentPath.size() > 0) {
-		switch (state)
-		{
-		case EnemyState::Scatter:
-			//DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
-			break;
-		case EnemyState::Chase:
-			//DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
-			break;
-		}
-	}
+	//if (currentPath.size() > 0) {
+	//	switch (state)
+	//	{
+	//	case EnemyState::Scatter:
+	//		DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
+	//		break;
+	//	case EnemyState::Chase:
+	//		DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
+	//		break;
+	//	}
+	//}
 }
 
 void Enemy::UpdateEnemyTilePosition()
@@ -143,8 +145,36 @@ void Enemy::UpdateEnemyTilePosition()
 	}
 
 	//in the case that no path is found, the enemy will set a neighbour tile as his path 
-	if (pos.size() <= 0) {
+	if (pos.size() == 0) {
 		pos = FindPath(gridPos, GetOppositeDirectionNeighbour(), currentDir);
+
+		//in the case that no path is found, its because the enemy is about to be teleported to the other side of the screen
+		if (pos.size() == 0) {
+			sf::Vector2i p = gridPos;
+			switch (currentDir)
+			{
+			case Left:
+				p.x--;
+				if (p.x < 0) {
+					Teleport(Right);
+					gridPos.x = 27;
+					return;
+				}
+				else
+					pos.push_back(p);
+				break;
+			case Right:
+				p.x++;
+				if (p.x > 27) {
+					Teleport(Left);
+					gridPos.x = 0;
+					return;
+				}
+				else
+					pos.push_back(p);
+				break;
+			}
+		}
 	}
 
 	if (pos[0].x < gridPos.x) {
@@ -171,7 +201,7 @@ void Enemy::UpdateEnemyTilePosition()
 		if (state != EnemyState::Frightened)	
 			animator->SetAnimationClip(animations[3]);
 	}
-
+	
 	currentPath = pos;
 	UpdateTileArray(pos[0]);
 }
@@ -258,15 +288,13 @@ sf::Vector2i Enemy::GetFrightenedTargetPosition()
 			break;
 		}
 
-		std::cout << "Scared!" << std::endl;
-
 		return pos;
 	}
 
 	return gridPos;
 }
 
-void Enemy::SetupAnimations() 
+void Enemy::SetupAnimations()
 {
 	sf::Texture f1, f2, ff1, ff2;
 	f1.loadFromFile("Resources/PacManSprites.png", sf::IntRect(358, 65, 14, 14));

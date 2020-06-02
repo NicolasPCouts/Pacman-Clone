@@ -59,8 +59,6 @@ sf::Vector2i Inky::GetChaseTargetPosition()
 	else if (gridPos.y + dist.y < 1)	finalPos.y = 1;
 	else finalPos.y = gridPos.y + dist.y;
 
-	std::cout << "X : " << finalPos.x << " Y : " << finalPos.y << std::endl;
-
 	return finalPos;
 }
 
