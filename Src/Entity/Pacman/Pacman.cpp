@@ -110,6 +110,7 @@ void Pacman::UpdatePlayerTilePosition()
 		//nextDir = None;
 	}
 
+	
 	if (IsNeighbourTileAvailable(currentDir))
 	{
 		switch (currentDir)
@@ -125,6 +126,23 @@ void Pacman::UpdatePlayerTilePosition()
 			break;
 		case Right:
 			UpdateTileArray(sf::Vector2i(gridPos.x + 1, gridPos.y));
+			break;
+		}
+	}
+	else {
+		switch (currentDir)
+		{
+		case Left:
+			if (IsTeleportTile(sf::Vector2i(gridPos.x - 1, gridPos.y))) {
+				Teleport(Right);
+				UpdateTileArray(sf::Vector2i(27, gridPos.y));
+			}
+			break;
+		case Right:
+			if (IsTeleportTile(sf::Vector2i(gridPos.x + 1, gridPos.y))) {
+				Teleport(Left);
+				UpdateTileArray(sf::Vector2i(0, gridPos.y));
+			}
 			break;
 		}
 	}

@@ -22,6 +22,8 @@ public:
 protected:
 	sf::Vector2f GetFinalTilePosition();
 	bool IsNeighbourTileAvailable(Directions dir);
+	bool IsTeleportTile(sf::Vector2i pos);
+	void Teleport(Directions teleportTo);
 	virtual void UpdateTileArray(sf::Vector2i newPos) = 0;
 	virtual void Move() = 0;
 };

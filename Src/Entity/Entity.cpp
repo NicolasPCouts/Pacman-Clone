@@ -41,14 +41,38 @@ bool Entity::IsNeighbourTileAvailable(Directions dir)
 			return true;
 		break;
 	case Left:
+		if (IsTeleportTile(sf::Vector2i(gridPos.x - 1, gridPos.y)))
+			return false;
 		if (gameManager->tileArray[gridPos.x - 1][gridPos.y].tileType != sTile::Wall)
 			return true;
 		break;
 	case Right:
+		if (IsTeleportTile(sf::Vector2i(gridPos.x + 1, gridPos.y)))
+			return false;
 		if (gameManager->tileArray[gridPos.x + 1][gridPos.y].tileType != sTile::Wall)
 			return true;
 		break;
 	}
 
 	return false;
+}
+
+bool Entity::IsTeleportTile(sf::Vector2i pos)
+{
+	if (pos.x < 0 || pos.x > 27)
+		return true;
+	return false;
+}
+
+void Entity::Teleport(Directions teleportTo)
+{
+	switch (teleportTo)
+	{
+	case Left:
+		body.setPosition(sf::Vector2f((-1 * gameManager->tileWidth) - 5, (gridPos.y * gameManager->tileHeight) - 5));
+		break;
+	case Right:
+		body.setPosition(sf::Vector2f((28 * gameManager->tileWidth) - 5, (gridPos.y * gameManager->tileHeight) - 5));
+		break;
+	}
 }
