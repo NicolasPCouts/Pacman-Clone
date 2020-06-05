@@ -18,4 +18,17 @@ D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Enemy
           [
               T=float
           ]
+  Pacman.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(10,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(23,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(23,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Generating Code...
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
