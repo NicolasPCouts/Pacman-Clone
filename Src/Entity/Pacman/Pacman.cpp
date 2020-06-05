@@ -1,6 +1,7 @@
 #include "Pacman.h"
 #include "../../Tile.h"
 #include "../Enemy/Enemy.h"
+#include "../../Debugger/Debug.h"
 
 extern GameManager* gameManager;
 
@@ -32,6 +33,7 @@ Pacman::~Pacman()
 void Pacman::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
+	DrawCube(rw, gridPos);
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
@@ -159,12 +161,11 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 	{
 		EatSnack(newPos);
 	}
-	else if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == sTile::Ghost) {
-		Enemy* e = gameManager->FindEnemyByPosition(gridPos);
-		if (e != NULL)
-			if (e->state == EnemyState::Frightened)
-				e->Eaten();
-	}
+
+	Enemy* e = gameManager->FindEnemyByPosition(gridPos);
+	if (e != NULL)
+		if (e->state == EnemyState::Frightened)
+			e->Eaten();
 
 	//transfering player to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
