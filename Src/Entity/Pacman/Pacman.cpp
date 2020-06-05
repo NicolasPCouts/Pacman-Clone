@@ -90,9 +90,8 @@ void Pacman::Move()
 void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 {
 	if (gameManager->SnackList[gameManager->FindSnackID(snackGridPosition)]->snackType == Snack::BigSnack) {
-		for (Enemy* e : gameManager->enemys) {
-			e->Scare();
-		}
+		for (Enemy* e : gameManager->enemys)
+			if(e != NULL)	e->Scare();
 	}
 
 	gameManager->DeleteSnack(snackGridPosition);
@@ -159,6 +158,12 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 	if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == sTile::Snack)
 	{
 		EatSnack(newPos);
+	}
+	else if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == sTile::Ghost) {
+		Enemy* e = gameManager->FindEnemyByPosition(gridPos);
+		if (e != NULL)
+			if (e->state == EnemyState::Frightened)
+				e->Eaten();
 	}
 
 	//transfering player to next tile

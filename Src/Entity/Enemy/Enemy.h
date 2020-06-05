@@ -21,6 +21,7 @@ public:
 	void UpdateTileArray(sf::Vector2i newPos) override;
 	void Update() override;
 	void Draw(sf::RenderWindow& rw) override;
+	void Eaten();
 private:
 	int currentWave = 0;
 	float totalWaveTime = 0;
@@ -39,6 +40,7 @@ private:
 	bool hasStartedflickeringAnim = false;
 	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
+	void ChangeAnimation();
 	sf::Vector2i GetOppositeDirectionNeighbour();
 	void Move() override;
 protected:

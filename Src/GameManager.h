@@ -34,6 +34,7 @@ public:
 	~GameManager();
 	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnack(sf::Vector2i snackPos);
+	Enemy* FindEnemyByPosition(sf::Vector2i pos);
 private:
 	sf::Clock clock;
 	float aspectRatio;

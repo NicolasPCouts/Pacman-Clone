@@ -114,17 +114,22 @@ void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
 
-	//if (currentPath.size() > 0) {
-	//	switch (state)
-	//	{
-	//	case EnemyState::Scatter:
-	//		DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
-	//		break;
-	//	case EnemyState::Chase:
-	//		DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
-	//		break;
-	//	}
-	//}
+	if (currentPath.size() > 0) {
+		switch (state)
+		{
+		case EnemyState::Scatter:
+			DrawPathfinding(rw, currentPath, gridPos, GetScatterTargetPosition());
+			break;
+		case EnemyState::Chase:
+			DrawPathfinding(rw, currentPath, gridPos, GetChaseTargetPosition());
+			break;
+		}
+	}
+}
+
+void Enemy::Eaten()
+{
+	state = EnemyState::Eaten;
 }
 
 void Enemy::UpdateEnemyTilePosition()
@@ -176,34 +181,82 @@ void Enemy::UpdateEnemyTilePosition()
 			}
 		}
 	}
+	currentPath = pos;
 
 	if (pos[0].x < gridPos.x) {
-		currentDir = Left;
-
-		if(state != EnemyState::Frightened)
-			animator->SetAnimationClip(animations[0]);
+		if (currentDir != Left) {
+			currentDir = Left;
+			ChangeAnimation();
+		}
 	}
 	else if (pos[0].x > gridPos.x) {
-		currentDir = Right;
-
-		if (state != EnemyState::Frightened)
-			animator->SetAnimationClip(animations[1]);
+		if (currentDir != Right) {
+			currentDir = Right;
+			ChangeAnimation();
+		}
 	}
 	else if (pos[0].y < gridPos.y) {
-		currentDir = Up;
-
-		if (state != EnemyState::Frightened)
-			animator->SetAnimationClip(animations[2]);
+		if (currentDir != Up) {
+			currentDir = Up;
+			ChangeAnimation();
+		}
 	}
 	else if (pos[0].y > gridPos.y) {
-		currentDir = Down;
-
-		if (state != EnemyState::Frightened)	
-			animator->SetAnimationClip(animations[3]);
+		if (currentDir != Down) {
+			currentDir = Down;
+			ChangeAnimation();
+		}
 	}
 	
-	currentPath = pos;
 	UpdateTileArray(pos[0]);
+}
+
+void Enemy::ChangeAnimation()
+{
+	switch (currentDir)
+	{
+	case Left:
+		if (state != EnemyState::Frightened) {
+			if (state == EnemyState::Eaten) {
+				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(374, 81, 14, 14)))
+					body.setTexture(&texture);
+			}
+			else
+				animator->SetAnimationClip(animations[0]);
+		}
+		break;
+	case Right:
+		if (state != EnemyState::Frightened) {
+			if (state == EnemyState::Eaten) {
+				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(358, 81, 14, 14)))
+					body.setTexture(&texture);
+			}
+			else
+				animator->SetAnimationClip(animations[1]);
+		}
+		break;
+	case Up:
+		if (state != EnemyState::Frightened) {
+			if (state == EnemyState::Eaten) {
+				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(390, 81, 14, 14)))
+					body.setTexture(&texture);
+			}
+			else
+				animator->SetAnimationClip(animations[2]);
+		}
+		break;
+	case Down:
+		if (state != EnemyState::Frightened) {
+			if (state == EnemyState::Eaten) {
+				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(406, 81, 14, 14)))
+					body.setTexture(&texture);
+			}
+			else
+				animator->SetAnimationClip(animations[3]);
+		}
+		break;
+	}
+
 }
 
 sf::Vector2i Enemy::GetOppositeDirectionNeighbour()
