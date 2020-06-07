@@ -36,7 +36,6 @@ void Enemy::Scare()
 {
 	state = EnemyState::Frightened;
 	animator->SetAnimationClip(animations[4]);
-	speed = speed / 2;
 }
 
 void Enemy::Update()
@@ -45,7 +44,6 @@ void Enemy::Update()
 	{
 	//updating frightened timer
 	case EnemyState::Frightened:
-		std::cout << "boo" << std::endl;
 		scaredTimer += gameManager->deltaTime;
 
 		if (scaredTimer >= 6 && !hasStartedflickeringAnim){
@@ -66,7 +64,6 @@ void Enemy::Update()
 	//updating wave system
 	default:
 		totalWaveTime += gameManager->deltaTime;
-		std::cout << "normal" << std::endl;
 		if (totalWaveTime >= waves[currentWave].duration)
 		{
 			totalWaveTime -= waves[currentWave].duration;
@@ -79,13 +76,21 @@ void Enemy::Update()
 		break;
 	}
 
-	animator->Update(gameManager->deltaTime);
+	if(state != EnemyState::Eaten)
+		animator->Update(gameManager->deltaTime);
+
 	Move();
 }
 
 void Enemy::Move()
 {
 	float dt = speed * gameManager->deltaTime;
+
+	if (state == EnemyState::Frightened)
+		dt /= 2;
+	else if (state == EnemyState::Eaten)
+		dt *= 2;
+
 	switch (currentDir)
 	{
 	case None:
@@ -123,6 +128,7 @@ void Enemy::Draw(sf::RenderWindow& rw)
 	rw.draw(body);
 
 	DrawCube(rw, gridPos);
+	//DrawCube(rw, sf::Vector2i(13, 14));
 	//if (currentPath.size() > 0) {
 	//	switch (state)
 	//	{
@@ -139,6 +145,7 @@ void Enemy::Draw(sf::RenderWindow& rw)
 void Enemy::Eaten()
 {
 	state = EnemyState::Eaten;
+	std::cout << "eaten" << std::endl;
 }
 
 void Enemy::UpdateEnemyTilePosition()
@@ -151,6 +158,9 @@ void Enemy::UpdateEnemyTilePosition()
 		break;
 	case EnemyState::Chase:
 		pos = FindPath(gridPos, GetChaseTargetPosition(), currentDir);
+		break;
+	case EnemyState::Eaten:
+		pos = FindPath(gridPos, sf::Vector2i(13, 14), currentDir);
 		break;
 	case EnemyState::Frightened:
 		std::vector<sf::Vector2i> path{ GetFrightenedTargetPosition() };

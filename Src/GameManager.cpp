@@ -5,6 +5,7 @@
 #include "Entity/Enemy/Pinky.h"
 #include "Entity/Enemy/Inky.h"
 #include "Entity/Enemy/Clyde.h"
+#include "Debugger/Debug.h"
 
 void GameManager::StartGameManager()
 {
@@ -20,10 +21,10 @@ void GameManager::StartGameManager()
 
     CreateMapColliders();
     pacman = new Pacman(1, 1);
-    //enemys[0] = new Blinky(sf::Vector2i(3, 6));
+    enemys[0] = new Blinky(sf::Vector2i(3, 6));
     enemys[1] = new Pinky(sf::Vector2i(3, 1));
-    //enemys[2] = new Inky(sf::Vector2i(5, 6));
-    //enemys[3] = new Clyde(sf::Vector2i(18, 1));
+    enemys[2] = new Inky(sf::Vector2i(5, 6));
+    enemys[3] = new Clyde(sf::Vector2i(18, 1));
     CreateSnacks();
 }
 
@@ -84,6 +85,14 @@ void GameManager::Draw()
         x->Draw(*window);
 
     pacman->Draw(*window);
+
+    for (int i = 11; i <= 16; i++)
+    {
+        DrawCube(*window, sf::Vector2i(i, 13));
+        DrawCube(*window, sf::Vector2i(i, 14));
+        DrawCube(*window, sf::Vector2i(i, 15));
+
+    }
 
     for (auto const& x : enemys) 
     {
@@ -294,6 +303,10 @@ void GameManager::CreateMapColliders()
         tileArray[i][14].tileType = sTile::GhostHouse;
         tileArray[i][15].tileType = sTile::GhostHouse;
     }
+    tileArray[13][12].isEmpty = false;
+    tileArray[14][12].isEmpty = false;
+    tileArray[13][12].tileType = sTile::GhostHouse;
+    tileArray[14][12].tileType = sTile::GhostHouse;
 }
 
 void GameManager::CreateSnacks()
