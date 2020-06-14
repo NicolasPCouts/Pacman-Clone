@@ -38,6 +38,12 @@ void Enemy::Scare()
 	animator->SetAnimationClip(animations[4]);
 }
 
+void Enemy::Eaten()
+{
+	state = EnemyState::Eaten;
+	ChangeAnimation();
+}
+
 void Enemy::Update()
 {
 	switch (state)
@@ -54,7 +60,6 @@ void Enemy::Update()
 
 		if (scaredTimer >= 6 && hasStartedflickeringAnim) {
 			scaredTimer = 0;
-			speed = speed * 2;
 			state = waves[currentWave].waveState;
 			hasStartedflickeringAnim = false;
 		}
@@ -142,11 +147,6 @@ void Enemy::Draw(sf::RenderWindow& rw)
 	//}
 }
 
-void Enemy::Eaten()
-{
-	state = EnemyState::Eaten;
-	std::cout << "eaten" << std::endl;
-}
 
 void Enemy::UpdateEnemyTilePosition()
 {
