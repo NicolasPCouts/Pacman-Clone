@@ -60,7 +60,7 @@ struct sNode
 			if (pos.x < 0 || pos.y < 0 || pos.x >= NumberOfTilesX || pos.y >= NumberOfTilesY)
 				return sNode(sf::Vector2i(-100, -100));
 
-			if (tile->tileType == sTile::Wall)
+			if (tile->DoesTileHaveOnlyType(sTile::Wall))
 				node.walkable = false;
 			else
 				node.walkable = true;

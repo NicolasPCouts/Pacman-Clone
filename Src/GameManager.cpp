@@ -299,14 +299,20 @@ void GameManager::CreateMapColliders()
         tileArray[i][14].isEmpty = false;
         tileArray[i][15].isEmpty = false;
 
-        tileArray[i][13].tileType = sTile::GhostHouse;
-        tileArray[i][14].tileType = sTile::GhostHouse;
-        tileArray[i][15].tileType = sTile::GhostHouse;
+        tileArray[i][13].tileTypes.clear();
+        tileArray[i][14].tileTypes.clear();
+        tileArray[i][15].tileTypes.clear();
+
+        tileArray[i][13].tileTypes.push_back(sTile::GhostHouse);
+        tileArray[i][14].tileTypes.push_back(sTile::GhostHouse);
+        tileArray[i][15].tileTypes.push_back(sTile::GhostHouse);
     }
     tileArray[13][12].isEmpty = false;
     tileArray[14][12].isEmpty = false;
-    tileArray[13][12].tileType = sTile::GhostHouse;
-    tileArray[14][12].tileType = sTile::GhostHouse;
+    tileArray[13][12].tileTypes.clear();
+    tileArray[14][12].tileTypes.clear();
+    tileArray[13][12].tileTypes.push_back(sTile::GhostHouse);
+    tileArray[14][12].tileTypes.push_back(sTile::GhostHouse);
 }
 
 void GameManager::CreateSnacks()
@@ -316,7 +322,8 @@ void GameManager::CreateSnacks()
     for (const auto& snackPos : bigSnackPosArray)
     {
         tileArray[snackPos.x][snackPos.y].isEmpty = false;
-        tileArray[snackPos.x][snackPos.y].tileType = sTile::Snack;
+        tileArray[snackPos.x][snackPos.y].tileTypes.clear();
+        tileArray[snackPos.x][snackPos.y].tileTypes.push_back(sTile::Snack);
         Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(snackPos.x, snackPos.y));
         SnackList.push_back(s);
     }
@@ -329,7 +336,8 @@ void GameManager::CreateSnacks()
             if (tileArray[x][y].isEmpty)
             {
                 tileArray[x][y].isEmpty = false;
-                tileArray[x][y].tileType = sTile::Snack;
+                tileArray[x][y].tileTypes.clear();
+                tileArray[x][y].tileTypes.push_back(sTile::Snack);
                 Snack* s = new Snack(Snack::SmallSnack, sf::Vector2i(x, y));
                 SnackList.push_back(s);
             }

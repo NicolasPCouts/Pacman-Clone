@@ -33,23 +33,23 @@ bool Entity::IsNeighbourTileAvailable(Directions dir)
 	switch (dir)
 	{
 	case Up:
-		if (gameManager->tileArray[gridPos.x][gridPos.y - 1].tileType != sTile::Wall)
+		if (!gameManager->tileArray[gridPos.x][gridPos.y - 1].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	case Down:
-		if (gameManager->tileArray[gridPos.x][gridPos.y + 1].tileType != sTile::Wall)
+		if (!gameManager->tileArray[gridPos.x][gridPos.y + 1].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	case Left:
 		if (IsTeleportTile(sf::Vector2i(gridPos.x - 1, gridPos.y)))
 			return false;
-		if (gameManager->tileArray[gridPos.x - 1][gridPos.y].tileType != sTile::Wall)
+		if (!gameManager->tileArray[gridPos.x - 1][gridPos.y].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	case Right:
 		if (IsTeleportTile(sf::Vector2i(gridPos.x + 1, gridPos.y)))
 			return false;
-		if (gameManager->tileArray[gridPos.x + 1][gridPos.y].tileType != sTile::Wall)
+		if (!gameManager->tileArray[gridPos.x + 1][gridPos.y].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	}

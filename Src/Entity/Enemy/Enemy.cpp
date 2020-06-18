@@ -14,7 +14,8 @@ Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos)
 	body.setSize(sf::Vector2f(40, 40));
 	this->gridPos = gridPos;
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Player;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.clear();
+	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
 
 	SetupAnimations();
 	animator = new Animator(&body);
@@ -65,6 +66,9 @@ void Enemy::Update()
 		}
 		break;
 	case EnemyState::Eaten:
+		if (gameManager->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
+			state = waves[currentWave].waveState;
+		}
 		break;
 	//updating wave system
 	default:
@@ -146,7 +150,6 @@ void Enemy::Draw(sf::RenderWindow& rw)
 	//	}
 	//}
 }
-
 
 void Enemy::UpdateEnemyTilePosition()
 {
@@ -308,13 +311,13 @@ void Enemy::UpdateTileArray(sf::Vector2i newPos)
 	//emptying current tile
 	bool hasSnack = gameManager->FindSnackID(gridPos) == -1;
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = hasSnack? true : false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = hasSnack? sTile::None : sTile::Snack;
+	gameManager->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Ghost);
 
 	gridPos = newPos;
 
 	//transfering enemy to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Ghost;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
 }
 
 sf::Vector2i Enemy::GetScatterTargetPosition()

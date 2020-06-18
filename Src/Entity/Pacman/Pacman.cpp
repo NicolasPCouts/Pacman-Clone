@@ -10,7 +10,8 @@ Pacman::Pacman(int tileX, int tileY)
 	body.setSize(sf::Vector2f(40, 40));
 	gridPos = sf::Vector2i(tileX, tileY);
 	gameManager->tileArray[tileX][tileY].isEmpty = false;
-	gameManager->tileArray[tileX][tileY].tileType = sTile::Player;
+	gameManager->tileArray[tileX][tileY].tileTypes.clear();
+	gameManager->tileArray[tileX][tileY].tileTypes.push_back(sTile::Player);
 
 	SetupAnimations();
 	animator = new Animator(&body);
@@ -153,12 +154,12 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 {
 	//emptying current tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::None;
+	gameManager->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Player);
 
 	gridPos = newPos;
 
-	if (gameManager->tileArray[gridPos.x][gridPos.y].tileType == sTile::Snack)
-	{
+	if (gameManager->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::Snack)){
+		gameManager->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Snack);
 		EatSnack(newPos);
 	}
 
@@ -169,7 +170,7 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 
 	//transfering player to next tile
 	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileType = sTile::Player;
+	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Player);
 }
 
 void Pacman::SetupAnimations() 
