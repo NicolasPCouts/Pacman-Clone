@@ -7,10 +7,12 @@
 #include "Entity/Enemy/Clyde.h"
 #include "Debugger/Debug.h"
 
+#include "SFML/Audio.hpp"
+
 void GameManager::StartGameManager()
 {
     window = new sf::RenderWindow();
-    window->create(sf::VideoMode(1200, 1200), "Pacman", sf::Style::Resize);
+    window->create(sf::VideoMode(1200, 1200), "Pacman", sf::Style::Close);
     //window->create(sf::VideoMode::getFullscreenModes()[0], "Pacman", sf::Style::Resize);
 
     LoadMap();

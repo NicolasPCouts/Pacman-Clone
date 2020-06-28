@@ -1,8 +1,8 @@
 #pragma once
 #include "Common.h"
-
 #include "Tile.h"
 #include "Entity/Snack/Snack.h"
+#include "Audio/AudioManager.h"
 
 class Enemy;
 class Pacman;
@@ -17,6 +17,8 @@ public:
 
 	sf::Sprite mapSprite;
 	sf::Texture mapTexture;
+
+	AudioManager audio;
 
 	Pacman* pacman;
 	Enemy* enemys[4];
