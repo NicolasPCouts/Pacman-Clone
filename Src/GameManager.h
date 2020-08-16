@@ -36,6 +36,8 @@ public:
 	~GameManager();
 	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnack(sf::Vector2i snackPos);
+	void ScareEnemys();
+	void StopPowerSnackSound();
 	Enemy* FindEnemyByPosition(sf::Vector2i pos);
 private:
 	sf::Clock clock;

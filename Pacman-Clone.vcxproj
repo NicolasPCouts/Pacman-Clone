@@ -169,6 +169,7 @@
     <ClCompile Include="Src\Entity\Snack\Snack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Audio\AudioAssets.h" />
     <ClInclude Include="Src\Audio\AudioManager.h" />
     <ClInclude Include="Src\Entity\Enemy\Clyde.h" />
     <ClInclude Include="Src\Entity\Enemy\Inky.h" />

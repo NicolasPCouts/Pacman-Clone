@@ -12,6 +12,12 @@
 #include "SFML/Audio.hpp"
 #include "Audio/AudioAssets.h"
 
+//test
+#include <sstream>
+
+
+Sounds lastSoundPlayed = Sounds::None;
+
 void GameManager::StartGameManager()
 {
     window = new sf::RenderWindow();
@@ -383,6 +389,24 @@ void GameManager::DeleteSnacks()
     SnackList.clear();
 }
 
+void GameManager::ScareEnemys()
+{
+    for (Enemy* e : enemys)
+        if (e != NULL)	e->Scare();
+
+    audioManager.PlaySound(AUDIO_POWER_SNACK, true, VOLUME);
+    lastSoundPlayed = Sounds::PowerSnack;
+}
+
+void GameManager::StopPowerSnackSound()
+{
+    if (lastSoundPlayed == Sounds::PowerSnack) 
+    {
+        audioManager.StopSound();
+        lastSoundPlayed = Sounds::None;
+    }
+}
+
 Enemy* GameManager::FindEnemyByPosition(sf::Vector2i pos)
 {
     for (Enemy* e : enemys)
@@ -393,5 +417,4 @@ Enemy* GameManager::FindEnemyByPosition(sf::Vector2i pos)
     }
 
     return NULL;
-    // TODO: insert return statement here
 }

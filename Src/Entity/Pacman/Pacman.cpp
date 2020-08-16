@@ -93,8 +93,7 @@ void Pacman::Move()
 void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 {
 	if (gameManager->SnackList[gameManager->FindSnackID(snackGridPosition)]->snackType == Snack::BigSnack) {
-		for (Enemy* e : gameManager->enemys)
-			if(e != NULL)	e->Scare();
+		gameManager->ScareEnemys();
 	}
 
 	gameManager->DeleteSnack(snackGridPosition);

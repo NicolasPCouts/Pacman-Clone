@@ -14,7 +14,7 @@ class Entity
 public:
 	float speed = 80;
 	sf::Vector2i gridPos;
-	Directions currentDir = None;
+	Directions currentDir = Directions::None;
 	sf::RectangleShape body;
 	sf::Texture texture;
 	virtual void Update() = 0;

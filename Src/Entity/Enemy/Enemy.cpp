@@ -64,7 +64,9 @@ void Enemy::Update()
 		if (scaredTimer >= 6 && hasStartedflickeringAnim) {
 			scaredTimer = 0;
 			state = waves[currentWave].waveState;
+			gameManager->StopPowerSnackSound();
 			hasStartedflickeringAnim = false;
+			ChangeAnimation();
 		}
 		break;
 	case EnemyState::Eaten:
