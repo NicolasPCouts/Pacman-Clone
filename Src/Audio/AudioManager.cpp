@@ -2,14 +2,21 @@
 
 #include <iostream>
 
-AudioManager::AudioManager()
+
+void AudioManager::PlaySound(std::string path, bool loop, int volume)
 {
-    if (!buffer.loadFromFile("Resources/Sound/ghost_chase.wav"))
-        std::cout << "Cannot load audio file" << std::endl;
+    if (!buffer.loadFromFile(path))
+        std::cout << "Cannot load audio file >> " << path << std::endl;
     else
     {
         sound.setBuffer(buffer);
-        sound.setLoop(true);
+        sound.setLoop(loop);
+        sound.setVolume(volume);
         sound.play();
     }
+}
+
+void AudioManager::StopSound() 
+{
+    sound.stop();
 }

@@ -18,7 +18,7 @@ public:
 	sf::Sprite mapSprite;
 	sf::Texture mapTexture;
 
-	AudioManager audio;
+	AudioManager audioManager;
 
 	Pacman* pacman;
 	Enemy* enemys[4];

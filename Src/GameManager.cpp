@@ -1,13 +1,16 @@
 #include "GameManager.h"
+
 #include "Entity/Pacman/Pacman.h"
 #include "Entity/Enemy/Enemy.h"
 #include "Entity/Enemy/Blinky.h"
 #include "Entity/Enemy/Pinky.h"
 #include "Entity/Enemy/Inky.h"
 #include "Entity/Enemy/Clyde.h"
+
 #include "Debugger/Debug.h"
 
 #include "SFML/Audio.hpp"
+#include "Audio/AudioAssets.h"
 
 void GameManager::StartGameManager()
 {
@@ -28,6 +31,8 @@ void GameManager::StartGameManager()
     enemys[2] = new Inky(sf::Vector2i(5, 6));
     enemys[3] = new Clyde(sf::Vector2i(18, 1));
     CreateSnacks();
+
+    audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
 }
 
 GameManager::~GameManager()

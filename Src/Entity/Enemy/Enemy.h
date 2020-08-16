@@ -4,6 +4,8 @@
 #include "../../Animation/Animator.h"
 #include "../../Animation/Animation.h"
 
+#include "../../Audio/AudioManager.h"
+
 enum class EnemyState {
 	Scatter,
 	Chase,
@@ -38,6 +40,7 @@ private:
 
 	float scaredTimer = 0;
 	bool hasStartedflickeringAnim = false;
+	AudioManager audio;
 	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
 	void ChangeAnimation();

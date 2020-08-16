@@ -6,6 +6,7 @@
 #include  "../../Debugger/Debug.h"
 #include "../../Pathfinding/Pathfinding.h"
 #include "../Pacman/Pacman.h"
+#include "../../Audio/AudioAssets.h"
 
 extern GameManager* gameManager;
 
@@ -42,6 +43,7 @@ void Enemy::Scare()
 void Enemy::Eaten()
 {
 	state = EnemyState::Eaten;
+	audio.PlaySound(AUDIO_EAT_GHOST, false, VOLUME);
 	ChangeAnimation();
 }
 

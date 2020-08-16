@@ -5,7 +5,8 @@
 class AudioManager
 {
 public:
-	AudioManager();
+	void PlaySound(std::string path, bool loop, int volume);
+	void StopSound();
 private:
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
