@@ -152,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\States\MainMenuState\MainMenuState.cpp" />
+    <ClCompile Include="Src\States\GameState\GameState.cpp" />
     <ClCompile Include="Src\Audio\AudioManager.cpp" />
     <ClCompile Include="Src\Entity\Enemy\Clyde.cpp" />
     <ClCompile Include="Src\Entity\Enemy\Inky.cpp" />
@@ -167,8 +169,11 @@
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\Entity\Pacman\Pacman.cpp" />
     <ClCompile Include="Src\Entity\Snack\Snack.cpp" />
+    <ClCompile Include="Src\States\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\States\MainMenuState\MainMenuState.h" />
+    <ClInclude Include="Src\States\GameState\GameState.h" />
     <ClInclude Include="Src\Audio\AudioAssets.h" />
     <ClInclude Include="Src\Audio\AudioManager.h" />
     <ClInclude Include="Src\Entity\Enemy\Clyde.h" />
@@ -187,6 +192,7 @@
     <ClInclude Include="Src\Entity\Pacman\Pacman.h" />
     <ClInclude Include="Src\Entity\Snack\Snack.h" />
     <ClInclude Include="Src\Tile.h" />
+    <ClInclude Include="Src\States\State.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
