@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../GameManager.h"
 #include "../Common.h"
-#include "Node.h"
+#include "../Entity/Entity.h"
 
-std::vector<sf::Vector2i> FindPath(sf::Vector2i startNode, sf::Vector2i endNode, Directions currentDir);
+class GameState;
+
+std::vector<sf::Vector2i> FindPath(sf::Vector2i startNode, sf::Vector2i endNode, Directions currentDir, GameState* gameState);

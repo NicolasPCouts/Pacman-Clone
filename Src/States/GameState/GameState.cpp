@@ -11,6 +11,7 @@
 
 #include "SFML/Audio.hpp"
 #include "../../Audio/AudioAssets.h"
+#include "../../Entity/Snack/Snack.h"
 
 //test
 #include <sstream>
@@ -20,7 +21,6 @@ Sounds lastSoundPlayed = Sounds::None;
 GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager)
 	: State(window, states, gameManager)
 {
-    LoadMap();
 
     CreateMapColliders();
     pacman = new Pacman(1, 1, this);
@@ -31,6 +31,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
     CreateSnacks();
 
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
+    LoadMap();
 }
 
 GameState::~GameState() 
@@ -45,14 +46,6 @@ GameState::~GameState()
 
 void GameState::Update(const float& deltaTime)
 {
-    //get input
-    sf::Event event;
-    while (window->pollEvent(event))
-    {
-        if(event.type == sf::Event::KeyPressed)
-            pacman->OnKeyPressed(event.key);
-    }
-
     //Logic
     pacman->Update(deltaTime);
     for (auto const& x : enemys)
@@ -77,9 +70,9 @@ void GameState::Draw()
 
     for (int i = 11; i <= 16; i++)
     {
-        DrawCube(*window, sf::Vector2i(i, 13));
-        DrawCube(*window, sf::Vector2i(i, 14));
-        DrawCube(*window, sf::Vector2i(i, 15));
+        DrawCube(*window, sf::Vector2i(i, 13), this);
+        DrawCube(*window, sf::Vector2i(i, 14), this);
+        DrawCube(*window, sf::Vector2i(i, 15), this);
 
     }
 

@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "../GameManager.h"
+#include "../States/GameState/GameState.h"
 
 Directions GetOppositeDirection(Directions dir) 
 {

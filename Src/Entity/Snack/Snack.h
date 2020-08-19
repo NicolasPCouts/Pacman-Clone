@@ -2,7 +2,6 @@
 #include "../../Common.h"
 
 #include "../Entity.h"
-#include "../../States/GameState/GameState.h"
 
 class Snack : public Entity {
 public:
@@ -11,7 +10,7 @@ public:
 
     Snack(SnackType type, sf::Vector2i gridPos, GameState* gameState);
     void UpdateTileArray(sf::Vector2i newPos) {};
-    void Move() {};
-    void Update() {};
+    void Move(const float& deltaTime) override {};
+    void Update(const float& deltaTime) override {};
     void Draw(sf::RenderWindow& rw) override;
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "Common.h"
-#include "States/GameState/GameState.h"
+
+class State;
 
 class GameManager
 {

@@ -139,7 +139,7 @@ void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
 
-	DrawCube(rw, gridPos);
+	DrawCube(rw, gridPos, gameState);
 	//DrawCube(rw, sf::Vector2i(13, 14));
 	//if (currentPath.size() > 0) {
 	//	switch (state)
@@ -160,13 +160,13 @@ void Enemy::UpdateEnemyTilePosition()
 	switch (state)
 	{
 	case EnemyState::Scatter:
-		pos = FindPath(gridPos, GetScatterTargetPosition(), currentDir);
+		pos = FindPath(gridPos, GetScatterTargetPosition(), currentDir, gameState);
 		break;
 	case EnemyState::Chase:
-		pos = FindPath(gridPos, GetChaseTargetPosition(), currentDir);
+		pos = FindPath(gridPos, GetChaseTargetPosition(), currentDir, gameState);
 		break;
 	case EnemyState::Eaten:
-		pos = FindPath(gridPos, sf::Vector2i(13, 14), currentDir);
+		pos = FindPath(gridPos, sf::Vector2i(13, 14), currentDir, gameState);
 		break;
 	case EnemyState::Frightened:
 		std::vector<sf::Vector2i> path{ GetFrightenedTargetPosition() };
@@ -176,7 +176,7 @@ void Enemy::UpdateEnemyTilePosition()
 
 	//in the case that no path is found, the enemy will set a neighbour tile as his path 
 	if (pos.size() == 0) {
-		pos = FindPath(gridPos, GetOppositeDirectionNeighbour(), currentDir);
+		pos = FindPath(gridPos, GetOppositeDirectionNeighbour(), currentDir, gameState);
 
 		//in the case that no path is found, its because the enemy is about to be teleported to the other side of the screen
 		if (pos.size() == 0) {

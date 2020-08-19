@@ -2,6 +2,7 @@
 
 #include "../../Tile.h"
 #include "../Pacman/Pacman.h"
+#include "../../States/GameState/GameState.h"
 
 Clyde::Clyde(sf::Vector2i gridPos, GameState* gameState) : Enemy(gridPos, sf::Vector2i(230, 113), gameState)
 {

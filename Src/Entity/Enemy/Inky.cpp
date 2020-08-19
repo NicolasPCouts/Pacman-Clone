@@ -1,5 +1,6 @@
 #include "Inky.h"
 #include "../Pacman/Pacman.h"
+#include "../../States/GameState/GameState.h"
 
 Inky::Inky(sf::Vector2i gridPos, GameState* gameState) : Enemy(gridPos, sf::Vector2i(230, 97), gameState)
 {

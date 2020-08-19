@@ -2,6 +2,7 @@
 #include "../../Tile.h"
 #include "../Enemy/Enemy.h"
 #include "../../Debugger/Debug.h"
+#include "../../States/GameState/GameState.h"
 
 Pacman::Pacman(int tileX, int tileY, GameState* gameState) 
 	: Entity(gameState)
@@ -33,7 +34,7 @@ Pacman::~Pacman()
 void Pacman::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	DrawCube(rw, gridPos);
+	DrawCube(rw, gridPos, gameState);
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
@@ -50,6 +51,15 @@ void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
 
 void Pacman::Update(const float& deltaTime)
 {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		nextDir = Up;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+		nextDir = Down;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		nextDir = Left;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		nextDir = Right;
+
 	Move(deltaTime);
 	animator->Update(deltaTime);
 }

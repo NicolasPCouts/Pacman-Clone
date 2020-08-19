@@ -1,4 +1,5 @@
 #include "Snack.h"
+#include "../../States/GameState/GameState.h"
 
 Snack::Snack(SnackType type, sf::Vector2i gridPos, GameState* gameState)
     : Entity(gameState)

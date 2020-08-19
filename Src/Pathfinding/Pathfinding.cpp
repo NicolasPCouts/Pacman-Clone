@@ -1,5 +1,6 @@
 #include "Pathfinding.h"
-
+#include "Node.h"
+#include "../Entity/Entity.h"
 
 bool IsNodeInsideList(sNode& n, std::vector<sNode>& list) 
 {
@@ -37,13 +38,13 @@ int GetDistance(sNode& a, sNode& b)
 	return totalDis;
 }
 
-std::vector<sf::Vector2i> FindPath(sf::Vector2i startNodePos, sf::Vector2i endNodePos, Directions currentDir)
+std::vector<sf::Vector2i> FindPath(sf::Vector2i startNodePos, sf::Vector2i endNodePos, Directions currentDir, GameState* gameState)
 {
 	std::vector<sNode> openList;
 	std::vector<sNode> closedList;
 
-	sNode startNode = sNode(startNodePos);
-	sNode endNode = sNode(endNodePos);
+	sNode startNode = sNode(startNodePos, gameState);
+	sNode endNode = sNode(endNodePos, gameState);
 	startNode.ignoreDirection = GetOppositeDirection(currentDir);
 	openList.push_back(startNode);
 
