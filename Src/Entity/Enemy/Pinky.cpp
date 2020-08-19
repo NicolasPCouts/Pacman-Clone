@@ -1,11 +1,8 @@
 #include "Pinky.h"
-
-#include "../../GameManager.h"
 #include "../Pacman/Pacman.h"
+#include "../../States/GameState/GameState.h"
 
-extern GameManager* gameManager;
-
-Pinky::Pinky(sf::Vector2i gridPos) : Enemy(gridPos, sf::Vector2i(230, 81)) 
+Pinky::Pinky(sf::Vector2i gridPos, GameState* gameState) : Enemy(gridPos, sf::Vector2i(230, 81), gameState)
 {
 	SetupAnimations();
 }
@@ -14,8 +11,8 @@ Pinky::~Pinky() {	}
 
 sf::Vector2i Pinky::GetChaseTargetPosition()
 {
-	sf::Vector2i pos = gameManager->pacman->gridPos;
-	switch (gameManager->pacman->currentDir)
+	sf::Vector2i pos = gameState->pacman->gridPos;
+	switch (gameState->pacman->currentDir)
 	{
 	case Up:
 		pos.y -= 4;

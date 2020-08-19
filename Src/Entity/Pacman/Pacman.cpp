@@ -2,16 +2,16 @@
 #include "../../Tile.h"
 #include "../Enemy/Enemy.h"
 #include "../../Debugger/Debug.h"
+#include "../../States/GameState/GameState.h"
 
-extern GameManager* gameManager;
-
-Pacman::Pacman(int tileX, int tileY)
+Pacman::Pacman(int tileX, int tileY, GameState* gameState) 
+	: Entity(gameState)
 {
 	body.setSize(sf::Vector2f(40, 40));
 	gridPos = sf::Vector2i(tileX, tileY);
-	gameManager->tileArray[tileX][tileY].isEmpty = false;
-	gameManager->tileArray[tileX][tileY].tileTypes.clear();
-	gameManager->tileArray[tileX][tileY].tileTypes.push_back(sTile::Player);
+	gameState->tileArray[tileX][tileY].isEmpty = false;
+	gameState->tileArray[tileX][tileY].tileTypes.clear();
+	gameState->tileArray[tileX][tileY].tileTypes.push_back(sTile::Player);
 
 	SetupAnimations();
 	animator = new Animator(&body);
@@ -34,7 +34,7 @@ Pacman::~Pacman()
 void Pacman::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	DrawCube(rw, gridPos);
+	DrawCube(rw, gridPos, gameState);
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
@@ -49,15 +49,24 @@ void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
 		nextDir = Right;
 }
 
-void Pacman::Update()
+void Pacman::Update(const float& deltaTime)
 {
-	Move();
-	animator->Update(gameManager->deltaTime);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		nextDir = Up;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+		nextDir = Down;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		nextDir = Left;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		nextDir = Right;
+
+	Move(deltaTime);
+	animator->Update(deltaTime);
 }
 
-void Pacman::Move() 
+void Pacman::Move(const float& deltaTime)
 {
-	float dt = speed * gameManager->deltaTime;
+	float dt = speed * deltaTime;
 	switch (currentDir)
 	{
 	case None:
@@ -92,11 +101,11 @@ void Pacman::Move()
 
 void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 {
-	if (gameManager->SnackList[gameManager->FindSnackID(snackGridPosition)]->snackType == Snack::BigSnack) {
-		gameManager->ScareEnemys();
+	if (gameState->SnackList[gameState->FindSnackID(snackGridPosition)]->snackType == Snack::BigSnack) {
+		gameState->ScareEnemys();
 	}
 
-	gameManager->DeleteSnack(snackGridPosition);
+	gameState->DeleteSnack(snackGridPosition);
 }
 
 void Pacman::UpdatePlayerTilePosition()
@@ -152,24 +161,24 @@ void Pacman::UpdatePlayerTilePosition()
 void Pacman::UpdateTileArray(sf::Vector2i newPos) 
 {
 	//emptying current tile
-	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = true;
-	gameManager->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Player);
+	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = true;
+	gameState->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Player);
 
 	gridPos = newPos;
 
-	if (gameManager->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::Snack)){
-		gameManager->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Snack);
+	if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::Snack)){
+		gameState->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Snack);
 		EatSnack(newPos);
 	}
 
-	Enemy* e = gameManager->FindEnemyByPosition(gridPos);
+	Enemy* e = gameState->FindEnemyByPosition(gridPos);
 	if (e != NULL)
 		if (e->state == EnemyState::Frightened)
 			e->Eaten();
 
 	//transfering player to next tile
-	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Player);
+	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Player);
 }
 
 void Pacman::SetupAnimations() 

@@ -1,6 +1,7 @@
 #include "Blinky.h"
+#include "../../States/GameState/GameState.h"
 
-Blinky::Blinky(sf::Vector2i gridPos) : Enemy(gridPos, sf::Vector2i(230, 65))
+Blinky::Blinky(sf::Vector2i gridPos, GameState* gameState) : Enemy(gridPos, sf::Vector2i(230, 65), gameState)
 {
 	SetupAnimations();
 }

@@ -1,7 +1,6 @@
 #include "Entity.h"
 #include "../GameManager.h"
-
-extern GameManager* gameManager;
+#include "../States/GameState/GameState.h"
 
 Directions GetOppositeDirection(Directions dir) 
 {
@@ -23,9 +22,14 @@ Directions GetOppositeDirection(Directions dir)
     return None;
 }
 
+Entity::Entity(GameState* gameState)
+{
+	this->gameState = gameState;
+}
+
 sf::Vector2f Entity::GetFinalTilePosition()
 {
-    return sf::Vector2f((gridPos.x * gameManager->tileWidth) - 5, (gridPos.y * gameManager->tileHeight) - 5);
+    return sf::Vector2f((gridPos.x * gameState->tileWidth) - 5, (gridPos.y * gameState->tileHeight) - 5);
 }
 
 bool Entity::IsNeighbourTileAvailable(Directions dir)
@@ -33,23 +37,23 @@ bool Entity::IsNeighbourTileAvailable(Directions dir)
 	switch (dir)
 	{
 	case Up:
-		if (!gameManager->tileArray[gridPos.x][gridPos.y - 1].DoesTileHaveType(sTile::Wall))
+		if (!gameState->tileArray[gridPos.x][gridPos.y - 1].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	case Down:
-		if (!gameManager->tileArray[gridPos.x][gridPos.y + 1].DoesTileHaveType(sTile::Wall))
+		if (!gameState->tileArray[gridPos.x][gridPos.y + 1].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	case Left:
 		if (IsTeleportTile(sf::Vector2i(gridPos.x - 1, gridPos.y)))
 			return false;
-		if (!gameManager->tileArray[gridPos.x - 1][gridPos.y].DoesTileHaveType(sTile::Wall))
+		if (!gameState->tileArray[gridPos.x - 1][gridPos.y].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	case Right:
 		if (IsTeleportTile(sf::Vector2i(gridPos.x + 1, gridPos.y)))
 			return false;
-		if (!gameManager->tileArray[gridPos.x + 1][gridPos.y].DoesTileHaveType(sTile::Wall))
+		if (!gameState->tileArray[gridPos.x + 1][gridPos.y].DoesTileHaveType(sTile::Wall))
 			return true;
 		break;
 	}
@@ -69,10 +73,10 @@ void Entity::Teleport(Directions teleportTo)
 	switch (teleportTo)
 	{
 	case Left:
-		body.setPosition(sf::Vector2f((-1 * gameManager->tileWidth) - 5, (gridPos.y * gameManager->tileHeight) - 5));
+		body.setPosition(sf::Vector2f((-1 * gameState->tileWidth) - 5, (gridPos.y * gameState->tileHeight) - 5));
 		break;
 	case Right:
-		body.setPosition(sf::Vector2f((28 * gameManager->tileWidth) - 5, (gridPos.y * gameManager->tileHeight) - 5));
+		body.setPosition(sf::Vector2f((28 * gameState->tileWidth) - 5, (gridPos.y * gameState->tileHeight) - 5));
 		break;
 	}
 }

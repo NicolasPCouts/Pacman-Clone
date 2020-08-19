@@ -1,11 +1,12 @@
 #pragma once
-#include "../GameManager.h"
 
-extern GameManager* gameManager;
+#include "../States/GameState/GameState.h"
+#include "../Entity/Entity.h"
 
 struct sNode
 {
 	sNode* parent;
+	GameState* gameState;
 	Directions ignoreDirection = Directions::None;
 	sf::Vector2i pos;
 
@@ -16,7 +17,7 @@ struct sNode
 	bool visited = false;
 	bool walkable = true;
 
-	sNode(sf::Vector2i pos) { this->pos = pos; }
+	sNode(sf::Vector2i pos, GameState* gameState) { this->pos = pos; this->gameState = gameState; }
 
 	void SetParent(sNode p)
 	{
@@ -53,12 +54,12 @@ struct sNode
 
 	sNode CreateNode(sf::Vector2i pos)
 	{
-		sTile* tile = &gameManager->tileArray[pos.x][pos.y];
-		sNode node = sNode(pos);
+		sTile* tile = &gameState->tileArray[pos.x][pos.y];
+		sNode node = sNode(pos, gameState);
 		if (tile != NULL) {
 
 			if (pos.x < 0 || pos.y < 0 || pos.x >= NumberOfTilesX || pos.y >= NumberOfTilesY)
-				return sNode(sf::Vector2i(-100, -100));
+				return sNode(sf::Vector2i(-100, -100), gameState);
 
 			if (tile->DoesTileHaveOnlyType(sTile::Wall))
 				node.walkable = false;
@@ -67,6 +68,6 @@ struct sNode
 
 			return node;
 		}
-		return sNode(sf::Vector2i(-100, -100));
+		return sNode(sf::Vector2i(-100, -100), gameState);
 	}
 };

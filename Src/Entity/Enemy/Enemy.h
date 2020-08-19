@@ -17,16 +17,21 @@ class Enemy : public Entity
 {
 public:
 	EnemyState state = EnemyState::Scatter;
-	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos);
+	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState);
 	~Enemy();
 	void Scare();
 	void UpdateTileArray(sf::Vector2i newPos) override;
-	void Update() override;
+	void Update(const float& deltaTime) override;
 	void Draw(sf::RenderWindow& rw) override;
 	void Eaten();
 private:
 	int currentWave = 0;
 	float totalWaveTime = 0;
+	float scaredTimer = 0;
+	bool hasStartedflickeringAnim = false;
+	AudioManager audio;
+	std::vector<sf::Vector2i> currentPath;
+
 	struct Wave {
 		EnemyState waveState;
 		float duration;
@@ -38,14 +43,10 @@ private:
 					, Wave(EnemyState::Scatter, 5), Wave(EnemyState::Chase, -1)
 	};
 
-	float scaredTimer = 0;
-	bool hasStartedflickeringAnim = false;
-	AudioManager audio;
-	std::vector<sf::Vector2i> currentPath;
 	void UpdateEnemyTilePosition();
 	void ChangeAnimation();
 	sf::Vector2i GetOppositeDirectionNeighbour();
-	void Move() override;
+	void Move(const float& deltaTime) override;
 protected:
 	Animator* animator;
 	Animation* animations[6]; //left, right, up, down, frightened, flickeringFrightened

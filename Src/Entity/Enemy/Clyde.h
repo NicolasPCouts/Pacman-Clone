@@ -4,7 +4,7 @@
 class Clyde : public Enemy
 {
 public:
-	Clyde(sf::Vector2i gridPos);
+	Clyde(sf::Vector2i gridPos, GameState* gameState);
 	~Clyde();
 private:
 	sf::Vector2i GetScatterTargetPosition() override;
