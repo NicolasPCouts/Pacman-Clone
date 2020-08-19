@@ -1,11 +1,7 @@
 #include "Inky.h"
-
-#include "../../GameManager.h"
 #include "../Pacman/Pacman.h"
 
-extern GameManager* gameManager;
-
-Inky::Inky(sf::Vector2i gridPos) : Enemy(gridPos, sf::Vector2i(230, 97)) 
+Inky::Inky(sf::Vector2i gridPos, GameState* gameState) : Enemy(gridPos, sf::Vector2i(230, 97), gameState)
 {
 	SetupAnimations();
 }
@@ -20,7 +16,7 @@ sf::Vector2i Inky::GetScatterTargetPosition()
 sf::Vector2i Inky::GetChaseTargetPosition()
 {
 	sf::Vector2i dist;
-	switch (gameManager->pacman->currentDir)
+	switch (gameState->pacman->currentDir)
 	{
 	Up:
 		dist.y -= 2;
@@ -35,8 +31,8 @@ sf::Vector2i Inky::GetChaseTargetPosition()
 		dist.x += 2;
 		break;
 	}
-	sf::Vector2i pacmanPos = gameManager->pacman->gridPos;
-	sf::Vector2i blinkyPos = gameManager->enemys[0]->gridPos;
+	sf::Vector2i pacmanPos = gameState->pacman->gridPos;
+	sf::Vector2i blinkyPos = gameState->enemys[0]->gridPos;
 
 	if (pacmanPos.x < blinkyPos.x)
 		dist.x = blinkyPos.x - pacmanPos.x;

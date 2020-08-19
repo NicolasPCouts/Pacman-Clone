@@ -2,21 +2,20 @@
 
 #include <cstdlib>
 
-#include "../../GameManager.h"
 #include  "../../Debugger/Debug.h"
 #include "../../Pathfinding/Pathfinding.h"
 #include "../Pacman/Pacman.h"
 #include "../../Audio/AudioAssets.h"
+#include "../../States/GameState/GameState.h"
 
-extern GameManager* gameManager;
-
-Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos)
+Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState) 
+	: Entity(gameState)
 {
 	body.setSize(sf::Vector2f(40, 40));
 	this->gridPos = gridPos;
-	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.clear();
-	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
+	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.clear();
+	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
 
 	SetupAnimations();
 	animator = new Animator(&body);
@@ -47,13 +46,13 @@ void Enemy::Eaten()
 	ChangeAnimation();
 }
 
-void Enemy::Update()
+void Enemy::Update(const float& deltaTime)
 {
 	switch (state)
 	{
 	//updating frightened timer
 	case EnemyState::Frightened:
-		scaredTimer += gameManager->deltaTime;
+		scaredTimer += deltaTime;
 
 		if (scaredTimer >= 6 && !hasStartedflickeringAnim){
 			animator->SetAnimationClip(animations[5]);
@@ -64,19 +63,19 @@ void Enemy::Update()
 		if (scaredTimer >= 6 && hasStartedflickeringAnim) {
 			scaredTimer = 0;
 			state = waves[currentWave].waveState;
-			gameManager->StopPowerSnackSound();
+			gameState->StopPowerSnackSound();
 			hasStartedflickeringAnim = false;
 			ChangeAnimation();
 		}
 		break;
 	case EnemyState::Eaten:
-		if (gameManager->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
+		if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
 			state = waves[currentWave].waveState;
 		}
 		break;
 	//updating wave system
 	default:
-		totalWaveTime += gameManager->deltaTime;
+		totalWaveTime += deltaTime;
 		if (totalWaveTime >= waves[currentWave].duration)
 		{
 			totalWaveTime -= waves[currentWave].duration;
@@ -90,14 +89,14 @@ void Enemy::Update()
 	}
 
 	if(state != EnemyState::Eaten)
-		animator->Update(gameManager->deltaTime);
+		animator->Update(deltaTime);
 
-	Move();
+	Move(deltaTime);
 }
 
-void Enemy::Move()
+void Enemy::Move(const float& deltaTime)
 {
-	float dt = speed * gameManager->deltaTime;
+	float dt = speed * deltaTime;
 
 	if (state == EnemyState::Frightened)
 		dt /= 2;
@@ -313,15 +312,15 @@ sf::Vector2i Enemy::GetOppositeDirectionNeighbour()
 void Enemy::UpdateTileArray(sf::Vector2i newPos)
 {
 	//emptying current tile
-	bool hasSnack = gameManager->FindSnackID(gridPos) == -1;
-	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = hasSnack? true : false;
-	gameManager->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Ghost);
+	bool hasSnack = gameState->FindSnackID(gridPos) == -1;
+	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = hasSnack? true : false;
+	gameState->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Ghost);
 
 	gridPos = newPos;
 
 	//transfering enemy to next tile
-	gameManager->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameManager->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
+	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
 }
 
 sf::Vector2i Enemy::GetScatterTargetPosition()
@@ -331,7 +330,7 @@ sf::Vector2i Enemy::GetScatterTargetPosition()
 
 sf::Vector2i Enemy::GetChaseTargetPosition()
 {
-	return gameManager->pacman->gridPos;
+	return gameState->pacman->gridPos;
 }
 
 sf::Vector2i Enemy::GetFrightenedTargetPosition()

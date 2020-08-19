@@ -1,7 +1,4 @@
 #include "Debug.h"
-#include "../GameManager.h"
-
-extern GameManager* gameManager;
 
 void DrawGrid(sf::RenderWindow& window)
 {

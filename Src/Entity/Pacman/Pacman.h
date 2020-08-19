@@ -8,17 +8,17 @@
 class Pacman : public Entity
 {
 public:
-	Pacman(int x, int y);
+	Pacman(int x, int y, GameState* gameState);
 	~Pacman();
 	void OnKeyPressed(sf::Event::KeyEvent key);
-	void Update() override;
+	void Update(const float& deltaTime) override;
 	void Draw(sf::RenderWindow& rw) override;
 private:
 	Animator* animator;
 	Animation* animations[5];//left, right, up, down, death
 	Directions nextDir = None;
 	bool hasCompletedMovement = false;
-	void Move() override;
+	void Move(const float& deltaTime) override;
 	void EatSnack(sf::Vector2i snackGridPosition);
 	void UpdatePlayerTilePosition();
 	void UpdateTileArray(sf::Vector2i newPos);
