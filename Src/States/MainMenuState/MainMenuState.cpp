@@ -5,14 +5,14 @@
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager)
 	: State(window, states, gameManager) 
 {
-	if (!this->font.loadFromFile("Fonts/Dosis-Light.ttf"))
-	{
-		throw("Could not load font");
-	}
+	//if (!this->font.loadFromFile("Fonts/Dosis-Light.ttf"))
+	//{
+	//	throw("Could not load font");
+	//}
 
 	this->buttons["GAME_STATE"] = new Button(
 		300.f, 480.f, 250.f, 50.f,
-		&this->font, "New Game", 50,
+		/*&this->font,*/ "New Game", 50,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -39,8 +39,17 @@ void MainMenuState::Update(const float& deltaTime)
 	{
 		this->states->push(new GameState(window, states, gameManager));
 	}
+
+	Draw();
 }
 
 void MainMenuState::Draw()
 {
+	window->clear();
+	for (auto& it : this->buttons)
+	{
+		it.second->render(window);
+	}
+
+	window->display();
 }

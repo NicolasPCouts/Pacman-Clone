@@ -11,7 +11,7 @@ public:
 	void Update(const float& deltaTime);
 	void Draw();
 private:
-	sf::Font font;
+	//sf::Font font;
 	std::map<std::string, Button*> buttons;
 };
 

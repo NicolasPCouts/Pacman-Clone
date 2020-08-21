@@ -1,7 +1,7 @@
 #include"Button.h"
 
 Button::Button(float x, float y, float width, float height,
-	sf::Font* font, std::string text, unsigned character_size,
+	/*sf::Font* font,*/ std::string text, unsigned character_size,
 	sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 	sf::Color idle_color, sf::Color hover_color, sf::Color active_color)
 {
@@ -11,8 +11,8 @@ Button::Button(float x, float y, float width, float height,
 	this->shape.setSize(sf::Vector2f(width, height));
 	this->shape.setFillColor(idle_color);
 
-	this->font = font;
-	this->text.setFont(*this->font);
+	/*this->font = font;
+	this->text.setFont(*this->font);*/
 	this->text.setString(text);
 	this->text.setFillColor(text_idle_color);
 	this->text.setCharacterSize(character_size);
@@ -91,7 +91,7 @@ void Button::update(const sf::Vector2f mousePos)
 	}
 }
 
-void Button::render(sf::RenderTarget* target)
+void Button::render(sf::RenderWindow* target)
 {
 	target->draw(this->shape);
 	target->draw(this->text);
