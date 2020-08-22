@@ -75,6 +75,7 @@ void Button::update(const sf::Vector2f mousePos)
 		break;
 
 	case BTN_HOVER:
+		std::cout << "hover" << std::endl;
 		this->shape.setFillColor(this->hoverColor);
 		this->text.setFillColor(this->textHoverColor);
 		break;

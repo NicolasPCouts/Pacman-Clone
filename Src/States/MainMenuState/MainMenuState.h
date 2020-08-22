@@ -13,5 +13,8 @@ public:
 private:
 	//sf::Font font;
 	std::map<std::string, Button*> buttons;
+
+	sf::Sprite mapSprite;
+	sf::Texture mapTexture;
 };
 

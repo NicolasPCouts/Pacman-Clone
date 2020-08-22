@@ -1,5 +1,6 @@
 #include "MainMenuState.h"
 
+#include "../../GameManager.h"
 #include "../GameState/GameState.h"
 
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager)
@@ -11,11 +12,19 @@ MainMenuState::MainMenuState(sf::RenderWindow* window, std::stack<State*>* state
 	//}
 
 	this->buttons["GAME_STATE"] = new Button(
-		300.f, 480.f, 250.f, 50.f,
+		300.f, 480.f, 250.f, 250.f,
 		/*&this->font,*/ "New Game", 50,
-		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		sf::Color::Black, sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color::White, sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
+
+	if (mapTexture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
+	{
+		mapTexture.setSmooth(false);
+		mapSprite.setTexture(mapTexture);
+		mapSprite.setScale((window->getView().getSize().x) / (mapSprite.getLocalBounds().width * gameManager->aspectRatio), window->getView().getSize().y / mapSprite.getLocalBounds().height);
+		mapSprite.move(0, 1);
+	}
 }
 
 MainMenuState::~MainMenuState()
@@ -46,6 +55,7 @@ void MainMenuState::Update(const float& deltaTime)
 void MainMenuState::Draw()
 {
 	window->clear();
+	window->draw(mapSprite);
 	for (auto& it : this->buttons)
 	{
 		it.second->render(window);
