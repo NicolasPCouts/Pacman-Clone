@@ -1,5 +1,5 @@
 #include "GameManager.h"
-#include "States/GameState/GameState.h"
+#include "States/MainMenuState/MainMenuState.h"
 
 void GameManager::StartGameManager()
 {
@@ -10,7 +10,7 @@ void GameManager::StartGameManager()
     sf::View v(sf::Vector2f(400, 400), sf::Vector2f(800 * aspectRatio, 800));
     window->setView(v);
 
-    states.push(new GameState(window, &states, this));
+    states.push(new MainMenuState(window, &states, this));
 }
 
 GameManager::~GameManager()

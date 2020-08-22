@@ -170,6 +170,7 @@
     <ClCompile Include="Src\Entity\Pacman\Pacman.cpp" />
     <ClCompile Include="Src\Entity\Snack\Snack.cpp" />
     <ClCompile Include="Src\States\State.cpp" />
+    <ClCompile Include="Src\UI\Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\States\MainMenuState\MainMenuState.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Src\Entity\Snack\Snack.h" />
     <ClInclude Include="Src\Tile.h" />
     <ClInclude Include="Src\States\State.h" />
+    <ClInclude Include="Src\UI\Button.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
