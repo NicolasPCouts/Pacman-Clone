@@ -13,6 +13,8 @@ Button::Button(float x, float y, float width, float height,
 
 	/*this->font = font;
 	this->text.setFont(*this->font);*/
+	font.loadFromFile("Fonts/Dosis-Light.ttf");
+	this->text.setFont(this->font);
 	this->text.setString(text);
 	this->text.setFillColor(text_idle_color);
 	this->text.setCharacterSize(character_size);
@@ -71,13 +73,13 @@ void Button::update(const sf::Vector2f mousePos)
 	{
 	case BTN_IDLE:
 		this->shape.setFillColor(this->idleColor);
-		this->text.setFillColor(this->textIdleColor);
+		this->text.setFillColor(sf::Color::Red);
 		break;
 
 	case BTN_HOVER:
 		std::cout << "hover" << std::endl;
 		this->shape.setFillColor(this->hoverColor);
-		this->text.setFillColor(this->textHoverColor);
+		this->text.setFillColor(sf::Color::Red);
 		break;
 
 	case BTN_ACTIVE:
