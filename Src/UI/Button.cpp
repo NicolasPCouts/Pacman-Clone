@@ -73,13 +73,13 @@ void Button::update(const sf::Vector2f mousePos)
 	{
 	case BTN_IDLE:
 		this->shape.setFillColor(this->idleColor);
-		this->text.setFillColor(sf::Color::Red);
+		this->text.setFillColor(this->textIdleColor);
 		break;
 
 	case BTN_HOVER:
 		std::cout << "hover" << std::endl;
 		this->shape.setFillColor(this->hoverColor);
-		this->text.setFillColor(sf::Color::Red);
+		this->text.setFillColor(this->textHoverColor);
 		break;
 
 	case BTN_ACTIVE:

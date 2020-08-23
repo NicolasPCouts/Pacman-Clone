@@ -12,10 +12,11 @@ MainMenuState::MainMenuState(sf::RenderWindow* window, std::stack<State*>* state
 	//}
 
 	this->buttons["GAME_STATE"] = new Button(
-		300.f, 480.f, 250.f, 250.f,
-		/*&this->font,*/ "New Game", 50,
-		sf::Color::Black, sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
-		sf::Color::White, sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		window->getView().getCenter().x - 50, 480.f,
+		100.f, 30.f,
+		"New Game", 20,
+		sf::Color(105, 105, 105, 255), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color::Black, sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 
 	if (mapTexture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
