@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\States\GameOverState\GameOverState.cpp" />
     <ClCompile Include="Src\States\MainMenuState\MainMenuState.cpp" />
     <ClCompile Include="Src\States\GameState\GameState.cpp" />
     <ClCompile Include="Src\Audio\AudioManager.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="Src\UI\Button.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\States\GameOverState\GameOverState.h" />
     <ClInclude Include="Src\States\MainMenuState\MainMenuState.h" />
     <ClInclude Include="Src\States\GameState\GameState.h" />
     <ClInclude Include="Src\Audio\AudioAssets.h" />
@@ -200,7 +202,27 @@
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\pac-man-logo.png" />
     <Image Include="Resources\PacManSprites.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\Sound\credit.wav" />
+    <Media Include="Resources\Sound\death_1.wav" />
+    <Media Include="Resources\Sound\death_2.wav" />
+    <Media Include="Resources\Sound\eat_fruit.wav" />
+    <Media Include="Resources\Sound\eat_ghost.wav" />
+    <Media Include="Resources\Sound\extend.wav" />
+    <Media Include="Resources\Sound\game_start.wav" />
+    <Media Include="Resources\Sound\intermission.wav" />
+    <Media Include="Resources\Sound\munch_1.wav" />
+    <Media Include="Resources\Sound\munch_2.wav" />
+    <Media Include="Resources\Sound\power_pellet.wav" />
+    <Media Include="Resources\Sound\retreating.wav" />
+    <Media Include="Resources\Sound\siren_1.wav" />
+    <Media Include="Resources\Sound\siren_2.wav" />
+    <Media Include="Resources\Sound\siren_3.wav" />
+    <Media Include="Resources\Sound\siren_4.wav" />
+    <Media Include="Resources\Sound\siren_5.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

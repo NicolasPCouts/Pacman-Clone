@@ -72,6 +72,9 @@
     <ClCompile Include="Src\UI\Button.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Src\States\GameOverState\GameOverState.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Tile.h">
@@ -140,6 +143,9 @@
     <ClInclude Include="Src\UI\Button.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Src\States\GameOverState\GameOverState.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -148,5 +154,61 @@
     <Image Include="Resources\PacManSprites.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
+    <Image Include="Resources\pac-man-logo.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\Sound\credit.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\death_1.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\death_2.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\eat_fruit.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\eat_ghost.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\extend.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\game_start.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\intermission.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\munch_1.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\munch_2.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\power_pellet.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\retreating.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\siren_1.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\siren_2.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\siren_3.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\siren_4.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Resources\Sound\siren_5.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
   </ItemGroup>
 </Project>
