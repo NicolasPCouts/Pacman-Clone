@@ -1,3 +1,2 @@
-﻿  MainMenuState.cpp
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+﻿  GameManager.cpp
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
