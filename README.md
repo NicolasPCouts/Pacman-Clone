@@ -7,6 +7,6 @@ When the game is finished i will update this readme with some more information a
 ## Screenshots (In Progress)
 
 <div>
-  <img width="523" height="520" align="left" src="https://github.com/NicolasPCouts/Pacman-Clone/blob/master/screenshots/screenshot.png">
-  <img width="523" height="520" align="left" src="https://github.com/NicolasPCouts/Pacman-Clone/blob/master/screenshots/screenshot2.png">
+  <img width="261" height="260" align="left" src="https://github.com/NicolasPCouts/Pacman-Clone/blob/master/screenshots/screenshot.png">
+  <img width="261" height="260" align="left" src="https://github.com/NicolasPCouts/Pacman-Clone/blob/master/screenshots/screenshot2.png">
 </div>
