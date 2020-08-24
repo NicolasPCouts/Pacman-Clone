@@ -6,24 +6,19 @@
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager)
 	: State(window, states, gameManager) 
 {
-	//if (!this->font.loadFromFile("Fonts/Dosis-Light.ttf"))
-	//{
-	//	throw("Could not load font");
-	//}
-
 	this->buttons["GAME_STATE"] = new Button(
-		300.f, 480.f, 250.f, 250.f,
-		/*&this->font,*/ "New Game", 50,
-		sf::Color::Black, sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
-		sf::Color::White, sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		window->getView().getCenter().x - 100, 480.f,
+		200.f, 53.f,
+		"New Game", 50,
+		sf::Color(130, 130, 130, 255), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50)
 	);
 
-	if (mapTexture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
+	if (mapTexture.loadFromFile("Resources/pac-man-logo.png"))
 	{
 		mapTexture.setSmooth(false);
 		mapSprite.setTexture(mapTexture);
-		mapSprite.setScale((window->getView().getSize().x) / (mapSprite.getLocalBounds().width * gameManager->aspectRatio), window->getView().getSize().y / mapSprite.getLocalBounds().height);
-		mapSprite.move(0, 1);
+		mapSprite.setScale(0.1f, 0.1f);
+		mapSprite.setPosition(window->getView().getCenter().x - (mapSprite.getGlobalBounds().width / 2), 20);
 	}
 }
 
