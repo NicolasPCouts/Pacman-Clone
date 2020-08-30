@@ -42,6 +42,7 @@ void Enemy::Scare()
 void Enemy::Eaten()
 {
 	state = EnemyState::Eaten;
+	scaredTimer = 0;
 	audio.PlaySound(AUDIO_EAT_GHOST, false, VOLUME);
 	ChangeAnimation();
 }
@@ -61,16 +62,17 @@ void Enemy::Update(const float& deltaTime)
 		}
 
 		if (scaredTimer >= 6 && hasStartedflickeringAnim) {
-			scaredTimer = 0;
 			state = waves[currentWave].waveState;
 			gameState->StopPowerSnackSound();
 			hasStartedflickeringAnim = false;
 			ChangeAnimation();
+			scaredTimer = 0;
 		}
 		break;
 	case EnemyState::Eaten:
 		if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
 			state = waves[currentWave].waveState;
+			scaredTimer = 0;
 		}
 		break;
 	//updating wave system
