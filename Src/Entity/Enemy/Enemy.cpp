@@ -318,6 +318,14 @@ void Enemy::UpdateTileArray(sf::Vector2i newPos)
 
 	gridPos = newPos;
 
+	if (newPos == gameState->pacman->gridPos)
+	{
+		if (state == EnemyState::Frightened)
+			Eaten();
+		else if (state != EnemyState::Eaten)
+			gameState->pacman->Die();
+	}
+
 	//transfering enemy to next tile
 	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
 	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);

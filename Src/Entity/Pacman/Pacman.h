@@ -13,6 +13,7 @@ public:
 	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update(const float& deltaTime) override;
 	void Draw(sf::RenderWindow& rw) override;
+	void Die();
 private:
 	Animator* animator;
 	Animation* animations[5];//left, right, up, down, death

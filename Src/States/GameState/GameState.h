@@ -30,6 +30,7 @@ public:
 	~GameState();
 	void Update(const float& deltaTime);
 	void Draw();
+	void OnPacmanDeath();
 	int FindSnackID(sf::Vector2i snackPos);
 	void DeleteSnack(sf::Vector2i snackPos);
 	void ScareEnemys();

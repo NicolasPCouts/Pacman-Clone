@@ -64,6 +64,11 @@ void Pacman::Update(const float& deltaTime)
 	animator->Update(deltaTime);
 }
 
+void Pacman::Die() 
+{
+	gameState->OnPacmanDeath();
+}
+
 void Pacman::Move(const float& deltaTime)
 {
 	float dt = speed * deltaTime;
@@ -172,9 +177,13 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 	}
 
 	Enemy* e = gameState->FindEnemyByPosition(gridPos);
-	if (e != NULL)
+	if (e != NULL) 
+	{
 		if (e->state == EnemyState::Frightened)
 			e->Eaten();
+		else if (e->state != EnemyState::Eaten)
+			Die();
+	}
 
 	//transfering player to next tile
 	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;

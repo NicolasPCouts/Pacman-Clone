@@ -13,6 +13,8 @@
 #include "../../Audio/AudioAssets.h"
 #include "../../Entity/Snack/Snack.h"
 
+#include "../MainMenuState/MainMenuState.h"
+
 //test
 #include <sstream>
 
@@ -23,7 +25,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
 {
 
     CreateMapColliders();
-    pacman = new Pacman(1, 1, this);
+    pacman = new Pacman(1, 6, this);
     enemys[0] = new Blinky(sf::Vector2i(3, 6), this);
     enemys[1] = new Pinky(sf::Vector2i(3, 1), this);
     enemys[2] = new Inky(sf::Vector2i(5, 6), this);
@@ -42,6 +44,11 @@ GameState::~GameState()
 
     delete window;
     DeleteSnacks();
+}
+
+void GameState::OnPacmanDeath() 
+{
+    states->push(new MainMenuState(window, states, gameManager));
 }
 
 void GameState::Update(const float& deltaTime)
