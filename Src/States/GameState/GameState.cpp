@@ -25,11 +25,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
 {
 
     CreateMapColliders();
-    pacman = new Pacman(1, 6, this);
-    enemys[0] = new Blinky(sf::Vector2i(3, 6), this);
-    enemys[1] = new Pinky(sf::Vector2i(3, 1), this);
-    enemys[2] = new Inky(sf::Vector2i(5, 6), this);
-    enemys[3] = new Clyde(sf::Vector2i(18, 1), this);
+    CreatePacmanAndEnemys();
     CreateSnacks();
 
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
@@ -48,7 +44,23 @@ GameState::~GameState()
 
 void GameState::OnPacmanDeath() 
 {
-    states->push(new MainMenuState(window, states, gameManager));
+    if(lives == 0)
+        states->push(new MainMenuState(window, states, gameManager));
+    else
+    {
+        Restart();
+        lives--;
+    }
+}
+
+void GameState::Restart()
+{
+    for (auto const& x : enemys)
+        delete x;
+
+    delete pacman;
+
+    CreatePacmanAndEnemys();
 }
 
 void GameState::Update(const float& deltaTime)
@@ -335,6 +347,14 @@ void GameState::CreateSnacks()
     }
 }
 
+void GameState::CreatePacmanAndEnemys() 
+{
+    pacman = new Pacman(1, 6, this);
+    enemys[0] = new Blinky(sf::Vector2i(3, 6), this);
+    enemys[1] = new Pinky(sf::Vector2i(3, 1), this);
+    enemys[2] = new Inky(sf::Vector2i(5, 6), this);
+    enemys[3] = new Clyde(sf::Vector2i(18, 1), this);
+}
 
 int GameState::FindSnackID(sf::Vector2i snackPos)
 {
