@@ -1,3 +1,16 @@
-﻿  GameState.cpp
+﻿  Pacman.cpp
 D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(24,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(24,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameState.cpp
+D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
   Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
