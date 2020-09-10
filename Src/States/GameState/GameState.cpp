@@ -1,5 +1,7 @@
 #include "GameState.h"
 
+#include <iostream>
+
 #include "../../Entity/Pacman/Pacman.h"
 #include "../../Entity/Enemy/Enemy.h"
 #include "../../Entity/Enemy/Blinky.h"
@@ -27,6 +29,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
     CreateMapColliders();
     CreatePacmanAndEnemys();
     CreateSnacks();
+    CreateUI();
 
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
     LoadMap();
@@ -72,6 +75,7 @@ void GameState::Update(const float& deltaTime)
         if (x != NULL)
             x->Update(deltaTime);
     }
+    this->text.setString("Score : " + std::to_string(score));
 
     //render
     Draw();
@@ -87,13 +91,13 @@ void GameState::Draw()
 
     pacman->Draw(*window);
 
-    for (int i = 11; i <= 16; i++)
-    {
-        DrawCube(*window, sf::Vector2i(i, 13), this);
-        DrawCube(*window, sf::Vector2i(i, 14), this);
-        DrawCube(*window, sf::Vector2i(i, 15), this);
+    //for (int i = 11; i <= 16; i++)
+    //{
+    //    DrawCube(*window, sf::Vector2i(i, 13), this);
+    //    DrawCube(*window, sf::Vector2i(i, 14), this);
+    //    DrawCube(*window, sf::Vector2i(i, 15), this);
 
-    }
+    //}
 
     for (auto const& x : enemys)
     {
@@ -101,9 +105,10 @@ void GameState::Draw()
             x->Draw(*window);
     }
 
+    window->draw(text);
+
     window->display();
 }
-
 
 void GameState::LoadMap()
 {
@@ -111,7 +116,7 @@ void GameState::LoadMap()
     {
         mapTexture.setSmooth(false);
         mapSprite.setTexture(mapTexture);
-        mapSprite.setScale((window->getView().getSize().x) / (mapSprite.getLocalBounds().width * gameManager->aspectRatio), window->getView().getSize().y / mapSprite.getLocalBounds().height);
+        mapSprite.setScale((window->getView().getSize().x) / (mapSprite.getLocalBounds().width * gameManager->aspectRatio), (window->getView().getSize().y - 100) / mapSprite.getLocalBounds().height);
         mapSprite.move(0, 1);
     }
     else
@@ -354,6 +359,16 @@ void GameState::CreatePacmanAndEnemys()
     enemys[1] = new Pinky(sf::Vector2i(3, 1), this);
     enemys[2] = new Inky(sf::Vector2i(5, 6), this);
     enemys[3] = new Clyde(sf::Vector2i(18, 1), this);
+}
+
+void GameState::CreateUI()
+{
+    font.loadFromFile("Fonts/Dosis-Light.ttf");
+    this->text.setFont(this->font);
+    this->text.setString("Score : " + std::to_string(score));
+    this->text.setFillColor(sf::Color::White);
+    this->text.setCharacterSize(36);
+    this->text.setPosition(10, 800);
 }
 
 int GameState::FindSnackID(sf::Vector2i snackPos)

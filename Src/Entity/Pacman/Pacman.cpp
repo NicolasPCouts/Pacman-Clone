@@ -110,6 +110,8 @@ void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 		gameState->ScareEnemys();
 	}
 
+	gameState->score += 10;
+
 	gameState->DeleteSnack(snackGridPosition);
 }
 

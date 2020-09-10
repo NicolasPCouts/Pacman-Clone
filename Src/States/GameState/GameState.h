@@ -25,7 +25,7 @@ public:
 	float tileWidth = 800 / (float)NumberOfTilesX;
 	float tileHeight = 800 / (float)NumberOfTilesY;
 	int lives = 3;
-
+	int score = 0;
 
 	GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager);
 	~GameState();
@@ -38,11 +38,15 @@ public:
 	void StopPowerSnackSound();
 	Enemy* FindEnemyByPosition(sf::Vector2i pos);
 private:
+	sf::Font font;
+	sf::Text text;
+
 	void Restart();
 	void LoadMap();
 	void CreateMapColliders();
 	void CreatePacmanAndEnemys();
 	void CreateSnacks();
+	void CreateUI();
 	void DeleteSnacks();
 };
 
