@@ -17,7 +17,7 @@ class Enemy : public Entity
 {
 public:
 	EnemyState state = EnemyState::Scatter;
-	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState);
+	Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState, Entities entityType);
 	~Enemy();
 	void Scare();
 	void UpdateTileArray(sf::Vector2i newPos) override;

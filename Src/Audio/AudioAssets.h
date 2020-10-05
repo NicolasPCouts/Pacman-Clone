@@ -5,7 +5,7 @@
 #define AUDIO_DEATH_1 "Resources/Sound/death_1.wav"
 #define AUDIO_POWER_SNACK "Resources/Sound/power_pellet.wav"
 
-#define VOLUME 100
+#define VOLUME 0
 
 enum class Sounds {
 	None,

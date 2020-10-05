@@ -48,6 +48,9 @@ private:
 	void CreatePacmanAndEnemys();
 	void CreateSnacks();
 	void CreateUI();
+	void UpdateUI();
+	void FreezeGame(Entities entityThatWontFreeze);
+	void UnfreezeGame();
 	void DeleteSnacks();
 };
 

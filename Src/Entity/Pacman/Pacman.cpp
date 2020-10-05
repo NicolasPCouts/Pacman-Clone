@@ -4,8 +4,8 @@
 #include "../../Debugger/Debug.h"
 #include "../../States/GameState/GameState.h"
 
-Pacman::Pacman(int tileX, int tileY, GameState* gameState) 
-	: Entity(gameState)
+Pacman::Pacman(int tileX, int tileY, GameState* gameState)
+	: Entity(gameState, Entities::Pacman)
 {
 	body.setSize(sf::Vector2f(40, 40));
 	gridPos = sf::Vector2i(tileX, tileY);

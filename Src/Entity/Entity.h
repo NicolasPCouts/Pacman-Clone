@@ -11,13 +11,23 @@ enum Directions {
 	None
 };
 
+enum class Entities {
+	NotDefined,
+	Pacman,
+	Blinky,
+	Clyde,
+	Inky,
+	Pinky,
+};
+
 class Entity
 {
 public:
-	Entity(GameState* gameState);
+	Entity(GameState* gameState, Entities entityType);
 	float speed = 80;
 	sf::Vector2i gridPos;
 	Directions currentDir = Directions::None;
+	Entities entityType;
 	sf::RectangleShape body;
 	sf::Texture texture;
 	virtual void Update(const float& deltaTime) = 0;

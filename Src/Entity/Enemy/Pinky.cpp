@@ -2,7 +2,8 @@
 #include "../Pacman/Pacman.h"
 #include "../../States/GameState/GameState.h"
 
-Pinky::Pinky(sf::Vector2i gridPos, GameState* gameState) : Enemy(gridPos, sf::Vector2i(230, 81), gameState)
+Pinky::Pinky(sf::Vector2i gridPos, GameState* gameState)
+	: Enemy(gridPos, sf::Vector2i(230, 81), gameState, Entities::Pinky)
 {
 	SetupAnimations();
 }

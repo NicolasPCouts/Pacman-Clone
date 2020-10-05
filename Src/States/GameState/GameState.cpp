@@ -52,18 +52,21 @@ void GameState::OnPacmanDeath()
     else
     {
         Restart();
-        lifes--;
     }
 }
 
 void GameState::Restart()
 {
+    audioManager.StopSound();
+    lifes--;
+
     for (auto const& x : enemys)
         delete x;
 
     delete pacman;
 
     CreatePacmanAndEnemys();
+    audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
 }
 
 void GameState::Update(const float& deltaTime)
@@ -75,8 +78,8 @@ void GameState::Update(const float& deltaTime)
         if (x != NULL)
             x->Update(deltaTime);
     }
-    this->scoreText.setString("Score : " + std::to_string(score));
-    this->lifesText.setString("Lifes : " + std::to_string(lifes));
+
+    UpdateUI();
 
     //render
     Draw();
@@ -368,17 +371,33 @@ void GameState::CreateUI()
 
     //creating score text
     this->scoreText.setFont(this->font);
-    this->scoreText.setString("Score : " + std::to_string(score));
     this->scoreText.setFillColor(sf::Color::White);
     this->scoreText.setCharacterSize(36);
     this->scoreText.setPosition(10, 800);
 
     //creating lives text
     this->lifesText.setFont(this->font);
-    this->lifesText.setString("Lifes : " + std::to_string(lifes));
     this->lifesText.setFillColor(sf::Color::White);
     this->lifesText.setCharacterSize(36);
     this->lifesText.setPosition(10, 850);
+
+    UpdateUI();
+}
+
+void GameState::UpdateUI() 
+{
+    this->scoreText.setString("Score : " + std::to_string(score));
+    this->lifesText.setString("Lifes : " + std::to_string(lifes));
+}
+
+void GameState::FreezeGame(Entities entityThatWontFreeze)
+{
+
+}
+
+void GameState::UnfreezeGame()
+{
+
 }
 
 int GameState::FindSnackID(sf::Vector2i snackPos)

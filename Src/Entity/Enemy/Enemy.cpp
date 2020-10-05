@@ -8,8 +8,8 @@
 #include "../../Audio/AudioAssets.h"
 #include "../../States/GameState/GameState.h"
 
-Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState) 
-	: Entity(gameState)
+Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState, Entities entityType)
+	: Entity(gameState, entityType)
 {
 	body.setSize(sf::Vector2f(40, 40));
 	this->gridPos = gridPos;

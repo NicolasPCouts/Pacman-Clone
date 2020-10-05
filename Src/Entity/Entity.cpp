@@ -22,9 +22,10 @@ Directions GetOppositeDirection(Directions dir)
     return None;
 }
 
-Entity::Entity(GameState* gameState)
+Entity::Entity(GameState* gameState, Entities entityType)
 {
 	this->gameState = gameState;
+	this->entityType = entityType;
 }
 
 sf::Vector2f Entity::GetFinalTilePosition()
