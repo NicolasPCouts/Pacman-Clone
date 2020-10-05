@@ -24,7 +24,7 @@ public:
 
 	float tileWidth = 800 / (float)NumberOfTilesX;
 	float tileHeight = 800 / (float)NumberOfTilesY;
-	int lives = 3;
+	int lifes = 3;
 	int score = 0;
 
 	GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager);
@@ -39,7 +39,8 @@ public:
 	Enemy* FindEnemyByPosition(sf::Vector2i pos);
 private:
 	sf::Font font;
-	sf::Text text;
+	sf::Text scoreText;
+	sf::Text lifesText;
 
 	void Restart();
 	void LoadMap();

@@ -182,7 +182,10 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 	if (e != NULL) 
 	{
 		if (e->state == EnemyState::Frightened)
+		{
 			e->Eaten();
+			gameState->score += 100;
+		}
 		else if (e->state != EnemyState::Eaten)
 			Die();
 	}

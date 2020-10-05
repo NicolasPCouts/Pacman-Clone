@@ -47,12 +47,12 @@ GameState::~GameState()
 
 void GameState::OnPacmanDeath() 
 {
-    if(lives == 0)
+    if(lifes == 0)
         states->push(new MainMenuState(window, states, gameManager));
     else
     {
         Restart();
-        lives--;
+        lifes--;
     }
 }
 
@@ -75,7 +75,8 @@ void GameState::Update(const float& deltaTime)
         if (x != NULL)
             x->Update(deltaTime);
     }
-    this->text.setString("Score : " + std::to_string(score));
+    this->scoreText.setString("Score : " + std::to_string(score));
+    this->lifesText.setString("Lifes : " + std::to_string(lifes));
 
     //render
     Draw();
@@ -96,7 +97,6 @@ void GameState::Draw()
     //    DrawCube(*window, sf::Vector2i(i, 13), this);
     //    DrawCube(*window, sf::Vector2i(i, 14), this);
     //    DrawCube(*window, sf::Vector2i(i, 15), this);
-
     //}
 
     for (auto const& x : enemys)
@@ -105,7 +105,8 @@ void GameState::Draw()
             x->Draw(*window);
     }
 
-    window->draw(text);
+    window->draw(lifesText);
+    window->draw(scoreText);
 
     window->display();
 }
@@ -364,11 +365,20 @@ void GameState::CreatePacmanAndEnemys()
 void GameState::CreateUI()
 {
     font.loadFromFile("Fonts/Dosis-Light.ttf");
-    this->text.setFont(this->font);
-    this->text.setString("Score : " + std::to_string(score));
-    this->text.setFillColor(sf::Color::White);
-    this->text.setCharacterSize(36);
-    this->text.setPosition(10, 800);
+
+    //creating score text
+    this->scoreText.setFont(this->font);
+    this->scoreText.setString("Score : " + std::to_string(score));
+    this->scoreText.setFillColor(sf::Color::White);
+    this->scoreText.setCharacterSize(36);
+    this->scoreText.setPosition(10, 800);
+
+    //creating lives text
+    this->lifesText.setFont(this->font);
+    this->lifesText.setString("Lifes : " + std::to_string(lifes));
+    this->lifesText.setFillColor(sf::Color::White);
+    this->lifesText.setCharacterSize(36);
+    this->lifesText.setPosition(10, 850);
 }
 
 int GameState::FindSnackID(sf::Vector2i snackPos)
