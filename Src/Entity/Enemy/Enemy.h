@@ -10,6 +10,7 @@ enum class EnemyState {
 	Scatter,
 	Chase,
 	Frightened,
+	Eaten_FreezedGame,
 	Eaten
 };
 

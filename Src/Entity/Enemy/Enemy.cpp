@@ -41,10 +41,11 @@ void Enemy::Scare()
 
 void Enemy::Eaten()
 {
-	state = EnemyState::Eaten;
+	state = EnemyState::Eaten_FreezedGame;
 	scaredTimer = 0;
 	audio.PlaySound(AUDIO_EAT_GHOST, false, VOLUME);
 	ChangeAnimation();
+	gameState->FreezeGame(entityType);
 }
 
 void Enemy::Update(const float& deltaTime)
@@ -69,10 +70,19 @@ void Enemy::Update(const float& deltaTime)
 			scaredTimer = 0;
 		}
 		break;
+	case EnemyState::Eaten_FreezedGame:
+		if (!audio.IsPlayingAudio())
+		{
+			state = EnemyState::Eaten;
+			ChangeAnimation();
+			gameState->UnfreezeGame();
+		}
+		break;
 	case EnemyState::Eaten:
 		if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
 			state = waves[currentWave].waveState;
 			scaredTimer = 0;
+			gameState->UnfreezeGame();
 		}
 		break;
 	//updating wave system
@@ -90,10 +100,11 @@ void Enemy::Update(const float& deltaTime)
 		break;
 	}
 
-	if(state != EnemyState::Eaten)
+	if(state != EnemyState::Eaten && state != EnemyState::Eaten_FreezedGame)
 		animator->Update(deltaTime);
 
-	Move(deltaTime);
+	if(state != EnemyState::Eaten_FreezedGame)
+		Move(deltaTime);
 }
 
 void Enemy::Move(const float& deltaTime)
@@ -240,50 +251,51 @@ void Enemy::UpdateEnemyTilePosition()
 
 void Enemy::ChangeAnimation()
 {
-	switch (currentDir)
+	if (state != EnemyState::Frightened)
 	{
-	case Left:
-		if (state != EnemyState::Frightened) {
-			if (state == EnemyState::Eaten) {
+		if (state == EnemyState::Eaten)
+		{
+			switch (currentDir)
+			{
+			case Left:
 				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(374, 81, 14, 14)))
 					body.setTexture(&texture);
-			}
-			else
-				animator->SetAnimationClip(animations[0]);
-		}
-		break;
-	case Right:
-		if (state != EnemyState::Frightened) {
-			if (state == EnemyState::Eaten) {
+				break;
+			case Right:
 				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(358, 81, 14, 14)))
 					body.setTexture(&texture);
-			}
-			else
-				animator->SetAnimationClip(animations[1]);
-		}
-		break;
-	case Up:
-		if (state != EnemyState::Frightened) {
-			if (state == EnemyState::Eaten) {
+				break;
+			case Up:
 				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(390, 81, 14, 14)))
 					body.setTexture(&texture);
-			}
-			else
-				animator->SetAnimationClip(animations[2]);
-		}
-		break;
-	case Down:
-		if (state != EnemyState::Frightened) {
-			if (state == EnemyState::Eaten) {
+				break;
+			case Down:
 				if (texture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(406, 81, 14, 14)))
 					body.setTexture(&texture);
+				break;
+			case None:
+				break;
 			}
-			else
-				animator->SetAnimationClip(animations[3]);
 		}
-		break;
+		else
+		{
+			switch (currentDir)
+			{
+			case Left:
+				animator->SetAnimationClip(animations[0]);
+				break;
+			case Right:
+				animator->SetAnimationClip(animations[1]);
+				break;
+			case Up:
+				animator->SetAnimationClip(animations[2]);
+				break;
+			case Down:
+				animator->SetAnimationClip(animations[3]);
+				break;
+			}
+		}
 	}
-
 }
 
 sf::Vector2i Enemy::GetOppositeDirectionNeighbour()
@@ -320,6 +332,10 @@ void Enemy::UpdateTileArray(sf::Vector2i newPos)
 
 	gridPos = newPos;
 
+	//transfering enemy to next tile
+	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
+	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
+
 	if (newPos == gameState->pacman->gridPos)
 	{
 		if (state == EnemyState::Frightened)
@@ -328,9 +344,6 @@ void Enemy::UpdateTileArray(sf::Vector2i newPos)
 			gameState->pacman->Die();
 	}
 
-	//transfering enemy to next tile
-	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
 }
 
 sf::Vector2i Enemy::GetScatterTargetPosition()

@@ -72,11 +72,17 @@ void GameState::Restart()
 void GameState::Update(const float& deltaTime)
 {
     //Logic
-    pacman->Update(deltaTime);
+    if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
+        pacman->Update(deltaTime);
+
+
     for (auto const& x : enemys)
     {
-        if (x != NULL)
-            x->Update(deltaTime);
+        if (isFreezed == false || entityThatWontFreeze == x->entityType) 
+        {
+            if (x != NULL)
+                x->Update(deltaTime);
+        }
     }
 
     UpdateUI();
@@ -392,12 +398,14 @@ void GameState::UpdateUI()
 
 void GameState::FreezeGame(Entities entityThatWontFreeze)
 {
-
+    isFreezed = true;
+    this->entityThatWontFreeze = entityThatWontFreeze;
 }
 
 void GameState::UnfreezeGame()
 {
-
+    isFreezed = false;
+    this->entityThatWontFreeze = Entities::NotDefined;
 }
 
 int GameState::FindSnackID(sf::Vector2i snackPos)

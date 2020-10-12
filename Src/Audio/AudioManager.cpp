@@ -20,3 +20,8 @@ void AudioManager::StopSound()
 {
     sound.stop();
 }
+
+bool AudioManager::IsPlayingAudio()
+{
+    return sound.getStatus() == sound.Playing;
+}
