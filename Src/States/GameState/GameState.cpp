@@ -101,11 +101,14 @@ void GameState::Draw()
 
     pacman->Draw(*window);
 
-    //for (int i = 11; i <= 16; i++)
+    //draw walls colliders
+    //for (int i = 0; i < NumberOfTilesX; i++)
     //{
-    //    DrawCube(*window, sf::Vector2i(i, 13), this);
-    //    DrawCube(*window, sf::Vector2i(i, 14), this);
-    //    DrawCube(*window, sf::Vector2i(i, 15), this);
+    //    for (int j = 0 ; j < NumberOfTilesY; j++)
+    //    {
+    //        if(tileArray[i][j].DoesTileHaveType(sTile::TileType::Wall))
+    //            DrawCube(*window, sf::Vector2i(i, j), this);
+    //    }
     //}
 
     for (auto const& x : enemys)
@@ -137,199 +140,58 @@ void GameState::LoadMap()
 
 void GameState::CreateMapColliders()
 {
-    for (int i = 0; i < NumberOfTilesX; i++)
-    {
-        tileArray[i][0].isEmpty = false;
-        tileArray[i][NumberOfTilesY - 1].isEmpty = false;
-    }
-    for (int i = 2; i <= 5; i++)
-    {
-        tileArray[i][2].isEmpty = false;
-        tileArray[i][3].isEmpty = false;
-        tileArray[i][4].isEmpty = false;
+    int mapDesign[NumberOfTilesY][NumberOfTilesX] = {
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
+    {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,1,1,1,2,2,1,1,1,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1},
+    {0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0},
+    {1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1},
+    {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+    {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+    {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
+    {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    };
 
-        tileArray[i + 20][2].isEmpty = false;
-        tileArray[i + 20][3].isEmpty = false;
-        tileArray[i + 20][4].isEmpty = false;
-    }
-    for (int i = 1; i <= 4; i++)
+    for (int y = 0; y < NumberOfTilesY; y++)
     {
-        tileArray[13][i].isEmpty = false;
-        tileArray[14][i].isEmpty = false;
-    }
-    for (int i = 7; i <= 11; i++)
-    {
-        tileArray[i][2].isEmpty = false;
-        tileArray[i][3].isEmpty = false;
-        tileArray[i][4].isEmpty = false;
-
-        tileArray[i + 9][2].isEmpty = false;
-        tileArray[i + 9][3].isEmpty = false;
-        tileArray[i + 9][4].isEmpty = false;
-    }
-    for (int i = 2; i <= 5; i++)
-    {
-        tileArray[i][6].isEmpty = false;
-        tileArray[i][7].isEmpty = false;
-
-        tileArray[i + 20][6].isEmpty = false;
-        tileArray[i + 20][7].isEmpty = false;
-    }
-    for (int i = 10; i <= 17; i++)
-    {
-        tileArray[i][6].isEmpty = false;
-        tileArray[i][7].isEmpty = false;
-
-        tileArray[i][18].isEmpty = false;
-        tileArray[i][19].isEmpty = false;
-
-        tileArray[i][24].isEmpty = false;
-        tileArray[i][25].isEmpty = false;
-    }
-    for (int i = 8; i <= 10; i++)
-    {
-        tileArray[13][i].isEmpty = false;
-        tileArray[14][i].isEmpty = false;
-
-        tileArray[13][i + 12].isEmpty = false;
-        tileArray[14][i + 12].isEmpty = false;
-
-        tileArray[13][i + 18].isEmpty = false;
-        tileArray[14][i + 18].isEmpty = false;
-    }
-    for (int i = 6; i <= 13; i++)
-    {
-        tileArray[7][i].isEmpty = false;
-        tileArray[8][i].isEmpty = false;
-
-        tileArray[7 + 12][i].isEmpty = false;
-        tileArray[8 + 12][i].isEmpty = false;
-    }
-    for (int i = 1; i < 10; i++)
-    {
-        tileArray[0][i].isEmpty = false;
-        tileArray[NumberOfTilesX - 1][i].isEmpty = false;
-    }
-    for (int i = 19; i < 30; i++)
-    {
-        tileArray[0][i].isEmpty = false;
-        tileArray[NumberOfTilesX - 1][i].isEmpty = false;
-    }
-    for (int i = 0; i <= 5; i++)
-    {
-        tileArray[i][9].isEmpty = false;
-        tileArray[i][9 + 4].isEmpty = false;
-        tileArray[i][9 + 6].isEmpty = false;
-        tileArray[i][9 + 10].isEmpty = false;
-
-        tileArray[i + 22][9].isEmpty = false;
-        tileArray[i + 22][9 + 4].isEmpty = false;
-        tileArray[i + 22][9 + 6].isEmpty = false;
-        tileArray[i + 22][9 + 10].isEmpty = false;
-    }
-    for (int i = 0; i <= 5; i++)
-    {
-        tileArray[i][10].isEmpty = false;
-        tileArray[i][11].isEmpty = false;
-        tileArray[i][12].isEmpty = false;
-        tileArray[i + 22][10].isEmpty = false;
-        tileArray[i + 22][11].isEmpty = false;
-        tileArray[i + 22][12].isEmpty = false;
-
-        tileArray[i][16].isEmpty = false;
-        tileArray[i][17].isEmpty = false;
-        tileArray[i][18].isEmpty = false;
-        tileArray[i + 22][16].isEmpty = false;
-        tileArray[i + 22][17].isEmpty = false;
-        tileArray[i + 22][18].isEmpty = false;
-    }
-    for (int i = 10; i <= 17; i++)
-    {
-        tileArray[i][12].isEmpty = false;
-        tileArray[i][16].isEmpty = false;
-    }
-    for (int i = 13; i <= 15; i++)
-    {
-        tileArray[10][i].isEmpty = false;
-        tileArray[17][i].isEmpty = false;
+        for (int x = 0; x < NumberOfTilesX; x++)
+        {
+            if (mapDesign[y][x] == 1)
+            {
+                tileArray[x][y].isEmpty = false;
+            }
+            else if (mapDesign[y][x] == 2)
+            {
+                tileArray[x][y].isEmpty = false;
+                tileArray[x][y].tileTypes.clear();
+                tileArray[x][y].tileTypes.push_back(sTile::GhostHouse);
+            }
+        }
     }
 
-    for (int i = 9; i < 12; i++)
-    {
-        tileArray[i][9].isEmpty = false;
-        tileArray[i][10].isEmpty = false;
-        tileArray[i + 7][9].isEmpty = false;
-        tileArray[i + 7][10].isEmpty = false;
-    }
-    for (int i = 15; i <= 19; i++)
-    {
-        tileArray[7][i].isEmpty = false;
-        tileArray[8][i].isEmpty = false;
-        tileArray[7 + 12][i].isEmpty = false;
-        tileArray[8 + 12][i].isEmpty = false;
-    }
-    for (int i = 7; i <= 11; i++)
-    {
-        tileArray[i][21].isEmpty = false;
-        tileArray[i][22].isEmpty = false;
-        tileArray[i + 9][21].isEmpty = false;
-        tileArray[i + 9][22].isEmpty = false;
-    }
-    for (int i = 24; i <= 26; i++)
-    {
-        tileArray[7][i].isEmpty = false;
-        tileArray[8][i].isEmpty = false;
-        tileArray[7 + 12][i].isEmpty = false;
-        tileArray[8 + 12][i].isEmpty = false;
-    }
-    for (int i = 2; i <= 11; i++)
-    {
-        tileArray[i][27].isEmpty = false;
-        tileArray[i][28].isEmpty = false;
-        tileArray[i + 14][27].isEmpty = false;
-        tileArray[i + 14][28].isEmpty = false;
-    }
-    for (int i = 1; i <= 2; i++)
-    {
-        tileArray[i][24].isEmpty = false;
-        tileArray[i][25].isEmpty = false;
-        tileArray[i + 24][24].isEmpty = false;
-        tileArray[i + 24][25].isEmpty = false;
-    }
-    for (int i = 21; i <= 25; i++)
-    {
-        tileArray[4][i].isEmpty = false;
-        tileArray[5][i].isEmpty = false;
-        tileArray[22][i].isEmpty = false;
-        tileArray[23][i].isEmpty = false;
-    }
-    for (int i = 2; i <= 3; i++)
-    {
-        tileArray[i][21].isEmpty = false;
-        tileArray[i][22].isEmpty = false;
-        tileArray[i + 22][21].isEmpty = false;
-        tileArray[i + 22][22].isEmpty = false;
-    }
-    for (int i = 11; i <= 16; i++)
-    {
-        tileArray[i][13].isEmpty = false;
-        tileArray[i][14].isEmpty = false;
-        tileArray[i][15].isEmpty = false;
 
-        tileArray[i][13].tileTypes.clear();
-        tileArray[i][14].tileTypes.clear();
-        tileArray[i][15].tileTypes.clear();
-
-        tileArray[i][13].tileTypes.push_back(sTile::GhostHouse);
-        tileArray[i][14].tileTypes.push_back(sTile::GhostHouse);
-        tileArray[i][15].tileTypes.push_back(sTile::GhostHouse);
-    }
-    tileArray[13][12].isEmpty = false;
-    tileArray[14][12].isEmpty = false;
-    tileArray[13][12].tileTypes.clear();
-    tileArray[14][12].tileTypes.clear();
-    tileArray[13][12].tileTypes.push_back(sTile::GhostHouse);
-    tileArray[14][12].tileTypes.push_back(sTile::GhostHouse);
 }
 
 void GameState::CreateSnacks()
@@ -365,9 +227,9 @@ void GameState::CreateSnacks()
 void GameState::CreatePacmanAndEnemys() 
 {
     pacman = new Pacman(1, 6, this);
-    enemys[0] = new Blinky(sf::Vector2i(3, 6), this);
+    enemys[0] = new Blinky(sf::Vector2i(3, 5), this);
     enemys[1] = new Pinky(sf::Vector2i(3, 1), this);
-    enemys[2] = new Inky(sf::Vector2i(5, 6), this);
+    enemys[2] = new Inky(sf::Vector2i(5, 5), this);
     enemys[3] = new Clyde(sf::Vector2i(18, 1), this);
 }
 
