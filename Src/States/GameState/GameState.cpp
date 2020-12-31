@@ -69,7 +69,7 @@ void GameState::Restart()
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
 }
 
-void GameState::Update(const float& deltaTime)
+void GameState::Update(const float& deltaTime) 
 {
     //Logic
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
