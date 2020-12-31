@@ -71,7 +71,7 @@ void GameState::Restart()
 
 void GameState::Update(const float& deltaTime)
 {
-    //Logic
+    //Logic 
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
         pacman->Update(deltaTime);
 
