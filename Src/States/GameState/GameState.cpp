@@ -85,6 +85,11 @@ void GameState::Update(const float& deltaTime)
         }
     }
 
+    for (auto const& x : SnackList)
+    {
+        x->Update(deltaTime);
+    }
+
     UpdateUI();
 
     //render

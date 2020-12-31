@@ -34,7 +34,7 @@ Pacman::~Pacman()
 void Pacman::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	DrawCube(rw, gridPos, gameState);
+	//DrawCube(rw, gridPos, gameState);
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)

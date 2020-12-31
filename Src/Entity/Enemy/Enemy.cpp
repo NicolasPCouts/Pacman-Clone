@@ -31,6 +31,7 @@ Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState
 
 Enemy::~Enemy()
 {
+	//todo delete animator and animation pointers
 }
 
 void Enemy::Scare()
@@ -152,8 +153,8 @@ void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
 
-	DrawCube(rw, gridPos, gameState);
-	//DrawCube(rw, sf::Vector2i(13, 14));
+	//DrawCube(rw, gridPos, gameState);
+
 	//if (currentPath.size() > 0) {
 	//	switch (state)
 	//	{

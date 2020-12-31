@@ -24,7 +24,7 @@ class Entity
 {
 public:
 	Entity(GameState* gameState, Entities entityType);
-	float speed = 80;
+	float speed = 140;
 	sf::Vector2i gridPos;
 	Directions currentDir = Directions::None;
 	Entities entityType;
