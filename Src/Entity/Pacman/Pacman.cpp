@@ -20,7 +20,7 @@ Pacman::Pacman(int tileX, int tileY, GameState* gameState)
 	else
 		std::cout << "texture not loaded correctly" << std::endl;
 
-	body.move(sf::Vector2f(30 * tileX, 25 * tileY));
+	body.move(sf::Vector2f(30 * tileX, 25.5f * tileY));
 }
 
 Pacman::~Pacman()

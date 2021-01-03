@@ -24,7 +24,7 @@ Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState
 	else
 		std::cout << "texture not loaded correctly" << std::endl;
 
-	body.move(sf::Vector2f(30 * gridPos.x, 20 * gridPos.y));
+	body.move(sf::Vector2f(30 * gridPos.x, 25.5f * gridPos.y));
 }
 
 

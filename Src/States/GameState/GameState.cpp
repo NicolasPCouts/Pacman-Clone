@@ -25,10 +25,10 @@ Sounds lastSoundPlayed = Sounds::None;
 GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager)
 	: State(window, states, gameManager)
 {
-
     CreateMapCollidersAndSnacks();
     CreatePacmanAndEnemys();
     CreateUI();
+    isFreezed = true;
 
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
     LoadMap();
@@ -64,6 +64,7 @@ void GameState::Restart()
 
     delete pacman;
 
+    isFreezed = true;
     CreatePacmanAndEnemys();
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
 }
@@ -71,9 +72,11 @@ void GameState::Restart()
 void GameState::Update(const float& deltaTime)
 {
     //Logic
+    if (!audioManager.IsPlayingAudio())
+        isFreezed = false;
+
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
         pacman->Update(deltaTime);
-
 
     for (auto const& x : enemys)
     {
