@@ -5,7 +5,7 @@ struct sTile {
 
     bool isEmpty = true;
 
-    std::vector<TileType> tileTypes{ Wall };
+    std::vector<TileType> tileTypes;
 
     static int GetDistanceBetweenTiles(sf::Vector2i a, sf::Vector2i b)
     {

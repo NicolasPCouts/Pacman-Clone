@@ -35,7 +35,7 @@ void GameManager::Update()
                 break;
             case sf::Event::Resized:
                 aspectRatio = float(window->getSize().x) / float(window->getSize().y);
-                sf::View v(sf::Vector2f(400, 400), sf::Vector2f(800 * aspectRatio, 800));
+                sf::View v(sf::Vector2f(400, 450), sf::Vector2f(800 * aspectRatio, 900));
                 window->setView(v);
                 break;
             }

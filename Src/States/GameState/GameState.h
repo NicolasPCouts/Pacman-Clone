@@ -52,9 +52,8 @@ private:
 
 	void Restart();
 	void LoadMap();
-	void CreateMapColliders();
+	void CreateMapCollidersAndSnacks();
 	void CreatePacmanAndEnemys();
-	void CreateSnacks();
 	void CreateUI();
 	void UpdateUI();
 	void DeleteSnacks();

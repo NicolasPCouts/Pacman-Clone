@@ -14,7 +14,6 @@ Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState
 	body.setSize(sf::Vector2f(40, 40));
 	this->gridPos = gridPos;
 	gameState->tileArray[gridPos.x][gridPos.y].isEmpty = false;
-	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.clear();
 	gameState->tileArray[gridPos.x][gridPos.y].tileTypes.push_back(sTile::Ghost);
 
 	SetupAnimations();
@@ -153,7 +152,7 @@ void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
 
-	//DrawCube(rw, gridPos, gameState);
+	DrawCube(rw, gridPos, gameState);
 
 	//if (currentPath.size() > 0) {
 	//	switch (state)

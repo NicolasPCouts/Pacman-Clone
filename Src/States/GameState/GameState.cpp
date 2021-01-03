@@ -26,9 +26,8 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
 	: State(window, states, gameManager)
 {
 
-    CreateMapColliders();
+    CreateMapCollidersAndSnacks();
     CreatePacmanAndEnemys();
-    CreateSnacks();
     CreateUI();
 
     audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
@@ -71,7 +70,7 @@ void GameState::Restart()
 
 void GameState::Update(const float& deltaTime)
 {
-    //Logic 
+    //Logic
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
         pacman->Update(deltaTime);
 
@@ -143,33 +142,33 @@ void GameState::LoadMap()
     }
 }
 
-void GameState::CreateMapColliders()
+void GameState::CreateMapCollidersAndSnacks()
 {
     int mapDesign[NumberOfTilesY][NumberOfTilesX] = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-    {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+    {1,3,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,3,1},
     {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
     {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
     {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
-    {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,1,1,1,2,2,1,1,1,0,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1},
-    {0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0},
-    {1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
-    {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,1,1,1,5,1,1,5,1,1,1,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,1,1,1,5,1,1,5,1,1,1,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,5,5,5,5,5,5,5,5,5,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,1,1,1,2,2,1,1,1,5,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,1,2,2,2,2,2,2,1,5,1,1,0,1,1,1,1,1,1},
+    {0,0,0,0,0,0,0,5,5,5,1,2,2,2,2,2,2,1,5,5,5,0,0,0,0,0,0,0},
+    {1,1,1,1,1,1,0,1,1,5,1,2,2,2,2,2,2,1,5,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,1,1,1,1,1,1,1,1,5,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,5,5,5,5,5,5,5,5,5,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,1,1,1,1,1,1,1,1,5,1,1,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,0,1,1,5,1,1,1,1,1,1,1,1,5,1,1,0,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
     {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-    {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1},
+    {1,3,0,0,1,1,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,1,1,0,0,3,1},
     {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
     {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
     {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
@@ -183,59 +182,46 @@ void GameState::CreateMapColliders()
     {
         for (int x = 0; x < NumberOfTilesX; x++)
         {
-            if (mapDesign[y][x] == 1)
+            if (mapDesign[y][x] == 0) // small snack
             {
                 tileArray[x][y].isEmpty = false;
-            }
-            else if (mapDesign[y][x] == 2)
-            {
-                tileArray[x][y].isEmpty = false;
-                tileArray[x][y].tileTypes.clear();
-                tileArray[x][y].tileTypes.push_back(sTile::GhostHouse);
-            }
-        }
-    }
-
-
-}
-
-void GameState::CreateSnacks()
-{
-    //BIG SNACKS
-    sf::Vector2i bigSnackPosArray[4]{ sf::Vector2i(1,3), sf::Vector2i(26,3), sf::Vector2i(1,23), sf::Vector2i(26,23) };
-    for (const auto& snackPos : bigSnackPosArray)
-    {
-        tileArray[snackPos.x][snackPos.y].isEmpty = false;
-        tileArray[snackPos.x][snackPos.y].tileTypes.clear();
-        tileArray[snackPos.x][snackPos.y].tileTypes.push_back(sTile::Snack);
-        Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(snackPos.x, snackPos.y), this);
-        SnackList.push_back(s);
-    }
-
-    //SMALL SNACKS
-    for (int x = 0; x < NumberOfTilesX; x++)
-    {
-        for (int y = 0; y < NumberOfTilesY; y++)
-        {
-            if (tileArray[x][y].isEmpty)
-            {
-                tileArray[x][y].isEmpty = false;
-                tileArray[x][y].tileTypes.clear();
                 tileArray[x][y].tileTypes.push_back(sTile::Snack);
                 Snack* s = new Snack(Snack::SmallSnack, sf::Vector2i(x, y), this);
                 SnackList.push_back(s);
             }
+            else if (mapDesign[y][x] == 1) // wall collider
+            {
+                tileArray[x][y].isEmpty = false;
+                tileArray[x][y].tileTypes.push_back(sTile::Wall);
+            }
+            else if (mapDesign[y][x] == 2) // ghost house
+            {
+                tileArray[x][y].isEmpty = false;
+                tileArray[x][y].tileTypes.push_back(sTile::GhostHouse);
+            }
+            else if (mapDesign[y][x] == 3) // big snack
+            {
+                tileArray[x][y].isEmpty = false;
+                tileArray[x][y].tileTypes.push_back(sTile::Snack);
+                Snack* s = new Snack(Snack::BigSnack, sf::Vector2i(x, y), this);
+                SnackList.push_back(s);
+            }
+            else if (mapDesign[y][x] == 5) // empty
+            {
+            }
         }
     }
+
+
 }
 
 void GameState::CreatePacmanAndEnemys() 
 {
-    pacman = new Pacman(1, 6, this);
-    enemys[0] = new Blinky(sf::Vector2i(3, 5), this);
-    enemys[1] = new Pinky(sf::Vector2i(3, 1), this);
-    enemys[2] = new Inky(sf::Vector2i(5, 5), this);
-    enemys[3] = new Clyde(sf::Vector2i(18, 1), this);
+    pacman = new Pacman(13, 23, this);
+    enemys[0] = new Blinky(sf::Vector2i(13, 12), this);
+    enemys[1] = new Pinky(sf::Vector2i(11, 14), this);
+    enemys[2] = new Inky(sf::Vector2i(13, 14), this);
+    enemys[3] = new Clyde(sf::Vector2i(15, 14), this);
 }
 
 void GameState::CreateUI()

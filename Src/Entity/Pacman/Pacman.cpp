@@ -10,7 +10,6 @@ Pacman::Pacman(int tileX, int tileY, GameState* gameState)
 	body.setSize(sf::Vector2f(40, 40));
 	gridPos = sf::Vector2i(tileX, tileY);
 	gameState->tileArray[tileX][tileY].isEmpty = false;
-	gameState->tileArray[tileX][tileY].tileTypes.clear();
 	gameState->tileArray[tileX][tileY].tileTypes.push_back(sTile::Player);
 
 	SetupAnimations();
@@ -21,7 +20,7 @@ Pacman::Pacman(int tileX, int tileY, GameState* gameState)
 	else
 		std::cout << "texture not loaded correctly" << std::endl;
 
-	body.move(sf::Vector2f(30 * tileX, 20 * tileY));
+	body.move(sf::Vector2f(30 * tileX, 25 * tileY));
 }
 
 Pacman::~Pacman()
@@ -34,7 +33,7 @@ Pacman::~Pacman()
 void Pacman::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	//DrawCube(rw, gridPos, gameState);
+	DrawCube(rw, gridPos, gameState);
 }
 
 void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
