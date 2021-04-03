@@ -30,7 +30,9 @@ Enemy::Enemy(sf::Vector2i gridPos, sf::Vector2i texturePos, GameState* gameState
 
 Enemy::~Enemy()
 {
-	//todo delete animator and animation pointers
+	delete animator;
+	for (auto const& x : animations)
+		delete x;
 }
 
 void Enemy::Scare()
