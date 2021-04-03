@@ -20,8 +20,6 @@
 //test
 #include <sstream>
 
-Sounds lastSoundPlayed = Sounds::None;
-
 GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager)
 	: State(window, states, gameManager)
 {
@@ -30,7 +28,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
     CreateUI();
     isFreezed = true;
 
-    audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
+    audioManager.PlaySound(Sounds::GameStart, false, VOLUME);
     LoadMap();
 }
 
@@ -66,13 +64,13 @@ void GameState::Restart()
 
     isFreezed = true;
     CreatePacmanAndEnemys();
-    audioManager.PlaySound(AUDIO_GAME_START, false, VOLUME);
+    audioManager.PlaySound(Sounds::GameStart, false, VOLUME);
 }
 
 void GameState::Update(const float& deltaTime)
 {
     //Logic
-    if (!audioManager.IsPlayingAudio())
+    if (!audioManager.IsPlayingAudio(Sounds::GameStart) && !audioManager.IsPlayingAudio(Sounds::PowerSnack))
         isFreezed = false;
 
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
@@ -299,17 +297,12 @@ void GameState::ScareEnemys()
     for (Enemy* e : enemys)
         if (e != NULL)	e->Scare();
 
-    audioManager.PlaySound(AUDIO_POWER_SNACK, true, VOLUME);
-    lastSoundPlayed = Sounds::PowerSnack;
+    audioManager.PlaySound(Sounds::PowerSnack, true, VOLUME);
 }
 
 void GameState::StopPowerSnackSound()
 {
-    if (lastSoundPlayed == Sounds::PowerSnack)
-    {
-        audioManager.StopSound();
-        lastSoundPlayed = Sounds::None;
-    }
+    audioManager.StopSound(Sounds::PowerSnack);
 }
 
 Enemy* GameState::FindEnemyByPosition(sf::Vector2i pos)

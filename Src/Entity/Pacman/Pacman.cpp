@@ -3,6 +3,7 @@
 #include "../Enemy/Enemy.h"
 #include "../../Debugger/Debug.h"
 #include "../../States/GameState/GameState.h"
+#include "../../Audio/AudioAssets.h"
 
 Pacman::Pacman(int tileX, int tileY, GameState* gameState)
 	: Entity(gameState, Entities::Pacman)
@@ -59,6 +60,12 @@ void Pacman::Update(const float& deltaTime)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		nextDir = Right;
 
+	//handle eating snack sound effect
+	if (isEatingSnacks && !audio.IsPlayingAudio(Sounds::Munch))
+		audio.PlaySound(Sounds::Munch, true, VOLUME);
+	else if (!isEatingSnacks && audio.IsPlayingAudio(Sounds::Munch))
+		audio.StopSound(Sounds::Munch);
+
 	Move(deltaTime);
 	animator->Update(deltaTime);
 }
@@ -109,6 +116,7 @@ void Pacman::EatSnack(sf::Vector2i snackGridPosition)
 		gameState->ScareEnemys();
 	}
 
+	isEatingSnacks = true;
 	gameState->score += 10;
 
 	gameState->DeleteSnack(snackGridPosition);
@@ -152,15 +160,17 @@ void Pacman::UpdatePlayerTilePosition()
 			if (IsTeleportTile(sf::Vector2i(gridPos.x - 1, gridPos.y))) {
 				Teleport(Right);
 				UpdateTileArray(sf::Vector2i(27, gridPos.y));
+				break;
 			}
-			break;
 		case Right:
 			if (IsTeleportTile(sf::Vector2i(gridPos.x + 1, gridPos.y))) {
 				Teleport(Left);
 				UpdateTileArray(sf::Vector2i(0, gridPos.y));
+				break;
 			}
-			break;
 		}
+		//if the player is stuck on a corner, and its not a teleport tile, munching sound should stop playing
+		if (isEatingSnacks) isEatingSnacks = false;
 	}
 }
 
@@ -172,10 +182,11 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 
 	gridPos = newPos;
 
-	if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::Snack)){
+	if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::Snack)) {
 		gameState->tileArray[gridPos.x][gridPos.y].EraseTileType(sTile::Snack);
 		EatSnack(newPos);
 	}
+	else isEatingSnacks = false;
 
 	Enemy* e = gameState->FindEnemyByPosition(gridPos);
 	if (e != NULL) 

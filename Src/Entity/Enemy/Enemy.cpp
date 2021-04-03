@@ -43,7 +43,7 @@ void Enemy::Eaten()
 {
 	state = EnemyState::Eaten_FreezedGame;
 	scaredTimer = 0;
-	audio.PlaySound(AUDIO_EAT_GHOST, false, VOLUME);
+	audio.PlaySound(Sounds::EatGhost, false, VOLUME);
 	ChangeAnimation();
 	gameState->FreezeGame(entityType);
 }
@@ -71,7 +71,7 @@ void Enemy::Update(const float& deltaTime)
 		}
 		break;
 	case EnemyState::Eaten_FreezedGame:
-		if (!audio.IsPlayingAudio())
+		if (!audio.IsPlayingAudio(Sounds::EatGhost))
 		{
 			state = EnemyState::Eaten;
 			ChangeAnimation();

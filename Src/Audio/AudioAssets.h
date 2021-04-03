@@ -4,10 +4,15 @@
 #define AUDIO_EAT_GHOST "Resources/Sound/eat_ghost.wav"
 #define AUDIO_DEATH_1 "Resources/Sound/death_1.wav"
 #define AUDIO_POWER_SNACK "Resources/Sound/power_pellet.wav"
+#define AUDIO_MUNCH "Resources/Sound/munch.wav"
 
 #define VOLUME 50
 
 enum class Sounds {
 	None,
-	PowerSnack
+	PowerSnack,
+	EatGhost,
+	Death,
+	Munch,
+	GameStart
 };

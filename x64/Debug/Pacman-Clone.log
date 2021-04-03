@@ -1,12 +1,13 @@
-﻿  Enemy.cpp
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\Src\Entity\Enemy\Enemy.cpp(27,28): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-  Pacman-Clone.vcxproj -> D:\Google Drive\DOCUMENTOS\Personal-Projects\Pacman-Clone\x64\Debug\Pacman-Clone.exe
+﻿  MainMenuState.cpp
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  GameState.cpp
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  AudioManager.cpp
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Audio\AudioManager.cpp(30,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Audio\AudioManager.cpp(35,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Audio\AudioManager.cpp(40,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Audio\AudioManager.cpp(45,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Audio\AudioManager.cpp(50,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Audio\AudioManager.cpp(106): warning C4715: 'AudioManager::IsPlayingAudio': not all control paths return a value
+  Pacman-Clone.vcxproj -> D:\NICOLAS\Personal REPOS\Pacman-Clone\x64\Debug\Pacman-Clone.exe
