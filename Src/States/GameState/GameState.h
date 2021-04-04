@@ -44,6 +44,7 @@ private:
 	int lifes = 3;
 
 	bool isFreezed = false;
+	bool gameHasStarted = false;
 	Entities entityThatWontFreeze = Entities::NotDefined;
 
 	sf::Font font;

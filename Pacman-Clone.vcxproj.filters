@@ -210,5 +210,8 @@
     <Media Include="Resources\Sound\siren_5.wav">
       <Filter>Arquivos de Recurso</Filter>
     </Media>
+    <Media Include="Resources\Sound\munch.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
   </ItemGroup>
 </Project>

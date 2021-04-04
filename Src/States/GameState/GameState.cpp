@@ -63,6 +63,7 @@ void GameState::Restart()
     delete pacman;
 
     isFreezed = true;
+    gameHasStarted = false;
     CreatePacmanAndEnemys();
     audioManager.PlaySound(Sounds::GameStart, false, VOLUME);
 }
@@ -70,8 +71,15 @@ void GameState::Restart()
 void GameState::Update(const float& deltaTime)
 {
     //Logic
-    if (!audioManager.IsPlayingAudio(Sounds::GameStart) && !audioManager.IsPlayingAudio(Sounds::PowerSnack))
+
+    //if initial music has played, start the game
+    if (!audioManager.IsPlayingAudio(Sounds::GameStart) && !gameHasStarted)
+    {
         isFreezed = false;
+        gameHasStarted = true;
+        audioManager.PlaySound(Sounds::Siren, true, VOLUME);
+
+    }
 
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
         pacman->Update(deltaTime);
@@ -297,12 +305,15 @@ void GameState::ScareEnemys()
     for (Enemy* e : enemys)
         if (e != NULL)	e->Scare();
 
+
+    audioManager.StopSound(Sounds::Siren);
     audioManager.PlaySound(Sounds::PowerSnack, true, VOLUME);
 }
 
 void GameState::StopPowerSnackSound()
 {
     audioManager.StopSound(Sounds::PowerSnack);
+    audioManager.PlaySound(Sounds::Siren, true, VOLUME);
 }
 
 Enemy* GameState::FindEnemyByPosition(sf::Vector2i pos)

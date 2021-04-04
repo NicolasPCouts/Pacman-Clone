@@ -28,5 +28,8 @@ private:
 
 	sf::SoundBuffer deathBuffer;
 	sf::Sound deathSound;
+
+	sf::SoundBuffer sirenBuffer;
+	sf::Sound sirenSound;
 };
 

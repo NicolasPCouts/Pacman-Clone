@@ -18,6 +18,9 @@ AudioManager::AudioManager()
 
     gameStartBuffer.loadFromFile(AUDIO_GAME_START);
     gameStartSound.setBuffer(gameStartBuffer);
+
+    sirenBuffer.loadFromFile(AUDIO_SIREN);
+    sirenSound.setBuffer(sirenBuffer);
 }
 
 void AudioManager::PlaySound(Sounds soundType, bool loop, int volume)
@@ -50,6 +53,11 @@ void AudioManager::PlaySound(Sounds soundType, bool loop, int volume)
         gameStartSound.setVolume(volume);
         gameStartSound.play();
         break;
+    case Sounds::Siren:
+        sirenSound.setLoop(loop);
+        sirenSound.setVolume(volume);
+        sirenSound.play();
+        break;
     }
 
 }
@@ -73,12 +81,16 @@ void AudioManager::StopSound(Sounds soundType)
     case Sounds::GameStart:
         gameStartSound.stop();
         break;
+    case Sounds::Siren:
+        sirenSound.stop();
+        break;
     case Sounds::None:
         gameStartSound.stop();
         munchSound.stop();
         deathSound.stop();
         eatGhostSound.stop();
         powerSnackSound.stop();
+        sirenSound.stop();
         break;
     }
 }
@@ -101,6 +113,9 @@ bool AudioManager::IsPlayingAudio(Sounds soundType)
         break;
     case Sounds::GameStart:
         return gameStartSound.getStatus() == gameStartSound.Playing;
+        break;
+    case Sounds::Siren:
+        return sirenSound.getStatus() == sirenSound.Playing;
         break;
     }
 }
