@@ -37,41 +37,34 @@ void Pacman::Draw(sf::RenderWindow& rw)
 	DrawCube(rw, gridPos, gameState);
 }
 
-void Pacman::OnKeyPressed(sf::Event::KeyEvent key)
-{
-	if (key.code == sf::Keyboard::Key::W)
-		nextDir = Up;
-	else if (key.code == sf::Keyboard::Key::S)
-		nextDir = Down;
-	else if (key.code == sf::Keyboard::Key::A)
-		nextDir = Left;
-	else if (key.code == sf::Keyboard::Key::D)
-		nextDir = Right;
-}
-
 void Pacman::Update(const float& deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		nextDir = Up;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		nextDir = Down;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		nextDir = Left;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		nextDir = Right;
+	if (!gameState->isPacmanDead)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+			nextDir = Up;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			nextDir = Down;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+			nextDir = Left;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			nextDir = Right;
 
-	//handle eating snack sound effect
-	if (isEatingSnacks && !audio.IsPlayingAudio(Sounds::Munch))
-		audio.PlaySound(Sounds::Munch, true, VOLUME);
-	else if (!isEatingSnacks && audio.IsPlayingAudio(Sounds::Munch))
-		audio.StopSound(Sounds::Munch);
+		//handle eating snack sound effect
+		if (isEatingSnacks && !audio.IsPlayingAudio(Sounds::Munch))
+			audio.PlaySound(Sounds::Munch, true, VOLUME);
+		else if (!isEatingSnacks && audio.IsPlayingAudio(Sounds::Munch))
+			audio.StopSound(Sounds::Munch);
 
-	Move(deltaTime);
+		Move(deltaTime);
+	}
 	animator->Update(deltaTime);
 }
 
 void Pacman::Die() 
 {
+	animator->SetAnimationClip(animations[4]);
+	audio.StopSound();
 	gameState->OnPacmanDeath();
 }
 
@@ -255,7 +248,7 @@ void Pacman::SetupAnimations()
 	animations[1] = new Animation(rightAnimTextures);
 	animations[2] = new Animation(upAnimTextures);
 	animations[3] = new Animation(downAnimTextures);
-	animations[4] = new Animation(deathAnimTextures, false);
+	animations[4] = new Animation(deathAnimTextures, false, 0.20f);
 }
 
 void Pacman::ChangeAnimation(Directions dir)

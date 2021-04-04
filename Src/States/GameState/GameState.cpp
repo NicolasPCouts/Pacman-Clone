@@ -44,12 +44,10 @@ GameState::~GameState()
 
 void GameState::OnPacmanDeath() 
 {
-    if(lifes == 0)
-        states->push(new MainMenuState(window, states, gameManager));
-    else
-    {
-        Restart();
-    }
+    isPacmanDead = true;
+    FreezeGame(Entities::Pacman);
+    audioManager.StopSound();
+    audioManager.PlaySound(Sounds::Death, false, VOLUME);
 }
 
 void GameState::Restart()
@@ -64,6 +62,8 @@ void GameState::Restart()
 
     isFreezed = true;
     gameHasStarted = false;
+    isPacmanDead = false;
+
     CreatePacmanAndEnemys();
     audioManager.PlaySound(Sounds::GameStart, false, VOLUME);
 }
@@ -81,6 +81,7 @@ void GameState::Update(const float& deltaTime)
 
     }
 
+    //updating entities that are not freezed
     if(isFreezed == false || entityThatWontFreeze == Entities::Pacman)
         pacman->Update(deltaTime);
 
@@ -98,9 +99,20 @@ void GameState::Update(const float& deltaTime)
         x->Update(deltaTime);
     }
 
-    UpdateUI();
+    //if pacman is dead, wait death music to stop before restarting the game
+    if (isPacmanDead && !audioManager.IsPlayingAudio(Sounds::Death))
+    {
+        if (lifes == 0)
+            states->push(new MainMenuState(window, states, gameManager));
+        else
+        {
+            Restart();
+        }
+    }
+
 
     //render
+    UpdateUI();
     Draw();
 }
 

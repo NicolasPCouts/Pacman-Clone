@@ -28,6 +28,8 @@ public:
 	float tileWidth = 800 / (float)NumberOfTilesX;
 	float tileHeight = 800 / (float)NumberOfTilesY;
 
+	bool isPacmanDead = false;
+
 	GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager);
 	~GameState();
 	void Update(const float& deltaTime);

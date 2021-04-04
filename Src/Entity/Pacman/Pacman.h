@@ -11,7 +11,6 @@ class Pacman : public Entity
 public:
 	Pacman(int x, int y, GameState* gameState);
 	~Pacman();
-	void OnKeyPressed(sf::Event::KeyEvent key);
 	void Update(const float& deltaTime) override;
 	void Draw(sf::RenderWindow& rw) override;
 	void Die();
