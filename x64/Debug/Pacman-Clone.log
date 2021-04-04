@@ -1,7 +1,11 @@
-﻿  Pacman.cpp
+﻿  Enemy.cpp
 D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(24,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Enemy.cpp(27,28): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
+          [
+              T=int
+          ]
+          and
           [
               T=float
           ]

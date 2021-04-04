@@ -189,7 +189,7 @@ void Pacman::UpdateTileArray(sf::Vector2i newPos)
 			e->Eaten();
 			gameState->score += 100;
 		}
-		else if (e->state != EnemyState::Eaten)
+		else if (e->state != EnemyState::Eaten_Retreating)
 			Die();
 	}
 

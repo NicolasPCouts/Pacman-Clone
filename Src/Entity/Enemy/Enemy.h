@@ -11,7 +11,7 @@ enum class EnemyState {
 	Chase,
 	Frightened,
 	Eaten_FreezedGame,
-	Eaten
+	Eaten_Retreating
 };
 
 class Enemy : public Entity

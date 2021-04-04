@@ -73,18 +73,25 @@ void Enemy::Update(const float& deltaTime)
 		}
 		break;
 	case EnemyState::Eaten_FreezedGame:
+		//start retreating mode
 		if (!audio.IsPlayingAudio(Sounds::EatGhost))
 		{
-			state = EnemyState::Eaten;
+			state = EnemyState::Eaten_Retreating;
 			ChangeAnimation();
 			gameState->UnfreezeGame();
+
+			gameState->audioManager.StopSound(Sounds::PowerSnack);
+			audio.PlaySound(Sounds::Retreating, true, VOLUME);
 		}
 		break;
-	case EnemyState::Eaten:
+	case EnemyState::Eaten_Retreating:
+		//when ghost gets to ghost house, switch back to normal behaviour
 		if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
 			state = waves[currentWave].waveState;
 			scaredTimer = 0;
-			gameState->UnfreezeGame();
+
+			gameState->audioManager.PlaySound(Sounds::PowerSnack, true, VOLUME);
+			audio.StopSound(Sounds::Retreating);
 		}
 		break;
 	//updating wave system
@@ -102,7 +109,7 @@ void Enemy::Update(const float& deltaTime)
 		break;
 	}
 
-	if(state != EnemyState::Eaten && state != EnemyState::Eaten_FreezedGame)
+	if(state != EnemyState::Eaten_Retreating && state != EnemyState::Eaten_FreezedGame)
 		animator->Update(deltaTime);
 
 	if(state != EnemyState::Eaten_FreezedGame)
@@ -115,7 +122,7 @@ void Enemy::Move(const float& deltaTime)
 
 	if (state == EnemyState::Frightened)
 		dt /= 2;
-	else if (state == EnemyState::Eaten)
+	else if (state == EnemyState::Eaten_Retreating)
 		dt *= 2;
 
 	switch (currentDir)
@@ -180,7 +187,7 @@ void Enemy::UpdateEnemyTilePosition()
 	case EnemyState::Chase:
 		pos = FindPath(gridPos, GetChaseTargetPosition(), currentDir, gameState);
 		break;
-	case EnemyState::Eaten:
+	case EnemyState::Eaten_Retreating:
 		pos = FindPath(gridPos, sf::Vector2i(13, 14), currentDir, gameState);
 		break;
 	case EnemyState::Frightened:
@@ -255,7 +262,7 @@ void Enemy::ChangeAnimation()
 {
 	if (state != EnemyState::Frightened)
 	{
-		if (state == EnemyState::Eaten)
+		if (state == EnemyState::Eaten_Retreating)
 		{
 			switch (currentDir)
 			{
@@ -342,7 +349,7 @@ void Enemy::UpdateTileArray(sf::Vector2i newPos)
 	{
 		if (state == EnemyState::Frightened)
 			Eaten();
-		else if (state != EnemyState::Eaten)
+		else if (state != EnemyState::Eaten_Retreating)
 			gameState->pacman->Die();
 	}
 

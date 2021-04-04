@@ -21,6 +21,9 @@ AudioManager::AudioManager()
 
     sirenBuffer.loadFromFile(AUDIO_SIREN);
     sirenSound.setBuffer(sirenBuffer);
+
+    retreatingBuffer.loadFromFile(AUDIO_RETREATING);
+    retreatingSound.setBuffer(retreatingBuffer);
 }
 
 void AudioManager::PlaySound(Sounds soundType, bool loop, int volume)
@@ -58,6 +61,11 @@ void AudioManager::PlaySound(Sounds soundType, bool loop, int volume)
         sirenSound.setVolume(volume);
         sirenSound.play();
         break;
+    case Sounds::Retreating:
+        retreatingSound.setLoop(loop);
+        retreatingSound.setVolume(volume);
+        retreatingSound.play();
+        break;
     }
 
 }
@@ -84,6 +92,9 @@ void AudioManager::StopSound(Sounds soundType)
     case Sounds::Siren:
         sirenSound.stop();
         break;
+    case Sounds::Retreating:
+        retreatingSound.stop();
+        break;
     case Sounds::None:
         gameStartSound.stop();
         munchSound.stop();
@@ -91,6 +102,7 @@ void AudioManager::StopSound(Sounds soundType)
         eatGhostSound.stop();
         powerSnackSound.stop();
         sirenSound.stop();
+        retreatingSound.stop();
         break;
     }
 }
@@ -116,6 +128,9 @@ bool AudioManager::IsPlayingAudio(Sounds soundType)
         break;
     case Sounds::Siren:
         return sirenSound.getStatus() == sirenSound.Playing;
+        break;
+    case Sounds::Retreating:
+        return retreatingSound.getStatus() == retreatingSound.Playing;
         break;
     }
 }

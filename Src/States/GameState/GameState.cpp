@@ -87,7 +87,7 @@ void GameState::Update(const float& deltaTime)
 
     for (auto const& x : enemys)
     {
-        if (isFreezed == false || entityThatWontFreeze == x->entityType || x->state == EnemyState::Eaten)
+        if (isFreezed == false || entityThatWontFreeze == x->entityType || x->state == EnemyState::Eaten_Retreating)
         {
             if (x != NULL)
                 x->Update(deltaTime);

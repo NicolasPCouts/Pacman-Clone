@@ -6,6 +6,7 @@
 #define AUDIO_POWER_SNACK "Resources/Sound/power_pellet.wav"
 #define AUDIO_MUNCH "Resources/Sound/munch.wav"
 #define AUDIO_SIREN "Resources/Sound/siren_1.wav"
+#define AUDIO_RETREATING "Resources/Sound/retreating.wav"
 
 #define VOLUME 50
 
@@ -16,5 +17,6 @@ enum class Sounds {
 	Death,
 	Munch,
 	GameStart,
-	Siren
+	Siren,
+	Retreating
 };

@@ -31,5 +31,8 @@ private:
 
 	sf::SoundBuffer sirenBuffer;
 	sf::Sound sirenSound;
+
+	sf::SoundBuffer retreatingBuffer;
+	sf::Sound retreatingSound;
 };
 
