@@ -34,7 +34,7 @@ Pacman::~Pacman()
 void Pacman::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
-	DrawCube(rw, gridPos, gameState);
+	//DrawCube(rw, gridPos, gameState);
 }
 
 void Pacman::Update(const float& deltaTime)
@@ -52,7 +52,7 @@ void Pacman::Update(const float& deltaTime)
 
 		//handle eating snack sound effect
 		if (isEatingSnacks && !audio.IsPlayingAudio(Sounds::Munch))
-			audio.PlaySound(Sounds::Munch, true, VOLUME);
+			audio.PlaySound(Sounds::Munch, true, VOLUME - 15);
 		else if (!isEatingSnacks && audio.IsPlayingAudio(Sounds::Munch))
 			audio.StopSound(Sounds::Munch);
 

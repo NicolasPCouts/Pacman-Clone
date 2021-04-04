@@ -29,6 +29,7 @@ public:
 	float tileHeight = 800 / (float)NumberOfTilesY;
 
 	bool isPacmanDead = false;
+	bool powerSnackActive = false;
 
 	GameState(sf::RenderWindow* window, std::stack<State*>* states, GameManager* gameManager);
 	~GameState();

@@ -76,6 +76,9 @@ void Enemy::Update(const float& deltaTime)
 		//start retreating mode
 		if (!audio.IsPlayingAudio(Sounds::EatGhost))
 		{
+			scaredTimer = 0;
+			hasStartedflickeringAnim = false;
+
 			state = EnemyState::Eaten_Retreating;
 			ChangeAnimation();
 			gameState->UnfreezeGame();
@@ -88,10 +91,12 @@ void Enemy::Update(const float& deltaTime)
 		//when ghost gets to ghost house, switch back to normal behaviour
 		if (gameState->tileArray[gridPos.x][gridPos.y].DoesTileHaveType(sTile::GhostHouse)) {
 			state = waves[currentWave].waveState;
-			scaredTimer = 0;
 
-			gameState->audioManager.PlaySound(Sounds::PowerSnack, true, VOLUME);
 			audio.StopSound(Sounds::Retreating);
+
+			//only play sound if power snack effect is still active
+			if(gameState->powerSnackActive)
+				gameState->audioManager.PlaySound(Sounds::PowerSnack, true, VOLUME);
 		}
 		break;
 	//updating wave system
@@ -161,7 +166,7 @@ void Enemy::Draw(sf::RenderWindow& rw)
 {
 	rw.draw(body);
 
-	DrawCube(rw, gridPos, gameState);
+	//DrawCube(rw, gridPos, gameState);
 
 	//if (currentPath.size() > 0) {
 	//	switch (state)

@@ -320,12 +320,14 @@ void GameState::ScareEnemys()
 
     audioManager.StopSound(Sounds::Siren);
     audioManager.PlaySound(Sounds::PowerSnack, true, VOLUME);
+    powerSnackActive = true;
 }
 
 void GameState::StopPowerSnackSound()
 {
     audioManager.StopSound(Sounds::PowerSnack);
     audioManager.PlaySound(Sounds::Siren, true, VOLUME);
+    powerSnackActive = false;
 }
 
 Enemy* GameState::FindEnemyByPosition(sf::Vector2i pos)
