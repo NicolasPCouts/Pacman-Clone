@@ -64,6 +64,7 @@ private:
 	void Restart();
 	void LoadTextures();
 	void CreateMapCollidersAndSnacks();
+	void EmptyTileArray();
 	void CreatePacmanAndEnemys();
 	void CreateUI();
 	void UpdateUI();

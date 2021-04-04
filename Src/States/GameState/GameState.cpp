@@ -53,7 +53,15 @@ void GameState::OnPacmanDeath()
 void GameState::Restart()
 {
     audioManager.StopSound();
-    lifes--;
+
+    if(isPacmanDead)
+        lifes--;
+    else
+    {
+        DeleteSnacks();
+        EmptyTileArray();
+        CreateMapCollidersAndSnacks();
+    }
 
     for (auto const& x : enemys)
         delete x;
@@ -262,6 +270,18 @@ void GameState::CreateMapCollidersAndSnacks()
 
 }
 
+void GameState::EmptyTileArray()
+{
+    for (int y = 0; y < NumberOfTilesY; y++)
+    {
+        for (int x = 0; x < NumberOfTilesX; x++)
+        {
+            tileArray[x][y].isEmpty = true;
+            tileArray[x][y].tileTypes.clear();
+        }
+    }
+}
+
 void GameState::CreatePacmanAndEnemys() 
 {
     pacman = new Pacman(13, 23, this);
@@ -327,6 +347,9 @@ void GameState::DeleteSnack(sf::Vector2i snackPos)
     {
         delete SnackList[id];
         SnackList.erase(SnackList.begin() + id);
+
+        if (SnackList.size() == 0)
+            Restart();
     }
 }
 
