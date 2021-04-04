@@ -157,6 +157,9 @@
     <Image Include="Resources\pac-man-logo.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
+    <Image Include="Resources\ready-gameover.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resources\Sound\credit.wav">

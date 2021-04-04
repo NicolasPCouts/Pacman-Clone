@@ -21,6 +21,13 @@ public:
 	std::vector<Snack*> SnackList;
 	sf::Sprite mapSprite;
 	sf::Texture mapTexture;
+
+	sf::Sprite readyTextSprite;
+	sf::Texture readyTextTexture;
+
+	sf::Sprite gameOverTextSprite;
+	sf::Texture gameOverTextTexture;
+
 	AudioManager audioManager;
 
 	int score = 0;
@@ -55,7 +62,7 @@ private:
 	sf::Text lifesText;
 
 	void Restart();
-	void LoadMap();
+	void LoadTextures();
 	void CreateMapCollidersAndSnacks();
 	void CreatePacmanAndEnemys();
 	void CreateUI();

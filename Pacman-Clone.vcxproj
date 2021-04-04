@@ -204,6 +204,7 @@
   <ItemGroup>
     <Image Include="Resources\pac-man-logo.png" />
     <Image Include="Resources\PacManSprites.png" />
+    <Image Include="Resources\ready-gameover.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resources\Sound\credit.wav" />

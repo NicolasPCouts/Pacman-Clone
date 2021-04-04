@@ -29,7 +29,7 @@ GameState::GameState(sf::RenderWindow* window, std::stack<State*>* states, GameM
     isFreezed = true;
 
     audioManager.PlaySound(Sounds::GameStart, false, VOLUME);
-    LoadMap();
+    LoadTextures();
 }
 
 GameState::~GameState() 
@@ -121,6 +121,10 @@ void GameState::Draw()
     window->clear();
     window->draw(mapSprite);
 
+    if(isPacmanDead) window->draw(gameOverTextSprite);
+
+    if(!gameHasStarted) window->draw(readyTextSprite);
+
     for (auto const& x : SnackList)
         x->Draw(*window);
 
@@ -148,7 +152,7 @@ void GameState::Draw()
     window->display();
 }
 
-void GameState::LoadMap()
+void GameState::LoadTextures()
 {
     if (mapTexture.loadFromFile("Resources/PacManSprites.png", sf::IntRect(0, 0, 226, 248)))
     {
@@ -156,6 +160,28 @@ void GameState::LoadMap()
         mapSprite.setTexture(mapTexture);
         mapSprite.setScale((window->getView().getSize().x) / (mapSprite.getLocalBounds().width * gameManager->aspectRatio), (window->getView().getSize().y - 100) / mapSprite.getLocalBounds().height);
         mapSprite.move(0, 1);
+    }
+    else
+    {
+        std::cout << "texture not loaded correctly" << std::endl;
+    }
+
+    if (gameOverTextTexture.loadFromFile("Resources/ready-gameover.png", sf::IntRect(0, 0, 175, 22)))
+    {
+        gameOverTextTexture.setSmooth(false);
+        gameOverTextSprite.setTexture(gameOverTextTexture);
+        gameOverTextSprite.move(310, 438);
+    }
+    else
+    {
+        std::cout << "texture not loaded correctly" << std::endl;
+    }
+
+    if (readyTextTexture.loadFromFile("Resources/ready-gameover.png", sf::IntRect(178, 0, 279, 22)))
+    {
+        readyTextTexture.setSmooth(false);
+        readyTextSprite.setTexture(readyTextTexture);
+        readyTextSprite.move(350, 438);
     }
     else
     {
