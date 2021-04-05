@@ -4,7 +4,7 @@ better understand the principles of the c++ language and improve my skills as a 
 
 When the game is finished i will update this readme with some more information and screenshots of the game
 
-## Screenshots (In Progress)
+## Screenshots
 
 <div>
   <img width="261" height="260" align="left" src="https://github.com/NicolasPCouts/Pacman-Clone/blob/master/screenshots/screenshot.png">
