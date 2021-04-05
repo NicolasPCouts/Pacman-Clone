@@ -12,8 +12,10 @@ When the game is finished i will update this readme with some more information a
 </div>
 
 
+<div>
 ## GamePlay
 
 you can check the game working on this video: 
 
 https://www.youtube.com/watch?v=CvY3Jp34jPM
+</div>
