@@ -1,10 +1,4 @@
-﻿  Debug.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  Blinky.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  Clyde.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  Enemy.cpp
+﻿  Enemy.cpp
 D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
 D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Enemy.cpp(27,28): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
@@ -15,31 +9,7 @@ D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Enemy.cpp(27,28): warnin
           [
               T=float
           ]
-  Inky.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(35,2): warning C4060: switch statement contains no 'case' or 'default' labels
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(23,4): warning C4102: 'Up': unreferenced label
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(26,6): warning C4102: 'Down': unreferenced label
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(29,6): warning C4102: 'Left': unreferenced label
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Enemy\Inky.cpp(32,7): warning C4102: 'Right': unreferenced label
-  Pinky.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  Entity.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  Pacman.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Entity\Pacman\Pacman.cpp(24,28): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Snack.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  Pathfinding.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
   GameState.cpp
-D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-  MainMenuState.cpp
 D:\NICOLAS\Personal REPOS\Pacman-Clone\Src\Tile.h(12,25): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
   Generating Code...
   Pacman-Clone.vcxproj -> D:\NICOLAS\Personal REPOS\Pacman-Clone\x64\Debug\Pacman-Clone.exe

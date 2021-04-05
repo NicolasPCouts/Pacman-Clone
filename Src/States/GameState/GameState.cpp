@@ -69,6 +69,7 @@ void GameState::Restart()
     delete pacman;
 
     isFreezed = true;
+    entityThatWontFreeze = Entities::NotDefined;
     gameHasStarted = false;
     isPacmanDead = false;
 
