@@ -39,6 +39,8 @@ void Enemy::Scare()
 {
 	state = EnemyState::Frightened;
 	animator->SetAnimationClip(animations[4]);
+	scaredTimer = 0;
+	hasStartedflickeringAnim = false;
 }
 
 void Enemy::Eaten()
