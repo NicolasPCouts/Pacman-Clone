@@ -86,7 +86,7 @@ void GameState::Update(const float& deltaTime)
     {
         isFreezed = false;
         gameHasStarted = true;
-        audioManager.PlaySound(Sounds::Siren, true, VOLUME);
+        audioManager.PlaySound(Sounds::Siren, true, VOLUME_SIREN);
 
     }
 
@@ -376,7 +376,7 @@ void GameState::ScareEnemys()
 void GameState::StopPowerSnackSound()
 {
     audioManager.StopSound(Sounds::PowerSnack);
-    audioManager.PlaySound(Sounds::Siren, true, VOLUME);
+    audioManager.PlaySound(Sounds::Siren, true, VOLUME_SIREN);
     powerSnackActive = false;
 }
 

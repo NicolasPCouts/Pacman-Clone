@@ -52,7 +52,7 @@ void Pacman::Update(const float& deltaTime)
 
 		//handle eating snack sound effect
 		if (isEatingSnacks && !audio.IsPlayingAudio(Sounds::Munch))
-			audio.PlaySound(Sounds::Munch, true, VOLUME - 15);
+			audio.PlaySound(Sounds::Munch, true, VOLUME_MUNCH);
 		else if (!isEatingSnacks && audio.IsPlayingAudio(Sounds::Munch))
 			audio.StopSound(Sounds::Munch);
 

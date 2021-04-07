@@ -9,6 +9,8 @@
 #define AUDIO_RETREATING "Resources/Sound/retreating.wav"
 
 #define VOLUME 50
+#define VOLUME_MUNCH 10
+#define VOLUME_SIREN 60
 
 enum class Sounds {
 	None,
